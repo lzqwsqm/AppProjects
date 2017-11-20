@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="fastscroll_thumb_width">64.0dip</dimen>
+    <dimen name="fastscroll_thumb_height">52.0dip</dimen>
+    <dimen name="toolbar_height">36.0dip</dimen>
+    <dimen name="toolbar_button_wh">32.0dip</dimen>
+    <dimen name="toolbar_button_4">4.0dip</dimen>
+    <dimen name="menu_width">165.0dip</dimen>
+    <dimen name="menu_text_size">15.0sp</dimen>
+    <dimen name="menu_item_height">42.0dip</dimen>
+    <dimen name="menu_dropdown_y">10.0dip</dimen>
+</resources>

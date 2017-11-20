@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:id="@+id/mainLayout" 
+	android:layout_width="fill_parent" 
+	android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:orientation="vertical" 
+		android:id="@+id/editorBodyLinearLayout" 
+		android:layout_width="fill_parent" 
+		android:layout_height="fill_parent">
+       <!--标签-->
+		<com.qingshan.widget.TabHost android:id="@+id/tabs" 
+			android:background="@drawable/tab_bg" 
+			android:descendantFocusability="afterDescendants" 
+			android:layout_width="fill_parent" 
+			android:layout_height="34.0dip">
+            <HorizontalScrollView android:id="@+id/tabScroller" 
+				android:scrollbars="none" 
+				android:layout_width="wrap_content" 
+				android:layout_height="fill_parent" 
+				android:layout_weight="1.0">
+                <com.qingshan.widget.TabWidget android:id="@+id/tabWidgets" 
+					android:layout_width="wrap_content" 
+					android:layout_height="fill_parent" />
+            </HorizontalScrollView>
+            <LinearLayout android:gravity="center_vertical" 
+				android:layout_gravity="right" 
+				android:orientation="vertical" 
+				android:layout_width="wrap_content" 
+				android:layout_height="fill_parent">
+                <ImageButton android:id="@+id/add_new_tab_btn" 
+					android:background="@drawable/tab_new_win_btn" 
+					android:layout_width="wrap_content" 
+					android:layout_height="wrap_content" />
+            </LinearLayout>
+        </com.qingshan.widget.TabHost>
+		
+        <HorizontalScrollView android:id="@+id/toolbar" 
+			android:background="@drawable/toolbar_bg" 
+			android:scrollbars="none" 
+			android:layout_width="fill_parent" 
+			android:layout_height="wrap_content" 
+			android:layout_margin="0.0dip">
+            <LinearLayout android:gravity="center_vertical" 
+				android:orientation="horizontal" 
+				android:id="@+id/toolbarLinearLayout" 
+				android:layout_width="wrap_content" 
+				android:layout_height="40.0dip">
+                <ImageButton android:layout_gravity="center" 
+					android:id="@+id/btn_open" 
+					android:background="#00000000" 
+					android:layout_width="wrap_content" 
+					android:layout_height="wrap_content" 
+					android:layout_marginLeft="22.0dip" 
+					android:src="@drawable/open_file_sel2" />
+                <ImageButton android:layout_gravity="center" android:id="@+id/btn_save" android:background="#00000000" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="22.0dip" android:src="@drawable/save_sel2" />
+                <ImageButton android:layout_gravity="center" android:id="@+id/undo" android:background="#00000000" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="22.0dip" android:src="@drawable/undo_no2" />
+                <ImageButton android:layout_gravity="center" android:id="@+id/redo" android:background="#00000000" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="22.0dip" android:src="@drawable/redo_no2" />
+                <ImageButton android:layout_gravity="center" android:id="@+id/preview" android:background="#00000000" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="22.0dip" android:src="@drawable/preview_sel2" />
+                <ImageButton android:layout_gravity="center" android:id="@+id/symbol" android:background="#00000000" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="22.0dip" android:src="@drawable/symbol_s2" />
+                <ImageButton android:layout_gravity="center" android:id="@+id/last_edit_back" android:background="#00000000" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="22.0dip" android:src="@drawable/back_edit_location_d2" />
+                <ImageButton android:layout_gravity="center" android:id="@+id/last_edit_forward" android:background="#00000000" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="22.0dip" android:src="@drawable/forward_edit_location_d2" />
+                <ImageButton android:layout_gravity="center" android:id="@+id/color" android:background="#00000000" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="22.0dip" android:src="@drawable/tool_color_sel2" />
+                <ImageButton android:layout_gravity="center" android:id="@+id/menu" android:background="#00000000" android:visibility="invisible" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="22.0dip" android:src="@drawable/menu" />
+            </LinearLayout>
+        </HorizontalScrollView>
+        <LinearLayout android:id="@+id/findlinearLayout" 
+			android:visibility="gone" 
+			android:layout_width="fill_parent" 
+			android:layout_height="wrap_content">
+            <EditText android:id="@+id/find_editText" 
+				android:layout_width="0.0dip" 
+				android:layout_height="wrap_content" 
+				android:layout_weight="1.0" />
+            <ImageButton android:id="@+id/find_next_imageButton" 
+				android:layout_width="wrap_content" 
+				android:layout_height="wrap_content" 
+				android:src="@drawable/find_forward" />
+            <ImageButton android:id="@+id/find_back_imageButton" 
+				android:layout_width="wrap_content" 
+				android:layout_height="wrap_content" 
+				android:src="@drawable/find_back" />
+            <Button android:id="@+id/show_replace_button" 
+				android:layout_width="wrap_content" 
+				android:layout_height="wrap_content" 
+				android:text="@string/replace" />
+        </LinearLayout>
+        <LinearLayout android:id="@+id/replace_linearLayout" 
+			android:visibility="gone" 
+			android:layout_width="fill_parent" 
+			android:layout_height="wrap_content">
+            <EditText android:id="@+id/replace_editText" 
+				android:layout_width="0.0dip" 
+				android:layout_height="wrap_content" 
+				android:layout_weight="1.0" />
+            <Button android:id="@+id/replace_button" 
+				android:layout_width="wrap_content" 
+				android:layout_height="wrap_content" 
+				android:text="@string/replace" />
+            <Button android:id="@+id/replace_all_button" 
+				android:layout_width="wrap_content" 
+				android:layout_height="wrap_content" 
+				android:text="@string/replace_all" />
+        </LinearLayout>
+        <LinearLayout android:focusable="true" 
+			android:focusableInTouchMode="true" 
+			android:layout_width="0.0px" 
+			android:layout_height="0.0px" />
+    </LinearLayout>
+    <com.qingshan.widget.SymbolGrid android:id="@+id/symbolGrid1" 
+		android:background="@drawable/symbol_bg" 
+		android:focusable="true" 
+		android:focusableInTouchMode="true" 
+		android:visibility="invisible" 
+		android:clickable="true" 
+		android:layout_width="380.0dip" 
+		android:layout_height="230.0dip" 
+		android:layout_centerHorizontal="true" 
+		android:layout_centerVertical="true" />
+</RelativeLayout>

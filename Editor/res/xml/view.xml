@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory android:title="@string/view" android:key="view">
+        <ListPreference android:title="@string/font" android:key="font" android:defaultValue="Monospace" />
+        <ListPreference android:title="@string/font_size" android:key="font_size" android:defaultValue="14" />
+        <CheckBoxPreference android:title="@string/touch_zoom" android:key="touch_zoom" android:defaultValue="true" />
+        <CheckBoxPreference android:title="@string/word_wrap" android:key="wordwrap" android:defaultValue="true" />
+        <CheckBoxPreference android:title="@string/show_line_num" android:key="show_line_num" android:defaultValue="true" />
+        <CheckBoxPreference android:title="@string/show_tab" android:key="show_tab" android:defaultValue="false" />
+        <ListPreference android:entries="@array/screen_orientation_name" android:title="@string/screen_orientation" android:key="screen_orientation" android:summary="@string/request_restart" android:defaultValue="auto" android:dialogTitle="@string/screen_orientation" android:entryValues="@array/screen_orientation_value" />
+    </PreferenceCategory>
+</PreferenceScreen>

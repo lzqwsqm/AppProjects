@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item type="id" name="show_ime" />
+    <item type="id" name="to_lower" />
+    <item type="id" name="to_upper" />
+    <item type="id" name="goto_line" />
+    <item type="id" name="home_notification" />
+    <item type="id" name="go_to_end" />
+    <item type="id" name="go_to_begin" />
+    <item type="id" name="hide_ime" />
+    <item type="id" name="menu_reopen" />
+    <item type="id" name="menu_pipe" />
+    <item type="id" name="menu_saveas" />
+    <item type="id" name="menu_highlight" />
+    <item type="id" name="menu_encoding" />
+    <item type="id" name="menu_search_replace" />
+    <item type="id" name="menu_preferences" />
+    <item type="id" name="menu_exit" />
+    <item type="id" name="insert_datetime" />
+    <item type="id" name="duplicate_line" />
+    <item type="id" name="doc_stat" />
+    <item type="id" name="linearLayout1">false</item>
+    <item type="id" name="imageView1">false</item>
+    <item type="id" name="linearLayout2">false</item>
+    <item type="id" name="field_app_name">false</item>
+    <item type="id" name="field_version">false</item>
+    <item type="id" name="linearLayout3">false</item>
+    <item type="id" name="textView1">false</item>
+    <item type="id" name="textView2">false</item>
+    <item type="id" name="textView3">false</item>
+    <item type="id" name="textView4">false</item>
+    <item type="id" name="textView5">false</item>
+    <item type="id" name="textView6">false</item>
+    <item type="id" name="color_picker_view">false</item>
+    <item type="id" name="color_text">false</item>
+    <item type="id" name="ok">false</item>
+    <item type="id" name="cancel">false</item>
+    <item type="id" name="donateWebView">false</item>
+    <item type="id" name="text_content">false</item>
+    <item type="id" name="horizontalScrollView1">false</item>
+    <item type="id" name="pathButtons">false</item>
+    <item type="id" name="filenameLinearLayout">false</item>
+    <item type="id" name="editTextFilename">false</item>
+    <item type="id" name="btnSave">false</item>
+    <item type="id" name="encodingLinearLayout">false</item>
+    <item type="id" name="encodingtxt">false</item>
+    <item type="id" name="encoding_list">false</item>
+    <item type="id" name="linebreakLinearLayout">false</item>
+    <item type="id" name="linebreakchar">false</item>
+    <item type="id" name="linebreak_list">false</item>
+    <item type="id" name="f_icon">false</item>
+    <item type="id" name="f_title">false</item>
+    <item type="id" name="f_text">false</item>
+    <item type="id" name="mainLayout">false</item>
+    <item type="id" name="editorBodyLinearLayout">false</item>
+    <item type="id" name="tabs">false</item>
+    <item type="id" name="tabScroller">false</item>
+    <item type="id" name="tabWidgets">false</item>
+    <item type="id" name="add_new_tab_btn">false</item>
+    <item type="id" name="toolbar">false</item>
+    <item type="id" name="toolbarLinearLayout">false</item>
+    <item type="id" name="btn_open">false</item>
+    <item type="id" name="btn_save">false</item>
+    <item type="id" name="undo">false</item>
+    <item type="id" name="redo">false</item>
+    <item type="id" name="preview">false</item>
+    <item type="id" name="symbol">false</item>
+    <item type="id" name="last_edit_back">false</item>
+    <item type="id" name="last_edit_forward">false</item>
+    <item type="id" name="color">false</item>
+    <item type="id" name="menu">false</item>
+    <item type="id" name="findlinearLayout">false</item>
+    <item type="id" name="find_editText">false</item>
+    <item type="id" name="find_next_imageButton">false</item>
+    <item type="id" name="find_back_imageButton">false</item>
+    <item type="id" name="show_replace_button">false</item>
+    <item type="id" name="replace_linearLayout">false</item>
+    <item type="id" name="replace_editText">false</item>
+    <item type="id" name="replace_button">false</item>
+    <item type="id" name="replace_all_button">false</item>
+    <item type="id" name="symbolGrid1">false</item>
+    <item type="id" name="main_menu">false</item>
+    <item type="id" name="top_layout">false</item>
+    <item type="id" name="menu_version">false</item>
+    <item type="id" name="menu_layout">false</item>
+    <item type="id" name="menu_grid">false</item>
+    <item type="id" name="rlMenuItem">false</item>
+    <item type="id" name="main_menu_icon">false</item>
+    <item type="id" name="main_menu_text">false</item>
+    <item type="id" name="gridLayout">false</item>
+    <item type="id" name="drag">false</item>
+    <item type="id" name="iv_close">false</item>
+    <item type="id" name="gridview">false</item>
+    <item type="id" name="RelativeLayout_Item">false</item>
+    <item type="id" name="symbol_iv">false</item>
+    <item type="id" name="tab_indicator_layout">false</item>
+    <item type="id" name="title">false</item>
+    <item type="id" name="left_line">false</item>
+    <item type="id" name="right_line">false</item>
+    <item type="id" name="tips_content_layout">false</item>
+    <item type="id" name="menuparent">false</item>
+    <item type="id" name="linearLayout_closeothers">false</item>
+    <item type="id" name="linearLayout_closeright">false</item>
+    <item type="id" name="imageView3">false</item>
+    <item type="id" name="linearLayout4">false</item>
+    <item type="id" name="linearLayout_closeall">false</item>
+    <item type="id" name="imageView4">false</item>
+    <item type="id" name="reopen">false</item>
+    <item type="id" name="highlight">false</item>
+    <item type="id" name="encoding">false</item>
+    <item type="id" name="search_replace">false</item>
+    <item type="id" name="preferences">false</item>
+    <item type="id" name="exit">false</item>
+</resources>

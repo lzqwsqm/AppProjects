@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.qingshan.widget.QSEditText android:scrollbarThumbVertical="@drawable/hidescrollbar" 
+	android:textSize="18.0dip" 
+	android:gravity="top|left|center" 
+	android:id="@+id/text_content" 
+	android:focusable="true" 
+	android:focusableInTouchMode="true" 
+	android:scrollbars="vertical" 
+	android:clickable="true" 
+	android:layout_width="fill_parent" 
+	android:layout_height="fill_parent" 
+	android:maxLength="99999999" 
+	android:layout_weight="1.0" 
+	android:inputType="textMultiLine" 
+	android:fastScrollEnabled="true"
+	android:selectAllOnFocus="true"
+  xmlns:android="http://schemas.android.com/apk/res/android" />

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" 
+	android:layout_width="fill_parent" 
+	android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <HorizontalScrollView android:id="@+id/horizontalScrollView1" 
+		android:layout_width="fill_parent" 
+		android:layout_height="wrap_content">
+        <LinearLayout android:orientation="horizontal" 
+			android:id="@+id/pathButtons" 
+			android:layout_width="wrap_content" 
+			android:layout_height="wrap_content" />
+    </HorizontalScrollView>
+    <ListView android:id="@+android:id/list" 
+		android:focusable="true" 
+		android:focusableInTouchMode="true" 
+		android:scrollbars="vertical" 
+		android:layout_width="fill_parent" 
+		android:layout_height="fill_parent" 
+		android:layout_weight="1.0" 
+		android:fastScrollEnabled="true" />
+    <LinearLayout android:id="@+id/filenameLinearLayout" 
+		android:layout_width="fill_parent" 
+		android:layout_height="wrap_content">
+        <EditText android:id="@+id/editTextFilename" 
+			android:layout_width="fill_parent" 
+			android:layout_height="wrap_content" 
+			android:layout_weight="1.0" />
+        <Button android:id="@+id/btnSave" 
+			android:layout_width="wrap_content" 
+			android:layout_height="wrap_content" 
+			android:text="@string/save" />
+    </LinearLayout>
+    <LinearLayout android:id="@+id/encodingLinearLayout" 
+		android:layout_width="fill_parent" 
+		android:layout_height="wrap_content">
+        <TextView android:id="@+id/encodingtxt" 
+			android:layout_width="wrap_content" 
+			android:layout_height="wrap_content" 
+			android:text="@string/encoding" />
+        <Spinner android:id="@+id/encoding_list" 
+			android:layout_width="wrap_content" 
+			android:layout_height="wrap_content" 
+			android:layout_weight="1.0" />
+    </LinearLayout>
+    <LinearLayout android:id="@+id/linebreakLinearLayout" 
+		android:layout_width="fill_parent" 
+		android:layout_height="wrap_content">
+        <TextView android:id="@+id/linebreakchar" 
+			android:layout_width="wrap_content" 
+			android:layout_height="wrap_content" 
+			android:text="@string/convert_linebreak_char" />
+        <Spinner android:entries="@array/linebreak_chars" 
+			android:id="@+id/linebreak_list" 
+			android:layout_width="wrap_content" 
+			android:layout_height="wrap_content" 
+			android:layout_weight="1.0" />
+    </LinearLayout>
+</LinearLayout>

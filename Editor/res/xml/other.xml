@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory android:title="@string/Other" android:key="other">
+        <CheckBoxPreference android:title="@string/autosave" android:key="autosave" android:summary="@string/autosave_summery" android:defaultValue="false" />
+        <CheckBoxPreference android:title="@string/open_last_file" android:key="open_last_file" android:summary="@string/open_last_file_summary" android:defaultValue="false" />
+        <CheckBoxPreference android:title="@string/hide_soft_keyboard" android:key="hide_soft_Keyboard" android:summary="@string/hide_soft_keyboard_summary" android:defaultValue="false" />
+        <CheckBoxPreference android:title="@string/auto_indent" android:key="auto_indent" android:defaultValue="true" />
+        <CheckBoxPreference android:title="@string/keep_screen_on" android:key="keep_screen_on" android:summary="@string/keep_screen_on_summary" />
+        <CheckBoxPreference android:title="@string/back_button_exit" android:key="back_button_exit" android:defaultValue="true" />
+        <CheckBoxPreference android:title="@string/get_root_title" android:key="get_root" android:summary="@string/get_root_summary" android:defaultValue="false" />
+        <CheckBoxPreference android:title="@string/auto_capitalize" android:key="auto_capitalize" android:summary="@string/auto_capitalize_summary" android:defaultValue="false" />
+    </PreferenceCategory>
+</PreferenceScreen>

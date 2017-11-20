@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory android:title="@string/date_format" android:key="date_format">
+        <ListPreference android:title="@string/use_selected_format" android:key="sys_format" />
+        <CheckBoxPreference android:title="@string/use_custom_format" android:key="custom_format" />
+        <EditTextPreference android:title="@string/date_format_title" android:key="custom_date_format" android:summary="@string/date_format_summary" android:defaultValue="@string/date_format_summary" />
+    </PreferenceCategory>
+</PreferenceScreen>

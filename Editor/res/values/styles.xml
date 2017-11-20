@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="MultiTab" parent="@android:style/Theme.Light">
+        <item name="android:buttonStyle">@style/JecButton</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:imageButtonStyle">@style/JecImageButton</item>
+    </style>
+    <style name="JecButton" parent="@android:style/Widget.Button">
+        <item name="android:textColor">#80000000</item>
+        <item name="android:gravity">center</item>
+        <item name="android:background">@drawable/btn_bg</item>
+    </style>
+    <style name="JecImageButton" parent="@android:style/Widget.ImageButton">
+        <item name="android:background">@drawable/btn_bg</item>
+        <item name="android:scaleType">center</item>
+    </style>
+    <style name="symbolgrid_text">
+        <item name="android:textSize">22.0dip</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">#ffffffff</item>
+        <item name="android:singleLine">true</item>
+    </style>
+</resources>

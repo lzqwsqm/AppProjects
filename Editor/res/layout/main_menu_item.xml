@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:id="@+id/rlMenuItem" 
+	android:layout_width="fill_parent" 
+	android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <ImageView android:id="@+id/main_menu_icon" 
+		android:layout_width="wrap_content" 
+		android:layout_height="wrap_content" 
+		android:layout_marginTop="2.0dip" 
+		android:scaleType="center" 
+		android:layout_centerHorizontal="true" />
+    <TextView android:textColor="@drawable/main_menu_text_color" 
+		android:ellipsize="end" 
+		android:gravity="center" 
+		android:id="@+id/main_menu_text" 
+		android:paddingLeft="3.0px" 
+		android:paddingRight="3.0px" 
+		android:layout_width="fill_parent" 
+		android:layout_height="wrap_content" 
+		android:layout_marginBottom="3.0px" 
+		android:singleLine="true" 
+		android:layout_below="@id/main_menu_icon" />
+</RelativeLayout>

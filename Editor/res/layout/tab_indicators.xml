@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:orientation="vertical" 
+	android:id="@+id/tab_indicator_layout" 
+	android:background="@drawable/tab_indicator" 
+	android:paddingRight="28.0dip" 
+	android:descendantFocusability="beforeDescendants" 
+	android:layout_width="110.0dip" 
+	android:layout_height="fill_parent" 
+	android:layout_marginLeft="-12.0dip" 
+	android:layout_weight="1.0"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <TextView android:textColor="#ff1770b0" 
+		android:ellipsize="marquee" 
+		android:gravity="center" 
+		android:id="@+id/title" 
+		android:layout_width="fill_parent" 
+		android:layout_height="wrap_content" 
+		android:singleLine="true" />
+</RelativeLayout>

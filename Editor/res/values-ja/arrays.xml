@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="linebreak_chars">
+        <item>変更なし</item>
+        <item>CR+LF(Windows)</item>
+        <item>LF (Unix/Android)</item>
+        <item>CR (Macintosh)</item>
+    </string-array>
+</resources>

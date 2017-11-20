@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory android:title="@string/help" android:key="helpcate">
+        <Preference android:title="@string/report_bug" android:key="feedback" />
+        <Preference android:title="@string/help" android:key="help" />
+        <Preference android:title="@string/about" android:key="about" />
+        <Preference android:title="@string/project_homepage" android:key="project" />
+    </PreferenceCategory>
+</PreferenceScreen>
