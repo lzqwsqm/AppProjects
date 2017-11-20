@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- res目录-资源文件夹
+     src目录-源码文件夹
+     bin目录-目标文件夹
+     gen目录-自动生成文件夹
+     AndroieManifest.xml程序清单文件 -->
+
+<!-- 程序清单文件-全局描述文件(参照疯狂安卓讲义28页&Android编程入门很简单37页)-->
+ 
+<!-- package包名
+     android:versionCode版本号
+     android:versionName版本名称 -->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.database"
+    android:versionCode="8" 
+    android:versionName="2.0" >
+    
+    <!-- 使用的 SDK  -->
+    <uses-sdk android:minSdkVersion="8" android:targetSdkVersion="10" />
+    
+    <!-- 权限  -->
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <!-- 读取电话状态权限  --> 
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <!-- 打开网络socket权限  -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!-- 获取网络状态权限  -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!-- 获取Wi-Fi网络状态权限  -->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    
+    <supports-screens android:anyDensity="false" 
+    android:smallScreens="true" 
+	android:normalScreens="true" 
+    android:largeScreens="true" 
+	android:resizeable="true" />
+    <!-- 应用描述
+         android:label标签
+         android:icon图标-->
+    <application android:label="@string/app_name" 
+        android:icon="@drawable/icon">
+        <!-- 窗口描述 -->
+        <activity android:label="@string/app_name" 
+        android:name=".WelcomeActivity" 
+        android:screenOrientation="portrait">
+            <!--程序入口指定  -->
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:theme="@android:style/Theme.Dialog" 
+        android:label="@string/app_name" 
+        android:name=".LoginActivity" 
+        android:screenOrientation="portrait" 
+        android:configChanges="keyboardHidden|orientation">
+            <intent-filter>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:theme="@android:style/Theme" 
+        android:label="@string/app_name" 
+        android:name=".MainActivity" 
+        android:screenOrientation="portrait" 
+        android:configChanges="keyboardHidden|orientation">
+            <intent-filter>
+                <action android:name="android.intent.action.MAINLIST" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:theme="@android:style/Theme.Dialog" 
+        android:label="@string/app_name" 
+        android:name=".FormActivity" 
+        android:screenOrientation="portrait" 
+        android:configChanges="keyboardHidden|orientation">
+            <intent-filter>
+                <action android:name="android.intent.action.Form" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:theme="@android:style/Theme.Dialog" 
+        android:label="@string/app_name" 
+        android:name=".DetailActivity" 
+        android:screenOrientation="portrait" 
+        android:configChanges="keyboardHidden|orientation">
+            <intent-filter>
+                <action android:name="android.intent.action.Detail" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:theme="@android:style/Theme.Dialog" 
+        android:label="@string/app_name" 
+        android:name=".NaviActivity" 
+        android:screenOrientation="portrait" 
+        android:configChanges="keyboardHidden|orientation">
+            <intent-filter>
+                <action android:name="android.intent.action.Navi" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+</manifest>

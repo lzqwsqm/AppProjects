@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <public type="drawable" name="analysis" id="0x7f020000" />
+    <public type="drawable" name="asset" id="0x7f020001" />
+    <public type="drawable" name="audit" id="0x7f020002" />
+    <public type="drawable" name="blue" id="0x7f020003" />
+    <public type="drawable" name="credit" id="0x7f020004" />
+    <public type="drawable" name="deposit" id="0x7f020005" />
+    <public type="drawable" name="dict" id="0x7f020006" />
+    <public type="drawable" name="divider" id="0x7f020007" />
+    <public type="drawable" name="evection" id="0x7f020008" />
+    <public type="drawable" name="favor" id="0x7f020009" />
+    <public type="drawable" name="green" id="0x7f02000a" />
+    <public type="drawable" name="icon" id="0x7f02000b" />
+    <public type="drawable" name="invest" id="0x7f02000c" />
+    <public type="drawable" name="leftarrow" id="0x7f02000d" />
+    <public type="drawable" name="leftarrowtouched" id="0x7f02000e" />
+    <public type="drawable" name="listbox" id="0x7f02000f" />
+    <public type="drawable" name="listbox_black" id="0x7f020010" />
+    <public type="drawable" name="listbox_blue" id="0x7f020011" />
+    <public type="drawable" name="main" id="0x7f020012" />
+    <public type="drawable" name="report" id="0x7f020013" />
+    <public type="drawable" name="rightarrow" id="0x7f020014" />
+    <public type="drawable" name="rightarrowtouched" id="0x7f020015" />
+    <public type="drawable" name="smile" id="0x7f020016" />
+    <public type="drawable" name="supermarket" id="0x7f020017" />
+    <public type="drawable" name="system" id="0x7f020018" />
+    <public type="drawable" name="titlebg" id="0x7f020019" />
+    <public type="drawable" name="titlebgblack" id="0x7f02001a" />
+    <public type="drawable" name="titlebgblacktouched" id="0x7f02001b" />
+    <public type="drawable" name="titlebgtouched" id="0x7f02001c" />
+    <public type="drawable" name="welcome" id="0x7f02001d" />
+    <public type="drawable" name="yellow" id="0x7f02001e" />
+    <public type="layout" name="main" id="0x7f030000" />
+    <public type="string" name="hello" id="0x7f040000" />
+    <public type="string" name="app_name" id="0x7f040001" />
+    <public type="id" name="mainlayout" id="0x7f050000" />
+</resources>
