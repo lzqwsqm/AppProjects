@@ -16,14 +16,20 @@ public class ArrayUtil
 			paramInt = -12 + (1 << i);
 		}
 		return paramInt;
-	}
+	}*/
+	public static int idealByteArraySize(int need) {
+        for (int i = 4; i < 32; i++)
+            if (need <= (1 << i) - 12)
+                return (1 << i) - 12;
 
-	public static int idealCharArraySize(int paramInt)
+        return need;
+    }
+	public static int idealCharArraySize(int need)
 	{
-		return idealByteArraySize(paramInt * 2) / 2;
+		return idealByteArraySize(need * 2) / 2;
 	}
 
-	public static boolean inArray(int paramInt, int[] paramArrayOfInt)
+	/*public static boolean inArray(int paramInt, int[] paramArrayOfInt)
 	{
 		int j = 0;
 		int i = paramArrayOfInt.length;
@@ -38,9 +44,17 @@ public class ArrayUtil
 			j = 1;
 		}
 		return j;
-	}
-
-	public static boolean inArray(String paramString, String[] paramArrayOfString)
+	}*/
+	public static boolean inArray(int value, int[] intArray)
+    {
+        for(int v : intArray)
+        {
+            if(v == value)
+                return true;
+        }
+        return false;
+    }
+	/*public static boolean inArray(String paramString, String[] paramArrayOfString)
 	{
 		int j = 0;
 		int k = paramArrayOfString.length;
@@ -55,8 +69,17 @@ public class ArrayUtil
 			j = 1;
 		}
 		return j;
-	}
-	*/
+	}*/
+	public static boolean inArray(String value, String[] strArray)
+    {
+        for(String v : strArray)
+        {
+            if(v == value)
+                return true;
+        }
+        return false;
+    }
+	
 }
 
 /* Location:           C:\Documents and Settings\鏉庡繝鍏╘妗岄潰\鍙嶇紪璇慭ApkDecompiler\Output\com.jecelyin.editor_V12.9.25\classes_dex2jar.jar

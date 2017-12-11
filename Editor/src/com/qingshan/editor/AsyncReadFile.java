@@ -45,8 +45,6 @@ public class AsyncReadFile
         showProgress();
        // new Thread(new AnonymousClass1(encoding, path, lineBreak, mJecEditor)).start();
     
-	
-	
 		new Thread(new Runnable()
 			{
 				public void run()
@@ -117,14 +115,14 @@ public class AsyncReadFile
 					{
 						//while (true)
 						//{
-							String str4 = e.getMessage();
-							obtainMessage.what = 1;
-							bundle.putString("error", str4);
-							//bundle.putString("path", path);
-							//bundle.putString("encoding", str);
-							//bundle.putInt("lineBreak", lineBreak);
-							obtainMessage.setData(bundle);
-							obtainMessage.sendToTarget();
+						String str4 = e.getMessage();
+						obtainMessage.what = 1;
+						bundle.putString("error", str4);
+						//bundle.putString("path", path);
+						//bundle.putString("encoding", str);
+						//bundle.putInt("lineBreak", lineBreak);
+						obtainMessage.setData(bundle);
+						obtainMessage.sendToTarget();
 						//}
 					}
 					catch (OutOfMemoryError e)
@@ -132,13 +130,13 @@ public class AsyncReadFile
 						//while (true)
 						//{
 						String errorMsg = mJecEditor.getString(R.string.out_of_memory/*2131230795*/);
-							obtainMessage.what = 1;
+						obtainMessage.what = 1;
 						bundle.putString("error", errorMsg);
-							//bundle.putString("path", path);
-							//bundle.putString("encoding", str);
-							//bundle.putInt("lineBreak", lineBreak);
-							obtainMessage.setData(bundle);
-							obtainMessage.sendToTarget();
+						//bundle.putString("path", path);
+						//bundle.putString("encoding", str);
+						//bundle.putInt("lineBreak", lineBreak);
+						obtainMessage.setData(bundle);
+						obtainMessage.sendToTarget();
 						//}
 					}
 					finally
