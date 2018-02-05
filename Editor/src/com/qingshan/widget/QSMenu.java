@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.ViewGroup.LayoutParams;
 import android.view.View;
+import android.view.Gravity;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
@@ -27,14 +28,23 @@ public class QSMenu extends Dialog
 implements AdapterView.OnItemClickListener
 {
 	private GridView mGrid;
-	private int[][] mMenuItemLists;
-	private ArrayList<Map<String, Object>> mMenuItems;
+	private int[][] mMenuItemLists = new int[][]{
+		new int[]{R.id.menu_reopen, R.string.reopen, R.drawable.menu_open}, 
+		new int[]{R.id.menu_saveas, R.string.saveas, R.drawable.menu_saveas}, 
+		new int[]{R.id.menu_highlight, R.string.highlight, R.drawable.menu_highlight}, 
+		new int[]{R.id.menu_encoding, R.string.encoding, R.drawable.menu_encoding}, 
+		new int[]{R.id.menu_search_replace, R.string.search_replace, R.drawable.menu_search}, 
+		new int[]{R.id.menu_pipe, R.string.open_with, R.drawable.menu_openwith}, 
+		new int[]{R.id.menu_preferences, R.string.preferences, R.drawable.menu_setting}, 
+		new int[]{R.id.menu_exit, R.string.exit, R.drawable.menu_exit}
+	};
+	private ArrayList<Map<String, Object>> mMenuItems= new ArrayList();
 	private OnMenuItemSelectedListener mOnMenuItemSelectedListener;
 	private ViewGroup mViewGroup;
 
 	public QSMenu(Context context) {
         super(context);
-        this.mMenuItemLists = new int[][]{
+        /*this.mMenuItemLists = new int[][]{
 			new int[]{R.id.menu_reopen, R.string.reopen, R.drawable.menu_open}, 
 			new int[]{R.id.menu_saveas, R.string.saveas, R.drawable.menu_saveas}, 
 			new int[]{R.id.menu_highlight, R.string.highlight, R.drawable.menu_highlight}, 
@@ -44,13 +54,13 @@ implements AdapterView.OnItemClickListener
 			new int[]{R.id.menu_preferences, R.string.preferences, R.drawable.menu_setting}, 
 			new int[]{R.id.menu_exit, R.string.exit, R.drawable.menu_exit}
 			};
-        this.mMenuItems = new ArrayList();
+        this.mMenuItems = new ArrayList();*/
         init(context);
     }
 
 	public QSMenu(Context context, int theme) {
         super(context, theme);
-        this.mMenuItemLists = new int[][]{
+        /*this.mMenuItemLists = new int[][]{
 			new int[]{R.id.menu_reopen, R.string.reopen, R.drawable.menu_open}, 
 			new int[]{R.id.menu_saveas, R.string.saveas, R.drawable.menu_saveas}, 
 			new int[]{R.id.menu_highlight, R.string.highlight, R.drawable.menu_highlight}, 
@@ -59,11 +69,11 @@ implements AdapterView.OnItemClickListener
 			new int[]{R.id.menu_pipe, R.string.open_with, R.drawable.menu_openwith}, 
 			new int[]{R.id.menu_preferences, R.string.preferences, R.drawable.menu_setting}, 
 			new int[]{R.id.menu_exit, R.string.exit, R.drawable.menu_exit}};
-        this.mMenuItems = new ArrayList();
+        this.mMenuItems = new ArrayList();*/
         init(context);
     }
 	private void init(Context context) {
-        requestWindowFeature(1);
+        requestWindowFeature(Window.FEATURE_NO_TITLE/*1*/);
         this.mViewGroup = (ViewGroup) LayoutInflater.from(context).inflate(R.layout.main_menu, null);
         this.mGrid = (GridView) this.mViewGroup.findViewById(R.id.menu_grid);
         ((TextView) this.mViewGroup.findViewById(R.id.menu_version)).setText(QSEditor.version);
@@ -102,13 +112,14 @@ implements AdapterView.OnItemClickListener
         super.onCreate(mBundle);
         setContentView(this.mViewGroup);
         WindowManager.LayoutParams attr = getWindow().getAttributes();
-        attr.gravity = 81;
+        attr.gravity = Gravity.CENTER|Gravity.BOTTOM/*80*/;
         attr.verticalMargin = 0.0f;
         attr.dimAmount = 0.0f;
         getWindow().setBackgroundDrawableResource(R.drawable.main_menu_bg);
-        setCanceledOnTouchOutside(true);
+        //按非窗口区域时，可以关闭窗口
+		setCanceledOnTouchOutside(true);
     }
-
+	
 	
 
 	protected void onStart()

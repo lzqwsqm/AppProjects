@@ -47,6 +47,7 @@ import android.view.View;
 import android.view.ViewConfiguration;
 import android.view.View.BaseSavedState;
 import android.view.inputmethod.InputMethodManager;
+import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.Scroller;
 import android.widget.Toast;
@@ -68,6 +69,7 @@ import java.util.zip.CRC32;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import android.widget.TextView;
+import android.text.InputType;
 /*
 *自定义
 if(){}
@@ -83,6 +85,14 @@ finally { //不管什么情况都会执行，包括try catch 里面用了return 
 */
 public class QSEditText extends EditText
 {
+	/*private static final int ID_SELECT_ALL = android.R.id.selectAll;
+    private static final int ID_START_SELECTING_TEXT = android.R.id.startSelectingText;
+    private static final int ID_CUT = android.R.id.cut;
+    private static final int ID_COPY = android.R.id.copy;
+    private static final int ID_PASTE = android.R.id.paste;
+    private static final int ID_COPY_URL = android.R.id.copyUrl;
+    private static final int ID_SWITCH_INPUT_METHOD = android.R.id.switchInputMethod;
+    private static final int ID_ADD_TO_DICTIONARY = android.R.id.addToDictionary;*/
 	static final Directions DIRS_ALL_LEFT_TO_RIGHT;
 	static final Directions DIRS_ALL_RIGHT_TO_LEFT;
 	public static final int DIR_LEFT_TO_RIGHT = 1;
@@ -109,52 +119,107 @@ public class QSEditText extends EditText
 	private static boolean mDisableSpellCheck;
 	private static boolean mHideSoftKeyboard;
 	private static Rect sTempRect = new Rect();
-	private String current_encoding;
-	private String current_ext;
-	private int current_linebreak;
-	private String current_path;
-	private String current_title;
-	private boolean hasNewline;
-	private int lastPaddingLeft;
-	private boolean mAutoIndent;
+	private String current_encoding="UTF-8";
+	private String current_ext="";
+	private int current_linebreak=0;
+	private String current_path="";
+	private String current_title="";
+	private boolean hasNewline=true;
+	private int lastPaddingLeft=0;
+	private boolean mAutoIndent=false;
 	private CRC32 mCRC32;
-	private String mDateFormat;
+	private String mDateFormat="";
 	private FastScroller mFastScroller;
 	private FlingRunnable mFlingRunnable;
 	private Highlight mHighlight;
-	private ArrayList<Integer> mLastEditBuffer;
-	private int mLastEditIndex;
+	private ArrayList<Integer> mLastEditBuffer= new ArrayList();
+	private int mLastEditIndex=-1;
 	private Layout mLayout;
 	private Path mLineBreakPath = new Path();
-	private int mLineNumX;
-	private int mLineNumber;
-	private int mLineNumberLength;
+	private int mLineNumX=0;
+	private int mLineNumber=0;
+	private int mLineNumberLength=0;
 	private Paint mLineNumberPaint;
-	private int mLineNumberWidth;
-	private HashMap<Integer, String> mLineStr;
-	private boolean mNoWrapMode;
-	private OnTextChangedListener mOnTextChangedListener;
-	private UndoParcel mRedoParcel;
+	private int mLineNumberWidth=0;
+	private HashMap<Integer, String> mLineStr= new HashMap();
+	private boolean mNoWrapMode=false;
+	private OnTextChangedListener mOnTextChangedListener=null;
+	private UndoParcel mRedoParcel=new UndoParcel();
 	private boolean mShowLineNum = true;
 	private boolean mShowWhiteSpace = false;
 	private boolean mSupportMultiTouch;
 	private Path mTabPath = new Path();
-	private Editable mText;
+	private Editable mText=null;
 	private TextPaint mTextPaint;
 	private float mTextSize;
-	private int mTouchMode;
-	private UndoParcel mUndoParcel;
-	private boolean mUndoRedo;
-	private TextWatcher mUndoWatcher;
+	private int mTouchMode=7;
+	private UndoParcel mUndoParcel=new UndoParcel();
+	private boolean mUndoRedo=false;
+	
+	private TextWatcher mUndoWatcher = new TextWatcher() {
+		TextChange lastChange;
+
+	public void onTextChanged(CharSequence s, int start, int before, int count) {
+		if (!QSEditor.isLoading) {
+			// QSEditText.this.mHighlight.redraw();
+			if (this.lastChange != null) {
+				if (count < UndoParcel.MAX_SIZE) {
+					this.lastChange.newtext = s.subSequence(start, start + count);
+					if (start == this.lastChange.start && ((this.lastChange.oldtext.length() > 0 || this.lastChange.newtext.length() > 0) && !QSEditText.this.equalsCharSequence(this.lastChange.newtext, this.lastChange.oldtext))) {
+						QSEditText.this.mUndoParcel.push(this.lastChange);
+						QSEditText.this.mRedoParcel.removeAll();
+					}
+					QSEditText.this.setUndoRedoButtonStatus();
+				} else {
+					QSEditText.this.mUndoParcel.removeAll();
+					QSEditText.this.mRedoParcel.removeAll();
+				}
+				this.lastChange = null;
+			}
+			int bufSize = QSEditText.this.mLastEditBuffer.size();
+			int lastLoc = 0;
+			if (bufSize != 0) {
+				lastLoc = ((Integer) QSEditText.this.mLastEditBuffer.get(bufSize + QSEditText.DIR_RIGHT_TO_LEFT)).intValue();
+			}
+			if (Math.abs(start - lastLoc) > QSEditText.LAST_EDIT_DISTANCE_LIMIT) {
+				QSEditText.this.mLastEditBuffer.add(Integer.valueOf(start));
+				QSEditText.this.mLastEditIndex = QSEditText.this.mLastEditBuffer.size() + QSEditText.DIR_RIGHT_TO_LEFT;
+				if (QSEditText.this.mOnTextChangedListener != null) {
+					QSEditText.this.mOnTextChangedListener.onTextChanged(QSEditText.this);
+				}
+			}
+		}
+	}
+
+	public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+		if (!QSEditor.isLoading) {
+			if (QSEditText.this.mUndoRedo) {
+				QSEditText.this.mUndoRedo = false;
+			} else if (count < UndoParcel.MAX_SIZE) {
+				this.lastChange = new UndoParcel.TextChange();
+				this.lastChange.start = start;
+				this.lastChange.oldtext = s.subSequence(start, start + count);
+			} else {
+				QSEditText.this.mUndoParcel.removeAll();
+				QSEditText.this.mRedoParcel.removeAll();
+				this.lastChange = null;
+			}
+		}
+	}
+
+	public void afterTextChanged(Editable s) {
+	}
+};
+
 	
 	private VelocityTracker mVelocityTracker;
 	private Paint mWhiteSpacePaint;
-	private Path[] mWhiteSpacePaths;
+	private Path[] mWhiteSpacePaths=new Path[]{mTabPath,mLineBreakPath};
 	private TextPaint mWorkPaint;
 	private float oldDist;
-	private int paddingLeft;
-	private int realLineNum;
-	private float scale;
+	private int paddingLeft=0;
+	private int realLineNum=0;
+	private float scale=0.5f;
 	private long src_text_crc32;
 	private int src_text_length;
 	
@@ -180,37 +245,38 @@ public class QSEditText extends EditText
         //this.mShowLineNum = true;
         //this.mLineBreakPath = new Path();
        // this.mTabPath = new Path();
-        Path[] pathArr = new Path[TOUCH_DRAG_START_MODE];
-        pathArr[0] = this.mTabPath;
-        pathArr[DIR_LEFT_TO_RIGHT] = this.mLineBreakPath;
-        this.mWhiteSpacePaths = pathArr;
-        this.paddingLeft = 0;
-        this.lastPaddingLeft = 0;
-        this.realLineNum = 0;
-        this.hasNewline = true;
-        this.mText = null;
-        this.mUndoParcel = new UndoParcel();
-        this.mRedoParcel = new UndoParcel();
-        this.mUndoRedo = false;
-        this.mAutoIndent = false;
-        this.mLineStr = new HashMap();
-        this.mLineNumber = 0;
-        this.mLineNumberWidth = 0;
-        this.mLineNumberLength = 0;
-        this.mLastEditBuffer = new ArrayList();
-        this.mLastEditIndex = DIR_RIGHT_TO_LEFT;
-        this.current_encoding = "UTF-8";
-        this.current_path = "";
-        this.current_ext = "";
-        this.current_title = "";
-        this.current_linebreak = 0;
-        this.mNoWrapMode = false;
-        this.mLineNumX = 0;
-        this.mDateFormat = "0";
-        this.mTouchMode = TOUCH_DONE_MODE;
-        this.scale = 0.5f;
-        this.mOnTextChangedListener = null;
-        this.mUndoWatcher = new TextWatcher() {
+        //Path[] pathArr = new Path[TOUCH_DRAG_START_MODE];
+        //pathArr[0] = this.mTabPath;
+        //pathArr[1] = this.mLineBreakPath;
+        //this.mWhiteSpacePaths = pathArr;
+        
+		//this.paddingLeft = 0;
+        //this.lastPaddingLeft = 0;
+        //this.realLineNum = 0;
+        //this.hasNewline = true;
+        //this.mText = null;
+        //this.mUndoParcel = new UndoParcel();
+        //this.mRedoParcel = new UndoParcel();
+        //this.mUndoRedo = false;
+        //this.mAutoIndent = false;
+        //this.mLineStr = new HashMap();
+        //this.mLineNumber = 0;
+        //this.mLineNumberWidth = 0;
+        //this.mLineNumberLength = 0;
+        //this.mLastEditBuffer = new ArrayList();
+        //this.mLastEditIndex = DIR_RIGHT_TO_LEFT;
+        //this.current_encoding = "UTF-8";
+        //this.current_path = "";
+        //this.current_ext = "";
+        //this.current_title = "";
+       // this.current_linebreak = 0;
+        //this.mNoWrapMode = false;
+        //this.mLineNumX = 0;
+        //this.mDateFormat = "0";
+        //this.mTouchMode = TOUCH_DONE_MODE;
+        //this.scale = 0.5f;
+        //this.mOnTextChangedListener = null;
+        /*this.mUndoWatcher = new TextWatcher() {
            TextChange lastChange;
 
             public void onTextChanged(CharSequence s, int start, int before, int count) {
@@ -263,7 +329,7 @@ public class QSEditText extends EditText
 
             public void afterTextChanged(Editable s) {
             }
-        };
+        };*/
     }
 	
 	
@@ -445,706 +511,8 @@ public class QSEditText extends EditText
 	//指定处理到的异常类型与catch标号
     .catchall {:try_start_0 .. :try_end_0} :catchall_0
 
-    .line 891
-    move-object/from16 v0, p0
-
-    iget-object v3, v0, Lcom/jecelyin/widget/JecEditText;->mLayout:Landroid/text/Layout;
-
-    if-eqz v3, :cond_0
-
-    .line 894
-    move-object/from16 v0, p0
-
-    iget-object v3, v0, Lcom/jecelyin/widget/JecEditText;->mText:Landroid/text/Editable;
-
-    invoke-interface {v3}, Landroid/text/Editable;->length()I
-
-    move-result v19
-
-    .line 896
-    .local v19, "textLength":I
-    const/16 v34, 0x0
-
-    .line 897
-    .local v34, "top":I
-    move-object/from16 v0, p0
-
-    iget-object v3, v0, Lcom/jecelyin/widget/JecEditText;->mLayout:Landroid/text/Layout;
-
-    invoke-virtual {v3}, Landroid/text/Layout;->getLineCount()I
-
-    move-result v29
-
-    .line 898
-    .local v29, "lineCount":I
-    move-object/from16 v0, p0
-
-    iget-object v3, v0, Lcom/jecelyin/widget/JecEditText;->mLayout:Landroid/text/Layout;
-
-    move/from16 v0, v29
-
-    invoke-virtual {v3, v0}, Landroid/text/Layout;->getLineTop(I)I
-
-    move-result v21
-
-    .line 900
-    .local v21, "bottom":I
-    move/from16 v0, v23
-
-    move/from16 v1, v34
-
-    if-le v0, v1, :cond_2
-
-    .line 902
-    move/from16 v34, v23
-
-    .line 904
-    :cond_2
-    move/from16 v0, v22
-
-    move/from16 v1, v21
-
-    if-ge v0, v1, :cond_3
-
-    .line 906
-    move/from16 v21, v22
-
-    .line 909
-    :cond_3
-    move-object/from16 v0, p0
-
-    iget-object v3, v0, Lcom/jecelyin/widget/JecEditText;->mLayout:Landroid/text/Layout;
-
-    move/from16 v0, v34
-
-    invoke-virtual {v3, v0}, Landroid/text/Layout;->getLineForVertical(I)I
-
-    move-result v24
-
-    .line 910
-    .local v24, "first":I
-    move-object/from16 v0, p0
-
-    iget-object v3, v0, Lcom/jecelyin/widget/JecEditText;->mLayout:Landroid/text/Layout;
-
-    move/from16 v0, v21
-
-    invoke-virtual {v3, v0}, Landroid/text/Layout;->getLineForVertical(I)I
-
-    move-result v26
-
-    .line 912
-    .local v26, "last":I
-    move-object/from16 v0, p0
-
-    iget-object v3, v0, Lcom/jecelyin/widget/JecEditText;->mLayout:Landroid/text/Layout;
-
-    move/from16 v0, v24
-
-    invoke-virtual {v3, v0}, Landroid/text/Layout;->getLineTop(I)I
-
-    move-result v30
-
-    .line 913
-    .local v30, "previousLineBottom":I
-    move-object/from16 v0, p0
-
-    iget-object v3, v0, Lcom/jecelyin/widget/JecEditText;->mLayout:Landroid/text/Layout;
-
-    move/from16 v0, v24
-
-    invoke-virtual {v3, v0}, Landroid/text/Layout;->getLineStart(I)I
-
-    move-result v31
-
-    .line 915
-    .local v31, "previousLineEnd":I
-    move-object/from16 v0, p0
-
-    iget-object v15, v0, Lcom/jecelyin/widget/JecEditText;->mTextPaint:Landroid/text/TextPaint;
-
-    .line 917
-    .local v15, "paint":Landroid/text/TextPaint;
-    sget-object v18, Lcom/jecelyin/widget/JecEditText;->NO_PARA_SPANS:[Landroid/text/style/ParagraphStyle;
-
-    .line 921
-    .local v18, "spans":[Landroid/text/style/ParagraphStyle;
-    move-object/from16 v0, p0
-
-    iget-object v5, v0, Lcom/jecelyin/widget/JecEditText;->mLayout:Landroid/text/Layout;
-
-    const/4 v3, 0x3
-
-    move/from16 v0, v24
-
-    if-lt v0, v3, :cond_8
-
-    add-int/lit8 v3, v24, -0x3
-
-    :goto_1
-    invoke-virtual {v5, v3}, Landroid/text/Layout;->getLineStart(I)I
-
-    move-result v32
-
-    .line 922
-    .local v32, "previousLineEnd2":I
-    move-object/from16 v0, p0
-
-    iget-object v5, v0, Lcom/jecelyin/widget/JecEditText;->mHighlight:Lcom/jecelyin/highlight/Highlight;
-
-    move-object/from16 v0, p0
-
-    iget-object v6, v0, Lcom/jecelyin/widget/JecEditText;->mText:Landroid/text/Editable;
-
-    move-object/from16 v0, p0
-
-    iget-object v11, v0, Lcom/jecelyin/widget/JecEditText;->mLayout:Landroid/text/Layout;
-
-    add-int/lit8 v3, v26, 0x3
-
-    move/from16 v0, v29
-
-    if-le v3, v0, :cond_9
-
-    move/from16 v3, v29
-
-    :goto_2
-    invoke-virtual {v11, v3}, Landroid/text/Layout;->getLineStart(I)I
-
-    move-result v3
-
-    move/from16 v0, v32
-
-    invoke-virtual {v5, v6, v0, v3}, Lcom/jecelyin/highlight/Highlight;->render(Landroid/text/Editable;II)Z
-
-    .line 924
-    move-object/from16 v0, p0
-
-    iget-boolean v3, v0, Lcom/jecelyin/widget/JecEditText;->mShowLineNum:Z
-
-    if-nez v3, :cond_4
-
-    move-object/from16 v0, p0
-
-    iget-boolean v3, v0, Lcom/jecelyin/widget/JecEditText;->mShowWhiteSpace:Z
-
-    if-eqz v3, :cond_0
-
-    .line 930
-    :cond_4
-    const/4 v3, 0x1
-
-    move/from16 v0, v29
-
-    if-ge v0, v3, :cond_a
-
-    const/16 v27, 0x1
-
-    .line 931
-    .local v27, "lastline":I
-    :goto_3
-    move-object/from16 v0, p0
-
-    iget v3, v0, Lcom/jecelyin/widget/JecEditText;->mLineNumber:I
-
-    move/from16 v0, v27
-
-    if-eq v0, v3, :cond_5
-
-    .line 933
-    move-object/from16 v0, p0
-
-    move/from16 v1, v27
-
-    invoke-direct {v0, v1}, Lcom/jecelyin/widget/JecEditText;->setLineNumberWidth(I)V
-
-    .line 936
-    :cond_5
-    move-object/from16 v0, p0
-
-    iget-boolean v3, v0, Lcom/jecelyin/widget/JecEditText;->mNoWrapMode:Z
-
-    if-eqz v3, :cond_b
-
-    .line 938
-    move-object/from16 v0, p0
-
-    iget v3, v0, Lcom/jecelyin/widget/JecEditText;->mLineNumberWidth:I
-
-    invoke-virtual/range {p0 .. p0}, Lcom/jecelyin/widget/JecEditText;->getScrollX()I
-
-    move-result v5
-
-    add-int/2addr v3, v5
-
-    move-object/from16 v0, p0
-
-    iput v3, v0, Lcom/jecelyin/widget/JecEditText;->mLineNumX:I
-
-    .line 944
-    :goto_4
-    invoke-virtual/range {p0 .. p0}, Lcom/jecelyin/widget/JecEditText;->getWidth()I
-
-    move-result v33
-
-    .line 945
-    .local v33, "right":I
-    invoke-virtual/range {p0 .. p0}, Lcom/jecelyin/widget/JecEditText;->getPaddingLeft()I
-
-    move-result v28
-
-    .line 947
-    .local v28, "left":I
-    const/4 v3, 0x1
-
-    move/from16 v0, v31
-
-    if-le v0, v3, :cond_c
-
-    .line 949
-    move-object/from16 v0, p0
-
-    iget-object v3, v0, Lcom/jecelyin/widget/JecEditText;->mText:Landroid/text/Editable;
-
-    invoke-interface {v3}, Landroid/text/Editable;->length()I
-
-    move-result v3
-
-    move/from16 v0, v31
-
-    if-ge v0, v3, :cond_0
-
-    .line 951
-    move-object/from16 v0, p0
-
-    iget-object v3, v0, Lcom/jecelyin/widget/JecEditText;->mText:Landroid/text/Editable;
-
-    const/16 v5, 0xa
-
-    const/4 v6, 0x0
-
-    move/from16 v0, v31
-
-    invoke-static {v3, v5, v6, v0}, Lcom/jecelyin/util/TextUtil;->countMatches(Ljava/lang/CharSequence;CII)I
-
-    move-result v3
-
-    move-object/from16 v0, p0
-
-    iput v3, v0, Lcom/jecelyin/widget/JecEditText;->realLineNum:I
-
-    .line 955
-    move-object/from16 v0, p0
-
-    iget-object v3, v0, Lcom/jecelyin/widget/JecEditText;->mText:Landroid/text/Editable;
-
-    move/from16 v0, v31
-
-    invoke-interface {v3, v0}, Landroid/text/Editable;->charAt(I)C
-
-    move-result v3
-
-    const/16 v5, 0xa
-
-    if-eq v3, v5, :cond_6
-
-    .line 957
-    move-object/from16 v0, p0
-
-    iget v3, v0, Lcom/jecelyin/widget/JecEditText;->realLineNum:I
-
-    add-int/lit8 v3, v3, 0x1
-
-    move-object/from16 v0, p0
-
-    iput v3, v0, Lcom/jecelyin/widget/JecEditText;->realLineNum:I
-
-    .line 964
-    :cond_6
-    :goto_5
-    const/4 v3, 0x1
-
-    move-object/from16 v0, p0
-
-    iput-boolean v3, v0, Lcom/jecelyin/widget/JecEditText;->hasNewline:Z
-
-    .line 967
-    if-nez v26, :cond_d
-
-    .line 969
-    move-object/from16 v0, p0
-
-    iget v3, v0, Lcom/jecelyin/widget/JecEditText;->mLineNumX:I
-
-    int-to-float v4, v3
-
-    move/from16 v0, v34
-
-    int-to-float v5, v0
-
-    move-object/from16 v0, p0
-
-    iget v3, v0, Lcom/jecelyin/widget/JecEditText;->mLineNumX:I
-
-    int-to-float v6, v3
-
-    move-object/from16 v0, p0
-
-    iget-object v3, v0, Lcom/jecelyin/widget/JecEditText;->mTextPaint:Landroid/text/TextPaint;
-
-    invoke-virtual {v3}, Landroid/text/TextPaint;->getTextSize()F
-
-    move-result v7
-
-    move-object/from16 v0, p0
-
-    iget-object v8, v0, Lcom/jecelyin/widget/JecEditText;->mLineNumberPaint:Landroid/graphics/Paint;
-
-    move-object/from16 v3, p1
-
-    invoke-virtual/range {v3 .. v8}, Landroid/graphics/Canvas;->drawLine(FFFFLandroid/graphics/Paint;)V
-
-    .line 970
-    move-object/from16 v0, p0
-
-    iget-boolean v3, v0, Lcom/jecelyin/widget/JecEditText;->hasNewline:Z
-
-    if-eqz v3, :cond_0
-
-    .line 972
-    move-object/from16 v0, p0
-
-    iget-object v3, v0, Lcom/jecelyin/widget/JecEditText;->mLineStr:Ljava/util/HashMap;
-
-    move-object/from16 v0, p0
-
-    iget v5, v0, Lcom/jecelyin/widget/JecEditText;->realLineNum:I
-
-    invoke-static {v5}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
-
-    move-result-object v5
-
-    invoke-virtual {v3, v5}, Ljava/util/HashMap;->get(Ljava/lang/Object;)Ljava/lang/Object;
-
-    move-result-object v4
-
-    check-cast v4, Ljava/lang/String;
-
-    .line 973
-    .local v4, "lineString":Ljava/lang/String;
-    if-nez v4, :cond_7
-
-    .line 975
-    new-instance v3, Ljava/lang/StringBuilder;
-
-    const-string v5, "      "
-
-    invoke-direct {v3, v5}, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
-
-    move-object/from16 v0, p0
-
-    iget v5, v0, Lcom/jecelyin/widget/JecEditText;->realLineNum:I
-
-    invoke-virtual {v3, v5}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
-
-    move-result-object v3
-
-    invoke-virtual {v3}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
-
-    move-result-object v4
-
-    .line 976
-    move-object/from16 v0, p0
-
-    iget-object v3, v0, Lcom/jecelyin/widget/JecEditText;->mLineStr:Ljava/util/HashMap;
-
-    move-object/from16 v0, p0
-
-    iget v5, v0, Lcom/jecelyin/widget/JecEditText;->realLineNum:I
-
-    invoke-static {v5}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
-
-    move-result-object v5
-
-    invoke-virtual {v3, v5, v4}, Ljava/util/HashMap;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
-
-    .line 978
-    :cond_7
-    invoke-virtual {v4}, Ljava/lang/String;->length()I
-
-    move-result v3
-
-    move-object/from16 v0, p0
-
-    iget v5, v0, Lcom/jecelyin/widget/JecEditText;->mLineNumberLength:I
-
-    sub-int v5, v3, v5
-
-    invoke-virtual {v4}, Ljava/lang/String;->length()I
-
-    move-result v6
-
-    move-object/from16 v0, p0
-
-    iget v3, v0, Lcom/jecelyin/widget/JecEditText;->mLineNumX:I
-
-    move-object/from16 v0, p0
-
-    iget v11, v0, Lcom/jecelyin/widget/JecEditText;->mLineNumberWidth:I
-
-    sub-int/2addr v3, v11
-
-    int-to-float v7, v3
-
-    move-object/from16 v0, p0
-
-    iget-object v3, v0, Lcom/jecelyin/widget/JecEditText;->mTextPaint:Landroid/text/TextPaint;
-
-    invoke-virtual {v3}, Landroid/text/TextPaint;->getTextSize()F
-
-    move-result v8
-
-    move-object/from16 v0, p0
-
-    iget-object v9, v0, Lcom/jecelyin/widget/JecEditText;->mLineNumberPaint:Landroid/graphics/Paint;
-
-    move-object/from16 v3, p1
-
-    invoke-virtual/range {v3 .. v9}, Landroid/graphics/Canvas;->drawText(Ljava/lang/String;IIFFLandroid/graphics/Paint;)V
-
-    goto/16 :goto_0
-
-    .line 881
-    .end local v4    # "lineString":Ljava/lang/String;
-    .end local v15    # "paint":Landroid/text/TextPaint;
-    .end local v18    # "spans":[Landroid/text/style/ParagraphStyle;
-    .end local v19    # "textLength":I
-    .end local v21    # "bottom":I
-    .end local v22    # "dbottom":I
-    .end local v23    # "dtop":I
-    .end local v24    # "first":I
-    .end local v26    # "last":I
-    .end local v27    # "lastline":I
-    .end local v28    # "left":I
-    .end local v29    # "lineCount":I
-    .end local v30    # "previousLineBottom":I
-    .end local v31    # "previousLineEnd":I
-    .end local v32    # "previousLineEnd2":I
-    .end local v33    # "right":I
-    .end local v34    # "top":I
-    :catchall_0
-    move-exception v3
-
-    :try_start_1
-    monitor-exit v5
-    :try_end_1
-    .catchall {:try_start_1 .. :try_end_1} :catchall_0
-
-    throw v3
-
-    .line 921
-    .restart local v15    # "paint":Landroid/text/TextPaint;
-    .restart local v18    # "spans":[Landroid/text/style/ParagraphStyle;
-    .restart local v19    # "textLength":I
-    .restart local v21    # "bottom":I
-    .restart local v22    # "dbottom":I
-    .restart local v23    # "dtop":I
-    .restart local v24    # "first":I
-    .restart local v26    # "last":I
-    .restart local v29    # "lineCount":I
-    .restart local v30    # "previousLineBottom":I
-    .restart local v31    # "previousLineEnd":I
-    .restart local v34    # "top":I
-    :cond_8
-    const/4 v3, 0x0
-
-    goto/16 :goto_1
-
-    .line 922
-    .restart local v32    # "previousLineEnd2":I
-    :cond_9
-    add-int/lit8 v3, v26, 0x3
-
-    goto/16 :goto_2
-
-    :cond_a
-    move/from16 v27, v29
-
-    .line 930
-    goto/16 :goto_3
-
-    .line 941
-    .restart local v27    # "lastline":I
-    :cond_b
-    move-object/from16 v0, p0
-
-    iget v3, v0, Lcom/jecelyin/widget/JecEditText;->mLineNumberWidth:I
-
-    move-object/from16 v0, p0
-
-    iput v3, v0, Lcom/jecelyin/widget/JecEditText;->mLineNumX:I
-
-    goto/16 :goto_4
-
-    .line 961
-    .restart local v28    # "left":I
-    .restart local v33    # "right":I
-    :cond_c
-    const/4 v3, 0x1
-
-    move-object/from16 v0, p0
-
-    iput v3, v0, Lcom/jecelyin/widget/JecEditText;->realLineNum:I
-
-    goto/16 :goto_5
-
-    .line 986
-    :cond_d
-    move/from16 v25, v24
-
-    .local v25, "i":I
-    :goto_6
-    move/from16 v0, v25
-
-    move/from16 v1, v26
-
-    if-gt v0, v1, :cond_0
-
-    .line 988
-    move/from16 v7, v31
-
-    .line 990
-    .local v7, "start":I
-    move-object/from16 v0, p0
-
-    iget-object v3, v0, Lcom/jecelyin/widget/JecEditText;->mLayout:Landroid/text/Layout;
-
-    add-int/lit8 v5, v25, 0x1
-
-    invoke-virtual {v3, v5}, Landroid/text/Layout;->getLineStart(I)I
-
-    move-result v31
-
-    .line 991
-    move-object/from16 v0, p0
-
-    move/from16 v1, v25
-
-    move/from16 v2, v31
-
-    invoke-direct {v0, v1, v7, v2}, Lcom/jecelyin/widget/JecEditText;->getLineVisibleEnd(III)I
-
-    move-result v8
-
-    .line 993
-    .local v8, "end":I
-    move/from16 v12, v30
-
-    .line 994
-    .local v12, "ltop":I
-    move-object/from16 v0, p0
-
-    iget-object v3, v0, Lcom/jecelyin/widget/JecEditText;->mLayout:Landroid/text/Layout;
-
-    add-int/lit8 v5, v25, 0x1
-
-    invoke-virtual {v3, v5}, Landroid/text/Layout;->getLineTop(I)I
-
-    move-result v14
-
-    .line 995
-    .local v14, "lbottom":I
-    move/from16 v30, v14
-
-    .line 996
-    move v13, v14
-
-    .line 998
-    .local v13, "lbaseline":I
-    move-object/from16 v0, p0
-
-    iget-object v3, v0, Lcom/jecelyin/widget/JecEditText;->mLayout:Landroid/text/Layout;
-
-    move/from16 v0, v25
-
-    invoke-virtual {v3, v0}, Landroid/text/Layout;->getParagraphDirection(I)I
-
-    move-result v9
-
-    .line 1003
-    .local v9, "dir":I
-    const/4 v3, 0x1
-
-    if-ne v9, v3, :cond_e
-
-    .line 1005
-    move/from16 v35, v28
-
-    .line 1013
-    .local v35, "x":I
-    :goto_7
-    sget-object v10, Lcom/jecelyin/widget/JecEditText;->DIRS_ALL_LEFT_TO_RIGHT:Lcom/jecelyin/widget/JecEditText$Directions;
-
-    .line 1016
-    .local v10, "directions":Lcom/jecelyin/widget/JecEditText$Directions;
-    move-object/from16 v0, p0
-
-    iget-object v3, v0, Lcom/jecelyin/widget/JecEditText;->mLayout:Landroid/text/Layout;
-
-    move/from16 v0, v25
-
-    invoke-virtual {v3, v0}, Landroid/text/Layout;->getLineContainsTab(I)Z
-
-    move-result v17
-
-    .line 1017
-    .local v17, "hasTab":Z
-    move/from16 v0, v35
-
-    int-to-float v11, v0
-
-    move-object/from16 v0, p0
-
-    iget-object v0, v0, Lcom/jecelyin/widget/JecEditText;->mWorkPaint:Landroid/text/TextPaint;
-
-    move-object/from16 v16, v0
-
-    add-int/lit8 v3, v25, 0x1
-
-    move/from16 v0, v26
-
-    if-ne v3, v0, :cond_f
-
-    const/16 v20, 0x1
-
-    :goto_8
-    move-object/from16 v5, p0
-
-    move-object/from16 v6, p1
-
-    invoke-direct/range {v5 .. v20}, Lcom/jecelyin/widget/JecEditText;->drawText(Landroid/graphics/Canvas;IIILcom/jecelyin/widget/JecEditText$Directions;FIIILandroid/text/TextPaint;Landroid/text/TextPaint;Z[Ljava/lang/Object;IZ)V
-
-    .line 986
-    add-int/lit8 v25, v25, 0x1
-
-    goto :goto_6
-
-    .line 1008
-    .end local v10    # "directions":Lcom/jecelyin/widget/JecEditText$Directions;
-    .end local v17    # "hasTab":Z
-    .end local v35    # "x":I
-    :cond_e
-    move/from16 v35, v33
-
-    .restart local v35    # "x":I
-    goto :goto_7
-
-    .line 1017
-    .restart local v10    # "directions":Lcom/jecelyin/widget/JecEditText$Directions;
-    .restart local v17    # "hasTab":Z
-    :cond_f
-    const/16 v20, 0x0
-
+    
+    
     goto :goto_8
 	
 .end method*/
@@ -1228,12 +596,12 @@ public class QSEditText extends EditText
 	//TabHost.setCurrentTab调用
 	public void hide()
 	{
-		setVisibility(8);
+		setVisibility(View.GONE/*8*/);
 	}
 	//TabHost.setCurrentTab调用
 	public void show()
 	{
-		setVisibility(0);
+		setVisibility(View.VISIBLE/*0*/);
 		if (this.mOnTextChangedListener != null)
 			this.mOnTextChangedListener.onTextChanged(this);
 	}
@@ -1296,9 +664,9 @@ public class QSEditText extends EditText
 		this.mHighlight = new Highlight();
 		this.mWorkPaint = new TextPaint();
 		this.mTextPaint = getPaint();
-		this.mLineNumberPaint = new Paint(1);
-		this.mWhiteSpacePaint = new Paint(1);
-		setImeOptions(268435462);
+		this.mLineNumberPaint = new Paint(Paint.ANTI_ALIAS_FLAG/*1*/);
+		this.mWhiteSpacePaint = new Paint(Paint.ANTI_ALIAS_FLAG/*1*/);
+		setImeOptions(EditorInfo.IME_ACTION_DONE | EditorInfo.IME_FLAG_NO_EXTRACT_UI/*268435462*/);
 		this.paddingLeft = getPaddingLeft();
 		this.mFastScroller = new FastScroller(getContext(), this);
 		//即给EditText增加监听器
@@ -1311,7 +679,7 @@ public class QSEditText extends EditText
 		this.mLineNumberPaint.setColor(Color.parseColor(ColorScheme.color_font));
 		this.mWhiteSpacePaint.setStrokeWidth(0.75F);
 		this.mWhiteSpacePaint.setStyle(Paint.Style.STROKE);
-		this.mWhiteSpacePaint.setColor(-7829368);
+		this.mWhiteSpacePaint.setColor(Color.GRAY/*-7829368*/);
 		this.mLineBreakPath.reset();
 		float f2 = this.mTextPaint.measureText("L");
 		float f1 = this.mTextPaint.descent() - this.mTextPaint.ascent();
@@ -1678,13 +1046,13 @@ public class QSEditText extends EditText
 	public void showIME(boolean show) {
         setHideKeyboard(!show);
         InputMethodManager imm = (InputMethodManager) getContext().getSystemService("input_method");
-        if (getResources().getConfiguration().hardKeyboardHidden != TOUCH_DRAG_START_MODE) {
+        if (getResources().getConfiguration().hardKeyboardHidden != Configuration.HARDKEYBOARDHIDDEN_YES/*TOUCH_DRAG_START_MODE*/) {
             show = false;
         }
         if (show) {
-            int type = 131073;
+            int type = InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_MULTI_LINE/*131073*/;
             if (mAutoCapitalize) {
-                type = 131073 | 16384;
+                type |= InputType.TYPE_TEXT_FLAG_CAP_SENTENCES/*131073 | 16384*/;
             }
             if (mDisableSpellCheck) {
                 type |= -524289;
@@ -1696,7 +1064,7 @@ public class QSEditText extends EditText
             }
             return;
         }
-        setRawInputType(0);
+        setRawInputType(InputType.TYPE_NULL/*0*/);
         if (imm != null) {
             imm.hideSoftInputFromWindow(getWindowToken(), 0);
         }

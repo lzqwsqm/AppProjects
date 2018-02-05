@@ -95,15 +95,13 @@ class FileListAdapter extends ArrayAdapter<File>
         this.holder.f_title.setText(title);
         if (file.isDirectory()) {
             this.holder.f_icon.setImageBitmap(this.mIcon_folder);
-        } else
-		{
-			if ("image".equals(f_type)) {
+        } else {if ("image".equals(f_type)) {
             this.holder.f_icon.setImageBitmap(this.mIcon_image);
         } else if ("audio".equals(f_type)) {
             this.holder.f_icon.setImageBitmap(this.mIcon_audio);
         } else if ("video".equals(f_type)) {
             this.holder.f_icon.setImageBitmap(this.mIcon_video);
-        } else if ("apk".equals(f_type)) {
+        } else if ("app".equals(f_type)) {
             this.holder.f_icon.setImageBitmap(this.mIcon_apk);
         } else {
             this.holder.f_icon.setImageBitmap(this.mIcon_file);

@@ -1,5 +1,6 @@
 
 package com.qingshan.editor;
+
 import android.graphics.Rect;
 import com.qingshan.editor.R;
 import android.app.Activity;
@@ -16,6 +17,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.res.AssetManager;
 import android.content.res.Resources;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
@@ -33,6 +35,7 @@ import android.view.ActionMode;
 import android.view.ActionMode.Callback;
 //import android.view.View.OnClickListener;
 import android.view.Window;
+import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
@@ -55,6 +58,7 @@ import com.qingshan.widget.SymbolGrid;
 import com.qingshan.widget.TabHost;
 //import com.jecelyin.widget.TabHost.OnTabChangeListener;
 //import com.jecelyin.widget.TabHost.OnTabCloseListener;
+import com.qingshan.widget.TabWidget;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -72,7 +76,6 @@ import java.util.zip.ZipInputStream;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import android.widget.TextView;
-//import java.text.*;
 /*
 调试备忘
  QSEditText.setPath
@@ -104,20 +107,22 @@ public class QSEditor extends Activity
 	 # static fields
 	 //声明静态字段.field指令后面跟随着的是访问权限.修饰关键字描述字段的其它属性指令的最后是字段名与类型
 	 .field private static final ACTION_EDIT_SCRIPT:Ljava/lang/String; = "com.googlecode.android_scripting.action.EDIT_SCRIPT"*/
-    private static final String ACTION_EDIT_SCRIPT = "com.googlecode.android_scripting.action.EDIT_SCRIPT";
+    // SL4A
+	 private static final String ACTION_EDIT_SCRIPT = "com.googlecode.android_scripting.action.EDIT_SCRIPT";
 	private static final String EXTRA_SCRIPT_CONTENT = "com.googlecode.android_scripting.extra.SCRIPT_CONTENT";
 	private static final String EXTRA_SCRIPT_PATH = "com.googlecode.android_scripting.extra.SCRIPT_PATH";
-	public static final int FILE_BROWSER_OPEN_CODE = 0;
-	public static final int FILE_BROWSER_SAVEAS_CODE = 1;
-	public static final String PREF_HISTORY = "history";
-	private static final String PREF_LAST_FILE = "last_files";
+	// end
+	public static final int FILE_BROWSER_OPEN_CODE = 0;// 打开
+	public static final int FILE_BROWSER_SAVEAS_CODE = 1;// 另存为
+	public static final String PREF_HISTORY = "history";// 保存打开文件记录
+	private static final String PREF_LAST_FILE = "last_files";// 最后打开的文件
 	private static final String SYNTAX_SIGN = "23";
-	private static final String TAG = "JecEditor";
+	private static final String TAG = "QSEditor";
 	public static String TEMP_PATH;
-	private static boolean fullScreen;
-	private static boolean hideToolbar;
-	public static boolean isFinish;
-	public static boolean isLoading;
+	private static boolean fullScreen;// 是否已经全屏状态
+	private static boolean hideToolbar;// 是否已经隐藏工具栏
+	public static boolean isFinish;//是否在退出APP状态
+	public static boolean isLoading;// 是否正在加载文件
 	public static boolean isRoot;
 	public static String version = "";
 	//实例字段
@@ -194,18 +199,7 @@ public class QSEditor extends Activity
 	 .line 100
 	 sput-boolean v1, Lcom/jecelyin/editor/JecEditor;->isLoading:Z
 
-	 .line 101
-	 sput-boolean v1, Lcom/jecelyin/editor/JecEditor;->fullScreen:Z
-
-	 .line 102
-	 sput-boolean v1, Lcom/jecelyin/editor/JecEditor;->hideToolbar:Z
-
-	 .line 103
-	 sput-boolean v1, Lcom/jecelyin/editor/JecEditor;->isRoot:Z
-
-	 .line 104
-	 sput-boolean v1, Lcom/jecelyin/editor/JecEditor;->isFinish:Z
-
+	
 	 .line 78
 	 return-void
 	 .end method
@@ -244,10 +238,10 @@ public class QSEditor extends Activity
         setContentView(R.layout.main);
         isFinish = false;
         try {
-            version = getPackageManager().getPackageInfo(getPackageName(), FILE_BROWSER_OPEN_CODE).versionName;
+            version = getPackageManager().getPackageInfo(getPackageName(), 0/*FILE_BROWSER_OPEN_CODE*/).versionName;
         } catch (Exception e) {
         }
-		//
+		//优先加载
         initEnv();
         //加入表
 		this.mTabHost = (TabHost) findViewById(R.id.tabs);
@@ -255,55 +249,7 @@ public class QSEditor extends Activity
         this.mTabHost.addTab("");
         
 		this.mEditText = this.mTabHost.getCurrentEditText();
-        //mEditText.setTextIsSelectable(true);
-		/*
-
-		最近项目要求屏蔽EditText 长按出来的ActionMode菜单，但是要保留选择文本功能。
-		这个屏蔽百度会出现各种方法，这里说一下我的思路：
-		1.屏蔽百度可知setCustomSelectionActionModeCallback即可,*/
-		mEditText.setCustomSelectionActionModeCallback(new Callback() { 
-				@Override
-				public boolean onPrepareActionMode(ActionMode mode, Menu menu) { 
-					return false;
-				} 
-				@Override
-				public void onDestroyActionMode(ActionMode mode) {  
-				} 
-				@Override
-				public boolean onCreateActionMode(ActionMode mode, Menu menu) { 
-					//这里可以添加自己的菜单选项（前提是要返回true的）
-					
-					
-					/*try {
-						Field mEditor = TextView.class.getDeclaredField("mEditor");//找到 TextView中的成员变量mEditor  
-						mEditor.setAccessible(true); 
-						Object object= mEditor.get(mEditText);//根具持有对象拿到mEditor变量里的值 （android.widget.Editor类的实例）
-                        //--------------------显示选择控制工具------------------------------//
-						Class mClass=Class.forName("android.widget.Editor");//拿到隐藏类Editor； 
-						Method  method=mClass.getDeclaredMethod("getSelectionController");//取得方法  getSelectionController 
-						method.setAccessible(true);//取消访问私有方法的合法性检查     
-						Object resultobject=method.invoke(object);//调用方法，返回SelectionModifierCursorController类的实例
-
-						Method show=resultobject.getClass().getDeclaredMethod("show");//查找 SelectionModifierCursorController类中的show方法
-						show.invoke(resultobject);//执行SelectionModifierCursorController类的实例的show方法
-						mEditText.setHasTransientState(true); 
-
-						//--------------------忽略最后一次TouchUP事件-----------------------------------------------//
-						Field  mSelectionActionMode=mClass.getDeclaredField("mDiscardNextActionUp");//查找变量Editor类中mDiscardNextActionUp
-						mSelectionActionMode.setAccessible(true); 
-						mSelectionActionMode.set(object,true);//赋值为true 
-
-					} catch (Exception e) { 
-						e.printStackTrace();
-					}*/
-					return true;//return false 隐藏actionMod菜单*/
-					//return onCreateActionMode(mode,menu);
-				} 
-				@Override
-				public boolean onActionItemClicked(ActionMode mode, MenuItem item) { 
-					return false;
-				}
-			});
+        
 		//查找布局
 		this.findLayout = (LinearLayout) findViewById(R.id.findlinearLayout);
         //替换布局
@@ -329,17 +275,26 @@ public class QSEditor extends Activity
         this.last_edit_forward_s = getResources().getDrawable(R.drawable.forward_edit_location_s2);
         this.findEditText.setImeOptions(EditorInfo.IME_ACTION_DONE | EditorInfo.IME_FLAG_NO_EXTRACT_UI/*268435462*/);
         this.replaceEditText.setImeOptions(EditorInfo.IME_ACTION_DONE | EditorInfo.IME_FLAG_NO_EXTRACT_UI/*268435462*/);
-        this.mMenu = new QSMenu(this);
+        // 一些android 3.0设备没有菜单按钮， 要特殊处理
+        /**
+         *  Android 4.0, 4.0.1, 4.0.2    14  ICE_CREAM_SANDWICH
+         *  Android 3.2     13  HONEYCOMB_MR2   
+         *  Android 3.1.x   12  HONEYCOMB_MR1
+         *  Android 3.0.x   11
+         */
+		this.mMenu = new QSMenu(this);
         this.mMenu.setOnMenuItemSelectedListener(this.mOnMenuItemSelectedListener);
-        if (Build.VERSION.SDK_INT > 10) {
+        //尽量在平板电脑上才显示菜单按钮
+		/*if (Build.VERSION.SDK_INT > 10) {
             showMenu = true;
         } else {
             showMenu = false;
-        }
+        }*/
+		showMenu = android.os.Build.VERSION.SDK_INT > 10;
 		//菜单按钮及事件
         ImageButton menuButton = (ImageButton) findViewById(R.id.menu);
         if (showMenu) {
-            menuButton.setVisibility(FILE_BROWSER_OPEN_CODE);
+            menuButton.setVisibility(View.VISIBLE/*FILE_BROWSER_OPEN_CODE*/);
             menuButton.setOnClickListener(new View.OnClickListener() {
 					public void onClick(View v) {
 						QSEditor.this.closeOptionsMenu();
@@ -349,9 +304,11 @@ public class QSEditor extends Activity
 				});
         }
         this.mPref = PreferenceManager.getDefaultSharedPreferences(this);
-        this.mAsyncSearch = new AsyncSearch();
+        // 确保顺序没错
+		this.mAsyncSearch = new AsyncSearch();
         init_highlight();
-        this.mTabHost.setOnTextChangedListener(new QSEditText.OnTextChangedListener() {
+        // 最后编辑按钮事件
+		this.mTabHost.setOnTextChangedListener(new QSEditText.OnTextChangedListener() {
 				public void onTextChanged(QSEditText editText) {
 					QSEditor.this.onEditLocationChanged(editText);
 					if (editText.canUndo()) {
@@ -366,7 +323,7 @@ public class QSEditor extends Activity
 					}
 				}
 			});
-			//切换事件
+		//标签切换事件
         this.mTabHost.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
 				public void onTabChanged(int tabId) {
 					QSEditor.this.mEditText = QSEditor.this.mTabHost.getCurrentEditText();
@@ -418,7 +375,7 @@ public class QSEditor extends Activity
 			});
         ((ImageButton) findViewById(R.id.symbol)).setOnClickListener(new  View.OnClickListener() {
 				public void onClick(View v) {
-					QSEditor.this.mSymbolGrid.setVisibility(QSEditor.FILE_BROWSER_OPEN_CODE);
+					QSEditor.this.mSymbolGrid.setVisibility(View.VISIBLE/*QSEditor.FILE_BROWSER_OPEN_CODE*/);
 				}
 			});
         bindEvent();
@@ -509,456 +466,7 @@ public class QSEditor extends Activity
 	 //设置object实例字段的值
 	 iput-object v5, p0, Lcom/jecelyin/editor/JecEditor;->mTabHost:Lcom/jecelyin/widget/TabHost;
 
-	 .line 162
-	 iget-object v5, p0, Lcom/jecelyin/editor/JecEditor;->mTabHost:Lcom/jecelyin/widget/TabHost;
-
-	 invoke-virtual {v5, p0}, Lcom/jecelyin/widget/TabHost;->initTabHost(Lcom/jecelyin/editor/JecEditor;)V
-
-	 .line 163
-	 iget-object v5, p0, Lcom/jecelyin/editor/JecEditor;->mTabHost:Lcom/jecelyin/widget/TabHost;
-
-	 const-string v7, ""
-
-	 invoke-virtual {v5, v7}, Lcom/jecelyin/widget/TabHost;->addTab(Ljava/lang/String;)V
-
-	 .line 164
-	 iget-object v5, p0, Lcom/jecelyin/editor/JecEditor;->mTabHost:Lcom/jecelyin/widget/TabHost;
-
-	 invoke-virtual {v5}, Lcom/jecelyin/widget/TabHost;->getCurrentEditText()Lcom/jecelyin/widget/JecEditText;
-
-	 move-result-object v5
-
-	 iput-object v5, p0, Lcom/jecelyin/editor/JecEditor;->mEditText:Lcom/jecelyin/widget/JecEditText;
-
-	 .line 165
-	 const v5, 0x7f060138
-
-	 invoke-virtual {p0, v5}, Lcom/jecelyin/editor/JecEditor;->findViewById(I)Landroid/view/View;
-
-	 move-result-object v5
-
-	 check-cast v5, Landroid/widget/LinearLayout;
-
-	 iput-object v5, p0, Lcom/jecelyin/editor/JecEditor;->findLayout:Landroid/widget/LinearLayout;
-
-	 .line 166
-	 const v5, 0x7f06013d
-
-	 invoke-virtual {p0, v5}, Lcom/jecelyin/editor/JecEditor;->findViewById(I)Landroid/view/View;
-
-	 move-result-object v5
-
-	 check-cast v5, Landroid/widget/LinearLayout;
-
-	 iput-object v5, p0, Lcom/jecelyin/editor/JecEditor;->replaceLayout:Landroid/widget/LinearLayout;
-
-	 .line 167
-	 const v5, 0x7f06013c
-
-	 invoke-virtual {p0, v5}, Lcom/jecelyin/editor/JecEditor;->findViewById(I)Landroid/view/View;
-
-	 move-result-object v5
-
-	 check-cast v5, Landroid/widget/Button;
-
-	 iput-object v5, p0, Lcom/jecelyin/editor/JecEditor;->replaceShowButton:Landroid/widget/Button;
-
-	 .line 168
-	 const v5, 0x7f060139
-
-	 invoke-virtual {p0, v5}, Lcom/jecelyin/editor/JecEditor;->findViewById(I)Landroid/view/View;
-
-	 move-result-object v5
-
-	 check-cast v5, Landroid/widget/EditText;
-
-	 iput-object v5, p0, Lcom/jecelyin/editor/JecEditor;->findEditText:Landroid/widget/EditText;
-
-	 .line 169
-	 const v5, 0x7f06013e
-
-	 invoke-virtual {p0, v5}, Lcom/jecelyin/editor/JecEditor;->findViewById(I)Landroid/view/View;
-
-	 move-result-object v5
-
-	 check-cast v5, Landroid/widget/EditText;
-
-	 iput-object v5, p0, Lcom/jecelyin/editor/JecEditor;->replaceEditText:Landroid/widget/EditText;
-
-	 .line 170
-	 const v5, 0x7f060132
-
-	 invoke-virtual {p0, v5}, Lcom/jecelyin/editor/JecEditor;->findViewById(I)Landroid/view/View;
-
-	 move-result-object v5
-
-	 check-cast v5, Landroid/widget/ImageButton;
-
-	 iput-object v5, p0, Lcom/jecelyin/editor/JecEditor;->previewBtn:Landroid/widget/ImageButton;
-
-	 .line 171
-	 const v5, 0x7f06012c
-
-	 invoke-virtual {p0, v5}, Lcom/jecelyin/editor/JecEditor;->findViewById(I)Landroid/view/View;
-
-	 move-result-object v5
-
-	 check-cast v5, Landroid/widget/HorizontalScrollView;
-
-	 iput-object v5, p0, Lcom/jecelyin/editor/JecEditor;->toolbar:Landroid/widget/HorizontalScrollView;
-
-	 .line 172
-	 const v5, 0x7f060134
-
-	 invoke-virtual {p0, v5}, Lcom/jecelyin/editor/JecEditor;->findViewById(I)Landroid/view/View;
-
-	 move-result-object v5
-
-	 check-cast v5, Landroid/widget/ImageButton;
-
-	 iput-object v5, p0, Lcom/jecelyin/editor/JecEditor;->last_edit_back:Landroid/widget/ImageButton;
-
-	 .line 173
-	 const v5, 0x7f060135
-
-	 invoke-virtual {p0, v5}, Lcom/jecelyin/editor/JecEditor;->findViewById(I)Landroid/view/View;
-
-	 move-result-object v5
-
-	 check-cast v5, Landroid/widget/ImageButton;
-
-	 iput-object v5, p0, Lcom/jecelyin/editor/JecEditor;->last_edit_forward:Landroid/widget/ImageButton;
-
-	 .line 174
-	 invoke-virtual {p0}, Lcom/jecelyin/editor/JecEditor;->getResources()Landroid/content/res/Resources;
-
-	 move-result-object v5
-
-	 const v7, 0x7f02005e
-
-	 invoke-virtual {v5, v7}, Landroid/content/res/Resources;->getDrawable(I)Landroid/graphics/drawable/Drawable;
-
-	 move-result-object v5
-
-	 iput-object v5, p0, Lcom/jecelyin/editor/JecEditor;->undo_can_drawable:Landroid/graphics/drawable/Drawable;
-
-	 .line 175
-	 invoke-virtual {p0}, Lcom/jecelyin/editor/JecEditor;->getResources()Landroid/content/res/Resources;
-
-	 move-result-object v5
-
-	 const v7, 0x7f02005c
-
-	 invoke-virtual {v5, v7}, Landroid/content/res/Resources;->getDrawable(I)Landroid/graphics/drawable/Drawable;
-
-	 move-result-object v5
-
-	 iput-object v5, p0, Lcom/jecelyin/editor/JecEditor;->undo_no_drawable:Landroid/graphics/drawable/Drawable;
-
-	 .line 176
-	 invoke-virtual {p0}, Lcom/jecelyin/editor/JecEditor;->getResources()Landroid/content/res/Resources;
-
-	 move-result-object v5
-
-	 const v7, 0x7f02003e
-
-	 invoke-virtual {v5, v7}, Landroid/content/res/Resources;->getDrawable(I)Landroid/graphics/drawable/Drawable;
-
-	 move-result-object v5
-
-	 iput-object v5, p0, Lcom/jecelyin/editor/JecEditor;->redo_can_drawable:Landroid/graphics/drawable/Drawable;
-
-	 .line 177
-	 invoke-virtual {p0}, Lcom/jecelyin/editor/JecEditor;->getResources()Landroid/content/res/Resources;
-
-	 move-result-object v5
-
-	 const v7, 0x7f02003c
-
-	 invoke-virtual {v5, v7}, Landroid/content/res/Resources;->getDrawable(I)Landroid/graphics/drawable/Drawable;
-
-	 move-result-object v5
-
-	 iput-object v5, p0, Lcom/jecelyin/editor/JecEditor;->redo_no_drawable:Landroid/graphics/drawable/Drawable;
-
-	 .line 179
-	 invoke-virtual {p0}, Lcom/jecelyin/editor/JecEditor;->getResources()Landroid/content/res/Resources;
-
-	 move-result-object v5
-
-	 const v7, 0x7f020004
-
-	 invoke-virtual {v5, v7}, Landroid/content/res/Resources;->getDrawable(I)Landroid/graphics/drawable/Drawable;
-
-	 move-result-object v5
-
-	 iput-object v5, p0, Lcom/jecelyin/editor/JecEditor;->last_edit_back_d:Landroid/graphics/drawable/Drawable;
-
-	 .line 180
-	 invoke-virtual {p0}, Lcom/jecelyin/editor/JecEditor;->getResources()Landroid/content/res/Resources;
-
-	 move-result-object v5
-
-	 const v7, 0x7f020006
-
-	 invoke-virtual {v5, v7}, Landroid/content/res/Resources;->getDrawable(I)Landroid/graphics/drawable/Drawable;
-
-	 move-result-object v5
-
-	 iput-object v5, p0, Lcom/jecelyin/editor/JecEditor;->last_edit_back_s:Landroid/graphics/drawable/Drawable;
-
-	 .line 181
-	 invoke-virtual {p0}, Lcom/jecelyin/editor/JecEditor;->getResources()Landroid/content/res/Resources;
-
-	 move-result-object v5
-
-	 const v7, 0x7f020018
-
-	 invoke-virtual {v5, v7}, Landroid/content/res/Resources;->getDrawable(I)Landroid/graphics/drawable/Drawable;
-
-	 move-result-object v5
-
-	 iput-object v5, p0, Lcom/jecelyin/editor/JecEditor;->last_edit_forward_d:Landroid/graphics/drawable/Drawable;
-
-	 .line 182
-	 invoke-virtual {p0}, Lcom/jecelyin/editor/JecEditor;->getResources()Landroid/content/res/Resources;
-
-	 move-result-object v5
-
-	 const v7, 0x7f02001a
-
-	 invoke-virtual {v5, v7}, Landroid/content/res/Resources;->getDrawable(I)Landroid/graphics/drawable/Drawable;
-
-	 move-result-object v5
-
-	 iput-object v5, p0, Lcom/jecelyin/editor/JecEditor;->last_edit_forward_s:Landroid/graphics/drawable/Drawable;
-
-	 .line 184
-	 iget-object v5, p0, Lcom/jecelyin/editor/JecEditor;->findEditText:Landroid/widget/EditText;
-
-	 invoke-virtual {v5, v9}, Landroid/widget/EditText;->setImeOptions(I)V
-
-	 .line 185
-	 iget-object v5, p0, Lcom/jecelyin/editor/JecEditor;->replaceEditText:Landroid/widget/EditText;
-
-	 invoke-virtual {v5, v9}, Landroid/widget/EditText;->setImeOptions(I)V
-
-	 .line 193
-	 new-instance v5, Lcom/jecelyin/widget/JecMenu;
-
-	 invoke-direct {v5, p0}, Lcom/jecelyin/widget/JecMenu;-><init>(Landroid/content/Context;)V
-
-	 iput-object v5, p0, Lcom/jecelyin/editor/JecEditor;->mMenu:Lcom/jecelyin/widget/JecMenu;
-
-	 .line 194
-	 iget-object v5, p0, Lcom/jecelyin/editor/JecEditor;->mMenu:Lcom/jecelyin/widget/JecMenu;
-
-	 iget-object v7, p0, Lcom/jecelyin/editor/JecEditor;->mOnMenuItemSelectedListener:Lcom/jecelyin/widget/JecMenu$OnMenuItemSelectedListener;
-
-	 invoke-virtual {v5, v7}, Lcom/jecelyin/widget/JecMenu;->setOnMenuItemSelectedListener(Lcom/jecelyin/widget/JecMenu$OnMenuItemSelectedListener;)V
-
-	 .line 196
-	 sget v5, Landroid/os/Build$VERSION;->SDK_INT:I
-
-	 const/16 v7, 0xa
-
-	 if-le v5, v7, :cond_2
-
-	 const/4 v3, 0x1
-
-	 .line 197
-	 .local v3, "showMenu":Z
-	 :goto_1
-	 const v5, 0x7f060137
-
-	 invoke-virtual {p0, v5}, Lcom/jecelyin/editor/JecEditor;->findViewById(I)Landroid/view/View;
-
-	 move-result-object v0
-
-	 check-cast v0, Landroid/widget/ImageButton;
-
-	 .line 198
-	 .local v0, "menuButton":Landroid/widget/ImageButton;
-	 if-eqz v3, :cond_0
-
-	 .line 200
-	 invoke-virtual {v0, v6}, Landroid/widget/ImageButton;->setVisibility(I)V
-
-	 .line 201
-	 new-instance v5, Lcom/jecelyin/editor/JecEditor$8;
-
-	 invoke-direct {v5, p0}, Lcom/jecelyin/editor/JecEditor$8;-><init>(Lcom/jecelyin/editor/JecEditor;)V
-
-	 invoke-virtual {v0, v5}, Landroid/widget/ImageButton;->setOnClickListener(Landroid/view/View$OnClickListener;)V
-
-	 .line 213
-	 :cond_0
-	 invoke-static {p0}, Landroid/preference/PreferenceManager;->getDefaultSharedPreferences(Landroid/content/Context;)Landroid/content/SharedPreferences;
-
-	 move-result-object v5
-
-	 iput-object v5, p0, Lcom/jecelyin/editor/JecEditor;->mPref:Landroid/content/SharedPreferences;
-
-	 .line 216
-	 new-instance v5, Lcom/jecelyin/editor/AsyncSearch;
-
-	 invoke-direct {v5}, Lcom/jecelyin/editor/AsyncSearch;-><init>()V
-
-	 iput-object v5, p0, Lcom/jecelyin/editor/JecEditor;->mAsyncSearch:Lcom/jecelyin/editor/AsyncSearch;
-
-	 .line 219
-	 invoke-direct {p0}, Lcom/jecelyin/editor/JecEditor;->init_highlight()V
-
-	 .line 222
-	 iget-object v5, p0, Lcom/jecelyin/editor/JecEditor;->mTabHost:Lcom/jecelyin/widget/TabHost;
-
-	 new-instance v6, Lcom/jecelyin/editor/JecEditor$9;
-
-	 invoke-direct {v6, p0}, Lcom/jecelyin/editor/JecEditor$9;-><init>(Lcom/jecelyin/editor/JecEditor;)V
-
-	 invoke-virtual {v5, v6}, Lcom/jecelyin/widget/TabHost;->setOnTextChangedListener(Lcom/jecelyin/widget/JecEditText$OnTextChangedListener;)V
-
-	 .line 246
-	 iget-object v5, p0, Lcom/jecelyin/editor/JecEditor;->mTabHost:Lcom/jecelyin/widget/TabHost;
-
-	 new-instance v6, Lcom/jecelyin/editor/JecEditor$10;
-
-	 invoke-direct {v6, p0}, Lcom/jecelyin/editor/JecEditor$10;-><init>(Lcom/jecelyin/editor/JecEditor;)V
-
-	 invoke-virtual {v5, v6}, Lcom/jecelyin/widget/TabHost;->setOnTabChangedListener(Lcom/jecelyin/widget/TabHost$OnTabChangeListener;)V
-
-	 .line 257
-	 iget-object v5, p0, Lcom/jecelyin/editor/JecEditor;->mTabHost:Lcom/jecelyin/widget/TabHost;
-
-	 new-instance v6, Lcom/jecelyin/editor/JecEditor$11;
-
-	 invoke-direct {v6, p0}, Lcom/jecelyin/editor/JecEditor$11;-><init>(Lcom/jecelyin/editor/JecEditor;)V
-
-	 invoke-virtual {v5, v6}, Lcom/jecelyin/widget/TabHost;->setOnTabCloseListener(Lcom/jecelyin/widget/TabHost$OnTabCloseListener;)V
-
-	 .line 280
-	 iget-object v5, p0, Lcom/jecelyin/editor/JecEditor;->last_edit_back:Landroid/widget/ImageButton;
-
-	 new-instance v6, Lcom/jecelyin/editor/JecEditor$12;
-
-	 invoke-direct {v6, p0}, Lcom/jecelyin/editor/JecEditor$12;-><init>(Lcom/jecelyin/editor/JecEditor;)V
-
-	 invoke-virtual {v5, v6}, Landroid/widget/ImageButton;->setOnClickListener(Landroid/view/View$OnClickListener;)V
-
-	 .line 295
-	 iget-object v5, p0, Lcom/jecelyin/editor/JecEditor;->last_edit_forward:Landroid/widget/ImageButton;
-
-	 new-instance v6, Lcom/jecelyin/editor/JecEditor$13;
-
-	 invoke-direct {v6, p0}, Lcom/jecelyin/editor/JecEditor$13;-><init>(Lcom/jecelyin/editor/JecEditor;)V
-
-	 invoke-virtual {v5, v6}, Landroid/widget/ImageButton;->setOnClickListener(Landroid/view/View$OnClickListener;)V
-
-	 .line 312
-	 const v5, 0x7f060141
-
-	 invoke-virtual {p0, v5}, Lcom/jecelyin/editor/JecEditor;->findViewById(I)Landroid/view/View;
-
-	 move-result-object v5
-
-	 check-cast v5, Lcom/jecelyin/widget/SymbolGrid;
-
-	 iput-object v5, p0, Lcom/jecelyin/editor/JecEditor;->mSymbolGrid:Lcom/jecelyin/widget/SymbolGrid;
-
-	 .line 314
-	 iget-object v5, p0, Lcom/jecelyin/editor/JecEditor;->mSymbolGrid:Lcom/jecelyin/widget/SymbolGrid;
-
-	 new-instance v6, Lcom/jecelyin/editor/JecEditor$14;
-
-	 invoke-direct {v6, p0}, Lcom/jecelyin/editor/JecEditor$14;-><init>(Lcom/jecelyin/editor/JecEditor;)V
-
-	 invoke-virtual {v5, v6}, Lcom/jecelyin/widget/SymbolGrid;->setClickListener(Lcom/jecelyin/widget/SymbolGrid$OnSymbolClickListener;)V
-
-	 .line 330
-	 const v5, 0x7f060133
-
-	 invoke-virtual {p0, v5}, Lcom/jecelyin/editor/JecEditor;->findViewById(I)Landroid/view/View;
-
-	 move-result-object v4
-
-	 check-cast v4, Landroid/widget/ImageButton;
-
-	 .line 331
-	 .local v4, "symbolButton":Landroid/widget/ImageButton;
-	 new-instance v5, Lcom/jecelyin/editor/JecEditor$15;
-
-	 invoke-direct {v5, p0}, Lcom/jecelyin/editor/JecEditor$15;-><init>(Lcom/jecelyin/editor/JecEditor;)V
-
-	 invoke-virtual {v4, v5}, Landroid/widget/ImageButton;->setOnClickListener(Landroid/view/View$OnClickListener;)V
-
-	 .line 340
-	 invoke-direct {p0}, Lcom/jecelyin/editor/JecEditor;->bindEvent()V
-
-	 .line 343
-	 iget-object v5, p0, Lcom/jecelyin/editor/JecEditor;->mPref:Landroid/content/SharedPreferences;
-
-	 const-string v6, "version"
-
-	 const-string v7, "-1"
-
-	 invoke-interface {v5, v6, v7}, Landroid/content/SharedPreferences;->getString(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
-
-	 move-result-object v2
-
-	 .line 344
-	 .local v2, "prefVer":Ljava/lang/String;
-	 sget-object v5, Lcom/jecelyin/editor/JecEditor;->version:Ljava/lang/String;
-
-	 invoke-virtual {v5, v2}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
-
-	 move-result v5
-
-	 if-nez v5, :cond_1
-
-	 .line 346
-	 invoke-static {p0}, Lcom/jecelyin/editor/Help;->showChangesLog(Landroid/content/Context;)V
-
-	 .line 347
-	 iget-object v5, p0, Lcom/jecelyin/editor/JecEditor;->mPref:Landroid/content/SharedPreferences;
-
-	 invoke-interface {v5}, Landroid/content/SharedPreferences;->edit()Landroid/content/SharedPreferences$Editor;
-
-	 move-result-object v5
-
-	 const-string v6, "version"
-
-	 sget-object v7, Lcom/jecelyin/editor/JecEditor;->version:Ljava/lang/String;
-
-	 invoke-interface {v5, v6, v7}, Landroid/content/SharedPreferences$Editor;->putString(Ljava/lang/String;Ljava/lang/String;)Landroid/content/SharedPreferences$Editor;
-
-	 move-result-object v5
-
-	 invoke-interface {v5}, Landroid/content/SharedPreferences$Editor;->commit()Z
-
-	 .line 349
-	 :cond_1
-	 invoke-virtual {p0}, Lcom/jecelyin/editor/JecEditor;->getIntent()Landroid/content/Intent;
-
-	 move-result-object v5
-
-	 invoke-virtual {p0, v5}, Lcom/jecelyin/editor/JecEditor;->onNewIntent(Landroid/content/Intent;)V
-
-	 .line 350
-	 return-void
-
-	 .end local v0    # "menuButton":Landroid/widget/ImageButton;
-	 .end local v2    # "prefVer":Ljava/lang/String;
-	 .end local v3    # "showMenu":Z
-	 .end local v4    # "symbolButton":Landroid/widget/ImageButton;
-	 :cond_2
-	 move v3, v6
-
-	 .line 196
-	 goto/16 :goto_1
-
-	 .line 154
-	 :catch_0
-	 move-exception v5
+	 
 
 	 goto/16 :goto_0
 	 .end method
@@ -997,7 +505,7 @@ public class QSEditor extends Activity
 	
 	//initEnv()调用
 	public void alert(int msg) {
-        new Builder(this).setMessage(msg).setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+        new AlertDialog.Builder(this).setMessage(msg).setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
 				public void onClick(DialogInterface dialog, int which) {
 					dialog.dismiss();
 					QSEditor.this.finish();
@@ -1005,7 +513,7 @@ public class QSEditor extends Activity
 			}).show();
     }
 	//initEnv()调用
-	public boolean unpackSyntax() {
+	/*public boolean unpackSyntax() {
         try {
             ZipInputStream zin = new ZipInputStream(getAssets().open("syntax.zip"));
             while (true) {
@@ -1038,6 +546,58 @@ public class QSEditor extends Activity
             e.printStackTrace();
             return false;
         }
+    }*/
+	/**
+     * 解压语法配置文件
+     * 
+     * @return
+     */
+    public boolean unpackSyntax()
+    {
+        try
+        {
+            InputStream is = getAssets().open("syntax.zip");
+            ZipInputStream zin = new ZipInputStream(is);
+            ZipEntry ze = null;
+            String name;
+            File file;
+            while ((ze = zin.getNextEntry()) != null)
+            {
+                name = ze.getName();
+                // Log.v("Decompress", "Unzipping " + name);
+
+                if(ze.isDirectory())
+                {
+                    file = new File(TEMP_PATH + File.separator + name);
+                    if(!file.exists())
+                    {
+                        if(!file.mkdir())
+                        {
+                            return false;
+                        }
+                    }
+                }else
+                {
+                    FileOutputStream fout = new FileOutputStream(TEMP_PATH + File.separator + name);
+                    byte[] buf = new byte[1024 * 4];
+                    int len;
+                    while ((len = zin.read(buf)) > 0)
+                    {
+                        fout.write(buf, 0, len);
+                    }
+                    buf = null;
+                    zin.closeEntry();
+                    fout.close();
+                }
+
+            }
+            zin.close();
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
     }
 	//onCreate调用
 	//load_options调用
@@ -1074,7 +634,7 @@ public class QSEditor extends Activity
         this.previewBtn.setOnClickListener(new View.OnClickListener() {
 				public void onClick(View v) {
 					if ("".equals(QSEditor.this.mEditText.getPath()) || QSEditor.this.mEditText.isTextChanged()) {
-						Toast.makeText(QSEditor.this, R.string.preview_msg, QSEditor.FILE_BROWSER_SAVEAS_CODE).show();
+						Toast.makeText(QSEditor.this, R.string.preview_msg, Toast.LENGTH_LONG/*QSEditor.FILE_BROWSER_SAVEAS_CODE*/).show();
 						return;
 					}
 					try {
@@ -1088,7 +648,7 @@ public class QSEditor extends Activity
 			});
         ((ImageButton) findViewById(R.id.color)).setOnClickListener(new View.OnClickListener() {
 				public void onClick(View v) {
-					new ColorPicker(QSEditor.this, new ColorListener(), "edittext", QSEditor.this.getString(R.string.insert_color), -16711936).show();
+					new ColorPicker(QSEditor.this, new ColorListener(), "edittext", QSEditor.this.getString(R.string.insert_color), Color.GREEN/*-16711936*/).show();
 				}
 			});
     }
@@ -1107,7 +667,14 @@ public class QSEditor extends Activity
 				}
 			});
     }
-
+	/**
+     * 打开文件浏览器
+     * 
+     * @param mode
+     *            0打开， 1保存模式
+     * @param filename
+     * @param mRunnable
+     */
     private void openFileBrowser(int mode, String filename, Runnable mRunnable) {
         this.fileBrowserCallbackRunnable = mRunnable;
         Intent intent = new Intent();
@@ -1122,12 +689,12 @@ public class QSEditor extends Activity
 		startActivityForResult(intent, mode);
     }
 	
-	
+	// 打开文件浏览器后的回调操作
 	 private Runnable fileBrowserCallbackRunnable = new Runnable()
 	 {
-	 public void run()
-	 {
-	 }
+	     public void run()
+	     {
+	     }
 	 };
 	 
 	 //保存
@@ -1139,7 +706,7 @@ public class QSEditor extends Activity
 			if (!"".equals(QSEditor.this.mEditText.getPath()))
 				QSEditor.this.save();
 			else
-				QSEditor.this.openFileBrowser(1, "Untitled.txt");
+				QSEditor.this.openFileBrowser(FILE_BROWSER_SAVEAS_CODE/*1*/, "Untitled.txt");
 		}
 	};
 	//
@@ -1150,7 +717,7 @@ public class QSEditor extends Activity
 	private void save(String encoding, int linebreak) {
         //比较基本数据类型，如果两个值相同，则结果为true
 		if (!"".equals(this.mEditText.getPath()) && !isLoading) {
-            boolean ok;
+            boolean ok=true;
             String content = this.mEditText.getString();
             if (linebreak == 2) {
                 //即把源字符串中的某一字符或字符串全部换成指定的字符或字符串
@@ -1171,17 +738,18 @@ public class QSEditor extends Activity
             if (ok) {
                 this.mEditText.setTextFinger();
                 this.mTabHost.setTabStatus(false);
-                Toast.makeText(this, R.string.save_succ, FILE_BROWSER_SAVEAS_CODE).show();
-                return;
+                Toast.makeText(this, R.string.save_succ, Toast.LENGTH_LONG/*FILE_BROWSER_SAVEAS_CODE*/).show();
+               // return;
+            }else{
+            Toast.makeText(this, getString(R.string.save_failed) + failMsg, Toast.LENGTH_LONG/*FILE_BROWSER_SAVEAS_CODE*/).show();
             }
-            Toast.makeText(this, getString(R.string.save_failed) + failMsg, FILE_BROWSER_SAVEAS_CODE).show();
-        }
+		}
     }
 	//后退事件
 	//bindEvent()调用
 	private void bindUndoButtonClickEvent()
 	{
-		this.undoBtn = ((ImageButton)findViewById(2131099952));
+		this.undoBtn = ((ImageButton)findViewById(R.id.undo/*2131099952*/));
 		this.undoBtn.setOnClickListener(new View.OnClickListener()
 			{
 				public void onClick(View paramView)
@@ -1193,7 +761,7 @@ public class QSEditor extends Activity
 	//bindEvent()调用
 	private void bindRedoButtonClickEvent()
 	{
-		this.redoBtn = ((ImageButton)findViewById(2131099953));
+		this.redoBtn = ((ImageButton)findViewById(R.id.redo/*2131099953*/));
 		this.redoBtn.setOnClickListener(new View.OnClickListener()
 			{
 				public void onClick(View paramView)
@@ -1207,8 +775,8 @@ public class QSEditor extends Activity
 	{
 		public void onClick(View paramView)
 		{
-			QSEditor.this.replaceLayout.setVisibility(0);
-			paramView.setVisibility(8);
+			QSEditor.this.replaceLayout.setVisibility(View.VISIBLE/*0*/);
+			paramView.setVisibility(View.GONE/*8*/);
 			QSEditor.this.replaceEditText.requestFocus();
 		}
 	};
@@ -1271,6 +839,7 @@ public class QSEditor extends Activity
 	*/
 	protected void onNewIntent(Intent mIntent) {
         if (!isLoading) {
+			// 处理来自其它程序通过Intent来打开文件
 			//&&可以用作逻辑与的运算符，表示逻辑与（and），当运算符两边的表达式的结果都为true时，整个运算结果才为true，否则，只要有一方为false，则结果为false。
 			//&&还具有短路的功能，即如果第一个表达式为false，则不再计算第二个表达式，例如，对于if(str != null && !str.equals(“”))表达式，当str为null时，后面的表达式不会执行，所以不会出现NullPointerException
 			//||可以作逻辑或运算符，表示逻辑或（or），当运算符有一边为true时，整个运算结果为true！
@@ -1290,7 +859,7 @@ public class QSEditor extends Activity
                     }
                 } else if (mIntent == null || !ACTION_EDIT_SCRIPT.equals(mIntent.getAction()) || mIntent.getExtras() == null) {
                     if (this.mPref.getBoolean("open_last_file", false)) {
-                        Map<String, ?> map = getSharedPreferences(PREF_LAST_FILE, FILE_BROWSER_OPEN_CODE).getAll();
+                        Map<String, ?> map = getSharedPreferences(PREF_LAST_FILE, MODE_PRIVATE/*FILE_BROWSER_OPEN_CODE*/).getAll();
                         if (map.size() > 0) {
                             for (Entry<String, ?> entry : map.entrySet()) {
                                 Object val = entry.getValue();
@@ -1311,13 +880,13 @@ public class QSEditor extends Activity
                     } else if (path != null) {
                         readFileToEditText(path);
                     }
-                }
+                }// 打开上次打开的文件
             } else if (mIntent.getScheme().equals("content")) {
                 try {
                     InputStream attachment = getContentResolver().openInputStream(mIntent.getData());
-                    BufferedReader br = new BufferedReader(new InputStreamReader(attachment), 16384);
+                    BufferedReader br = new BufferedReader(new InputStreamReader(attachment), 8192*2/*16384*/);
                     StringBuilder sb = new StringBuilder();
-                    while (true) {
+                    /*while (true) {
                         String text2 = br.readLine();
                         if (text2 == null) {
                             attachment.close();
@@ -1328,9 +897,19 @@ public class QSEditor extends Activity
                             return;
                         }
                         sb.append(text2).append("\n");
+                    }*/
+					String text2;
+					while((text2=br.readLine()) != null)
+                    {
+                        sb.append(text2).append("\n");
                     }
+					attachment.close();
+                    br.close();
+                    mTabHost.addTab("");
+                    mEditText.setText2(sb.toString());
+                    sb.setLength(0);
                 } catch (Exception e) {
-                    Toast.makeText(this, e.getMessage(), FILE_BROWSER_SAVEAS_CODE).show();
+                    Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG/*FILE_BROWSER_SAVEAS_CODE*/).show();
                 }
             } else if (mIntent.getScheme().equals("file")) {
                 Uri mUri = mIntent.getData();
@@ -1343,15 +922,19 @@ public class QSEditor extends Activity
     }
 	
 	
-	
+	/**
+     * 是否要进行保存
+     * 
+     * @return 返回true则需要保存
+     */
 	//onCreate调用
 	public void saveConfirm(final Runnable mRunnable) {
         if (this.mEditText.isTextChanged()) {
             String filename = "".equals(this.mEditText.getPath()) ? this.mEditText.getTitle() : this.mEditText.getPath();
             String string = getString(R.string.save_changes_to);
-            Object[] objArr = new Object[FILE_BROWSER_SAVEAS_CODE];
-            objArr[FILE_BROWSER_OPEN_CODE] = filename;
-            new Builder(this).setTitle(R.string.save_changes)
+            Object[] objArr = new Object[1/*FILE_BROWSER_SAVEAS_CODE*/];
+            objArr[0/*FILE_BROWSER_OPEN_CODE*/] = filename;
+            new AlertDialog.Builder(this).setTitle(R.string.save_changes)
 			.setMessage(String.format(string, objArr))
 				.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener()
 				{
@@ -1381,6 +964,7 @@ public class QSEditor extends Activity
 				}).show();
             return;
         }
+		// 内容没有改变
         mRunnable.run();
     }
 	
@@ -1475,24 +1059,24 @@ public class QSEditor extends Activity
 	
 		
 	//onCreate调用
-	protected void onEditLocationChanged(QSEditText paramJecEditText)
+	protected void onEditLocationChanged(QSEditText QSEditText)
 	{
-		if (!paramJecEditText.isCanBackEditLocation())
+		if (!QSEditText.isCanBackEditLocation())
 			this.last_edit_back.setImageDrawable(this.last_edit_back_d);
 		else
 			this.last_edit_back.setImageDrawable(this.last_edit_back_s);
-		if (!paramJecEditText.isCanForwardEditLocation())
+		if (!QSEditText.isCanForwardEditLocation())
 			this.last_edit_forward.setImageDrawable(this.last_edit_forward_d);
 		else
 			this.last_edit_forward.setImageDrawable(this.last_edit_forward_s);
 	}
 	//onCreate调用
-	private void switchPreviewButton(String paramString)
+	private void switchPreviewButton(String type)
 	{
-		if (!paramString.toUpperCase().startsWith("HTML"))
-			this.previewBtn.setVisibility(8);
+		if (!type.toUpperCase().startsWith("HTML"))
+			this.previewBtn.setVisibility(View.GONE/*8*/);
 		else
-			this.previewBtn.setVisibility(0);
+			this.previewBtn.setVisibility(View.VISIBLE/*0*/);
 	}
 	
 	public static void printException(Exception paramException)
@@ -1501,16 +1085,16 @@ public class QSEditor extends Activity
 	}
 	//onNewIntent调用
 	public void readFileToEditText(String path) {
-        String[] selinfo = getSharedPreferences(PREF_HISTORY, FILE_BROWSER_OPEN_CODE).getString(path, "").split(",");
-        int linebreak = FILE_BROWSER_OPEN_CODE;
+        String[] selinfo = getSharedPreferences(PREF_HISTORY, MODE_PRIVATE/*FILE_BROWSER_OPEN_CODE*/).getString(path, "").split(",");
+        int linebreak = 0/*FILE_BROWSER_OPEN_CODE*/;
         String encoding = "";
-        int selstart = FILE_BROWSER_OPEN_CODE;
-        int selend = FILE_BROWSER_OPEN_CODE;
+        int selstart = 0/*FILE_BROWSER_OPEN_CODE*/;
+        int selend = 0/*FILE_BROWSER_OPEN_CODE*/;
         if (selinfo.length >= 5) {
             linebreak = Integer.valueOf(selinfo[3]).intValue();
             encoding = selinfo[4];
-            selstart = Integer.valueOf(selinfo[FILE_BROWSER_OPEN_CODE]).intValue();
-            selend = Integer.valueOf(selinfo[FILE_BROWSER_SAVEAS_CODE]).intValue();
+            selstart = Integer.valueOf(selinfo[0/*FILE_BROWSER_OPEN_CODE*/]).intValue();
+            selend = Integer.valueOf(selinfo[1/*FILE_BROWSER_SAVEAS_CODE*/]).intValue();
         }
         readFileToEditText(path, "", linebreak, selstart, selend);
     }
@@ -1527,9 +1111,19 @@ public class QSEditor extends Activity
 		if (this.mLastFiles.size() >= 1)
 			readFileToEditText((String)this.mLastFiles.remove(0));
 	}
+	/**
+     * startActivityForResult回调函数
+     * 
+     * @param requestCode
+     *            这里的requestCode就是前面启动新Activity时的带过去的requestCode
+     * @param resultCode
+     *            resultCode则关联上了setResult中的resultCode
+     * @param data
+     *            返回的Intent参数
+     */
 	//当activity关闭后，如果有返回值，则会在这个方法内接收
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (-1 == resultCode) {
+        if (RESULT_OK/*-1*/ == resultCode) {
             final String path;
             final int lineBreak;
             int encoding;
@@ -1537,21 +1131,21 @@ public class QSEditor extends Activity
             switch (requestCode) {
                 case FILE_BROWSER_OPEN_CODE /*0*/:
                     path = data.getStringExtra("file");
-                    lineBreak = data.getIntExtra("linebreak", FILE_BROWSER_OPEN_CODE);
-                    encoding = data.getIntExtra("encoding", FILE_BROWSER_OPEN_CODE);
-                    if (encoding < FILE_BROWSER_SAVEAS_CODE) {
+                    lineBreak = data.getIntExtra("linebreak", 0/*FILE_BROWSER_OPEN_CODE*/);
+                    encoding = data.getIntExtra("encoding", 0/*FILE_BROWSER_OPEN_CODE*/);
+                    if (encoding < 1/*FILE_BROWSER_SAVEAS_CODE*/) {
                         charset = "";
                     } else {
                         charset = EncodingList.list[encoding];
                     }
-                    readFileToEditText(path, charset, lineBreak, FILE_BROWSER_OPEN_CODE, FILE_BROWSER_OPEN_CODE);
+                    readFileToEditText(path, charset, lineBreak, 0/*FILE_BROWSER_OPEN_CODE*/, 0/*FILE_BROWSER_OPEN_CODE*/);
                     break;
                 case FILE_BROWSER_SAVEAS_CODE /*1*/:
                     isLoading = false;
                     path = data.getStringExtra("file");
-                    lineBreak = data.getIntExtra("linebreak", FILE_BROWSER_OPEN_CODE);
-                    encoding = data.getIntExtra("encoding", FILE_BROWSER_OPEN_CODE);
-                    if (encoding < FILE_BROWSER_SAVEAS_CODE) {
+                    lineBreak = data.getIntExtra("linebreak", 0/*FILE_BROWSER_OPEN_CODE*/);
+                    encoding = data.getIntExtra("encoding", 0/*FILE_BROWSER_OPEN_CODE*/);
+                    if (encoding < 1/*FILE_BROWSER_SAVEAS_CODE*/) {
                         charset = "";
                     } else {
                         charset = EncodingList.list[encoding];
@@ -1563,7 +1157,7 @@ public class QSEditor extends Activity
                         save(charset, lineBreak);
                         break;
                     }
-                    new Builder(this).setMessage(getText(R.string.overwrite_confirm)).setPositiveButton(17039379, new DialogInterface.OnClickListener()
+                    new AlertDialog.Builder(this).setMessage(getText(R.string.overwrite_confirm)).setPositiveButton(android.R.string.yes/*17039379*/, new DialogInterface.OnClickListener()
 						{
 							public void onClick(DialogInterface dialog, int which) {
 								QSEditor.this.mEditText.setPath(path);
@@ -1571,7 +1165,7 @@ public class QSEditor extends Activity
 								QSEditor.this.save(charset, lineBreak);
 							}
 						})
-						.setNegativeButton(17039369, null)
+						.setNegativeButton(android.R.string.no/*17039369*/, null)
 						.show();
                     break;
             }
@@ -1588,24 +1182,43 @@ public class QSEditor extends Activity
 	//紧跟着触发dispatchKeyEvent
 	//然后触发onUserInteraction
 	//再次onKeyUp
-	public boolean dispatchKeyEvent(KeyEvent event) {
+	/*public boolean dispatchKeyEvent(KeyEvent event) {
         int keycode = event.getKeyCode();
-        if (!((event.getMetaState() & 4104) != 0) || event.getAction() != 0 || keycode != 47) {
+        if (!((event.getMetaState() & 8 | 0x1000/*4104) != 0) || event.getAction() != KeyEvent.ACTION_DOWN/*0 || keycode != KeyEvent.KEYCODE_S/*47) {
             return super.dispatchKeyEvent(event);
         }
         save();
         return true;
+    }*/
+	@Override
+    public boolean dispatchKeyEvent(KeyEvent event)
+    {
+        int ctrlKeyCode = 8 | 0x1000;
+        int keycode = event.getKeyCode();
+        // CTRL + KEYDOWN
+        int meta = (int)event.getMetaState();
+        boolean ctrl = (meta & ctrlKeyCode) != 0 ;
+        if(ctrl)
+        {
+            if (event.getAction() == KeyEvent.ACTION_DOWN && keycode == KeyEvent.KEYCODE_S )
+            {
+                save();
+                return true;
+            }
+        }
+        return super.dispatchKeyEvent(event);
     }
+	
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
         switch (keyCode) {
-            case 4://TestHandler.ACTION_PDISPLAY /*4*/:
+            case KeyEvent.KEYCODE_BACK/*4*/://TestHandler.ACTION_PDISPLAY /*4*/:
                 if (!isLoading) {
                     if (this.mSymbolGrid.isShown()) {
-                        this.mSymbolGrid.setVisibility(8);
+                        this.mSymbolGrid.setVisibility(View.GONE/*8*/);
                         return true;
-                    } else if (this.findLayout.getVisibility() == 0) {
-                        this.findLayout.setVisibility(8);
-                        this.replaceLayout.setVisibility(8);
+                    } else if (this.findLayout.getVisibility() == View.VISIBLE/*0*/) {
+                        this.findLayout.setVisibility(View.GONE/*8*/);
+                        this.replaceLayout.setVisibility(View.GONE/*8*/);
                         return true;
                     } else if (!this.back_button_exit) {
                         return true;
@@ -1615,30 +1228,30 @@ public class QSEditor extends Activity
                     }
                 }
                 break;
-            case 24://R.styleable.View_fadingEdge /*24*/:
+            case KeyEvent.KEYCODE_VOLUME_UP/*24*/://R.styleable.View_fadingEdge /*24*/:
                 if (!hideToolbar) {
-                    this.toolbar.setVisibility(8);
+                    this.toolbar.setVisibility(View.GONE/*8*/);
                     hideToolbar = true;
-                    Toast.makeText(this, R.string.volume_up_toolbar_msg, FILE_BROWSER_SAVEAS_CODE).show();
+                    Toast.makeText(this, R.string.volume_up_toolbar_msg, Toast.LENGTH_LONG/*FILE_BROWSER_SAVEAS_CODE*/).show();
                     return true;
                 } else if (fullScreen) {
                     return true;
                 } else {
-                    getWindow().addFlags(1024);
-                    getWindow().setFlags(1024, 1024);
+                    getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN/*1024*/);
+                    getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN/*1024*/, WindowManager.LayoutParams.FLAG_FULLSCREEN/*1024*/);
                     fullScreen = true;
                     Toast.makeText(this, R.string.volume_up_fullscreen_msg, FILE_BROWSER_SAVEAS_CODE).show();
                     return true;
                 }
-            case 25://R.styleable.View_fadingEdgeLength /*25*/:
+            case KeyEvent.KEYCODE_VOLUME_DOWN/*25*/://R.styleable.View_fadingEdgeLength /*25*/:
                 if (hideToolbar) {
-                    this.toolbar.setVisibility(FILE_BROWSER_OPEN_CODE);
+                    this.toolbar.setVisibility(View.VISIBLE/*FILE_BROWSER_OPEN_CODE*/);
                     hideToolbar = false;
                     return true;
                 } else if (!fullScreen) {
                     return true;
                 } else {
-                    getWindow().clearFlags(1024);
+                    getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN/*1024*/);
                     fullScreen = false;
                     return true;
                 }
@@ -1647,9 +1260,9 @@ public class QSEditor extends Activity
     }
 	public boolean onKeyUp(int keyCode, KeyEvent event) {
         switch (keyCode) {
-            case 84://R.styleable.Theme_listViewWhiteStyle /*84*/:
-                if (this.findLayout.getVisibility() == 8) {
-                    this.findLayout.setVisibility(FILE_BROWSER_OPEN_CODE);
+            case KeyEvent.KEYCODE_SEARCH/*84*/://R.styleable.Theme_listViewWhiteStyle /*84*/:
+                if (this.findLayout.getVisibility() == View.GONE/*8*/) {
+                    this.findLayout.setVisibility(View.VISIBLE/*FILE_BROWSER_OPEN_CODE*/);
                 }
                 find("next");
                 return true;
@@ -1662,19 +1275,19 @@ public class QSEditor extends Activity
         saveHistory();
         this.mTabHost.setAutoNewTab(false);
         int count = this.mTabHost.getTabCount();
-        if (count < FILE_BROWSER_SAVEAS_CODE) {
+        if (count < 1/*FILE_BROWSER_SAVEAS_CODE*/) {
             finish();
             return;
         }
         this.mTabHost.setCurrentTab(count - 1);
-        this.mTabHost.iterCloseTab(3, FILE_BROWSER_OPEN_CODE, count);
+        this.mTabHost.iterCloseTab(TabWidget.MENU_ACTION_CLOSE_ALL/*3*/, 0/*FILE_BROWSER_OPEN_CODE*/, count);
     }
 	private void saveHistory() {
         Editor editor;
         if (!(this.mEditText.getPath() == null || "".equals(this.mEditText.getPath()))) {
             int selstart = this.mEditText.getSelectionStart();
             int selend = this.mEditText.getSelectionEnd();
-            editor = getSharedPreferences(PREF_HISTORY, FILE_BROWSER_OPEN_CODE).edit();
+            editor = getSharedPreferences(PREF_HISTORY, MODE_PRIVATE/*FILE_BROWSER_OPEN_CODE*/).edit();
             editor.putString(this.mEditText.getPath(), String.format("%d,%d,%d,%d,%s", new Object[]{Integer.valueOf(selstart), Integer.valueOf(selend), Long.valueOf(System.currentTimeMillis()), Integer.valueOf(this.mEditText.getLineBreak()), this.mEditText.getEncoding()}));
             editor.commit();
         }
@@ -1682,7 +1295,7 @@ public class QSEditor extends Activity
         editor.clear();
         ArrayList<String> paths = this.mTabHost.getAllPath();
         int size = paths.size();
-        for (int i = FILE_BROWSER_OPEN_CODE; i < size; i += FILE_BROWSER_SAVEAS_CODE) {
+        for (int i = 0/*FILE_BROWSER_OPEN_CODE*/; i < size; i += 1/*FILE_BROWSER_SAVEAS_CODE*/) {
             String path = (String) paths.get(i);
             editor.putString(path, path);
         }
@@ -1742,8 +1355,12 @@ public class QSEditor extends Activity
 	{
 		super.onResume();
 		load_options();
+		// 按HOME键后，再点击程序图标恢复程序，不会执行onRestoreInstanceState，所以这里要处理一下
 		isLoading = false;
 	}
+	/**
+     * finish后，彻底退出程序
+     */
 	//Activity资源被系统回收之前执行的最后一个方法，调用finish()或者系统临时销毁Activity的时候调用，可以使用isFinishing()进行判断是正常销毁还是异常情况。
 	//用户改变设置（屏幕方向、语言、输入设备等）当前Activity实例会被销毁，然后重新创建一个新的实例；
 	//异常情况，该方法可能不会执行，Activity直接被killed掉
@@ -1759,6 +1376,7 @@ public class QSEditor extends Activity
 	{
 		if (!isFinish)
 			saveHistory();
+		// 自动保存当前文档
 		if ((this.autosave) && (this.mEditText.isTextChanged()))
 			save();
 		super.onStop();
@@ -1817,7 +1435,8 @@ public class QSEditor extends Activity
 	 */
 	protected void onSaveInstanceState(Bundle savedInstanceState) {
         super.onSaveInstanceState(savedInstanceState);
-        if (this.autosave && this.mEditText.isTextChanged()) {
+        // 自动保存当前文档
+		if (this.autosave && this.mEditText.isTextChanged()) {
             save();
         }
     }
@@ -1831,21 +1450,21 @@ public class QSEditor extends Activity
 
 	//finish调用
 	public void onLoaded() {
-        Toast.makeText(getApplicationContext(), getString(R.string.encoding) + ": " + this.mEditText.getEncoding(), FILE_BROWSER_SAVEAS_CODE).show();
+        Toast.makeText(getApplicationContext(), getString(R.string.encoding) + ": " + this.mEditText.getEncoding(), Toast.LENGTH_LONG/*FILE_BROWSER_SAVEAS_CODE*/).show();
         this.mEditText.resetUndoStatus();
         setTitle(new File(this.mEditText.getPath()).getName());
         switchPreviewButton(Highlight.getNameByExt(this.mEditText.getCurrentFileExt()));
-        String[] selinfo = getSharedPreferences(PREF_HISTORY, FILE_BROWSER_OPEN_CODE).getString(this.mEditText.getPath(), "").split(",");
+        String[] selinfo = getSharedPreferences(PREF_HISTORY, MODE_PRIVATE/*FILE_BROWSER_OPEN_CODE*/).getString(this.mEditText.getPath(), "").split(",");
         if (selinfo.length >= 3) {
-            this.mEditText.setSelection(Integer.valueOf(selinfo[FILE_BROWSER_OPEN_CODE]).intValue(), Integer.valueOf(selinfo[FILE_BROWSER_SAVEAS_CODE]).intValue());
+            this.mEditText.setSelection(Integer.valueOf(selinfo[0/*FILE_BROWSER_OPEN_CODE*/]).intValue(), Integer.valueOf(selinfo[1/*FILE_BROWSER_SAVEAS_CODE*/]).intValue());
         }
         saveHistory();
         loadLastOpenFiles();
     }
-	public void setTitle(String paramString)
+	public void setTitle(String tile)
 	{
-		super.setTitle(paramString);
-		this.mTabHost.setTitle(paramString);
+		super.setTitle(tile);
+		this.mTabHost.setTitle(tile);
 	}
 	 
 	 public void scrollToTop()
@@ -1861,7 +1480,7 @@ public class QSEditor extends Activity
         } catch (UnsupportedEncodingException e) {
             printException(e);
         } catch (OutOfMemoryError e2) {
-            Toast.makeText(this, R.string.out_of_memory, FILE_BROWSER_OPEN_CODE).show();
+            Toast.makeText(this, R.string.out_of_memory, Toast.LENGTH_SHORT/*FILE_BROWSER_OPEN_CODE*/).show();
         }
     }
 

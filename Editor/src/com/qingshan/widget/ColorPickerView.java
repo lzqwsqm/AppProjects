@@ -26,7 +26,7 @@ public class ColorPickerView extends View
 	private int mColor1;
 	private int mColor2;
 	private int mColor3;
-	private int mColor4 = -1;
+	private int mColor4 = 0xFFFFFFFF/*-1*/;
 	private int[] mColors;
 	private boolean mHighlightCenter;
 	private Paint mLeftPaint;
@@ -38,12 +38,12 @@ public class ColorPickerView extends View
 
 	public ColorPickerView(Context c) {
         super(c);
-        this.mColor4 = -1;
+        //this.mColor4 = -1;
     }
 
 	public ColorPickerView(Context context, AttributeSet attr) {
         super(context, attr);
-        this.mColor4 = -1;
+        //this.mColor4 = -1;
         init();
     }
 
@@ -52,19 +52,22 @@ public class ColorPickerView extends View
     }
 
 	private void init() {
-        this.mColors = new int[]{-65536, -65281, -16776961, -16711681, -16711936, -256, -65536};
-        this.mColor1 = -1;
-        this.mColor2 = -16777216;
+        mColors = new int[] {
+            0xFFFF0000, 0xFFFF00FF, 0xFF0000FF, 0xFF00FFFF, 0xFF00FF00,
+            0xFFFFFF00, 0xFFFF0000
+        };
+        mColor1 = 0xFFFFFFFF;
+        mColor2 = 0xFF000000;
         Shader s = new SweepGradient(0.0f, 0.0f, this.mColors, null);
-        this.mPaint = new Paint(1);
+        this.mPaint = new Paint(Paint.ANTI_ALIAS_FLAG/*1*/);
         this.mPaint.setShader(s);
         this.mPaint.setStyle(Style.STROKE);
-        this.mCenterPaint = new Paint(1);
+        this.mCenterPaint = new Paint(Paint.ANTI_ALIAS_FLAG/*1*/);
         this.mCenterPaint.setStrokeWidth(5.0f);
-        this.mLeftPaint = new Paint(1);
-        this.mRightPaint = new Paint(1);
+        this.mLeftPaint = new Paint(Paint.ANTI_ALIAS_FLAG/*1*/);
+        this.mRightPaint = new Paint(Paint.ANTI_ALIAS_FLAG/*1*/);
     }
-
+	
 	private int interpColor(int[] colors, float unit, boolean isSlider) {
         if (unit <= 0.0f) {
             return colors[0];
@@ -88,23 +91,28 @@ public class ColorPickerView extends View
         }
         return Color.argb(ave(Color.alpha(c0), Color.alpha(c1), p), ave(Color.red(c0), Color.red(c1), p), ave(Color.green(c0), Color.green(c1), p), ave(Color.blue(c0), Color.blue(c1), p));
 	}
-
+    @Override
 	protected void onDraw(Canvas canvas) {
         int width = getWidth();
         int height = getHeight();
         float lr_width = ((float) width) * 0.2f;
         float space = ((float) width) * 0.03f;
-        float outer_radius = ((float) Math.min(width, height)) * 0.48f;
+        //半径
+		float outer_radius = ((float) Math.min(width, height)) * 0.48f;
         float touch_feedback_ring = this.center_radius + (2.0f * this.mCenterPaint.getStrokeWidth());
         this.mRadius = (outer_radius + touch_feedback_ring) / 2.0f;
-        this.mLeftPaint.setShader(new LinearGradient(0.0f, 0.0f, 0.0f, (float) height, this.mColor1, this.mColor2, TileMode.CLAMP));
+        //两边渐变
+		this.mLeftPaint.setShader(new LinearGradient(0.0f, 0.0f, 0.0f, (float) height, this.mColor1, this.mColor2, TileMode.CLAMP));
         canvas.drawRect(space, 0.0f, lr_width, (float) height, this.mLeftPaint);
         this.mRightPaint.setShader(new LinearGradient(0.0f, 0.0f, 0.0f, (float) height, this.mColor3, this.mColor4, TileMode.CLAMP));
         canvas.drawRect(((float) width) - lr_width, 0.0f, ((float) width) - space, (float) height, this.mRightPaint);
-        canvas.translate((float) (width / 2), (float) (height / 2));
+		//转移坐标到中间
+		canvas.translate((float) (width / 2), (float) (height / 2));
         this.mPaint.setStrokeWidth(outer_radius - touch_feedback_ring);
-        canvas.drawCircle(0.0f, 0.0f, this.mRadius, this.mPaint);
-        canvas.drawCircle(0.0f, 0.0f, this.center_radius, this.mCenterPaint);
+        //色盘
+		canvas.drawCircle(0.0f, 0.0f, this.mRadius, this.mPaint);
+        //中间圆心
+		canvas.drawCircle(0.0f, 0.0f, this.center_radius, this.mCenterPaint);
         if (this.mTrackingCenter) {
             int c = this.mCenterPaint.getColor();
             this.mCenterPaint.setStyle(Style.STROKE);
@@ -118,10 +126,12 @@ public class ColorPickerView extends View
             this.mCenterPaint.setColor(c);
         }
     }
-
+	@Override
 	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        int size = Math.min(MeasureSpec.getSize(widthMeasureSpec), MeasureSpec.getSize(heightMeasureSpec));
-        this.center_radius = (CENTER_RADIUS_SCALE * (((float) size) * 0.5f)) / 2.0f;
+        //窗口尺寸
+		int size = Math.min(MeasureSpec.getSize(widthMeasureSpec), MeasureSpec.getSize(heightMeasureSpec));
+        //中间圆心的圆周率
+		this.center_radius = (CENTER_RADIUS_SCALE * (((float) size) * 0.5f)) / 2.0f;
         setMeasuredDimension(size, (int) (((float) size) * 0.6f));
     }
 	/*
@@ -492,107 +502,73 @@ public class ColorPickerView extends View
 	 return-void
 	 .end method
 	*/
-	public boolean onTouchEvent(MotionEvent event) {
-        int newcolor;
-        int width = this.getWidth();
-        int height = this.getHeight();
-        float x = event.getX() - (((float)(width / 2)));
-        float y = event.getY() - (((float)(height / 2)));
-        boolean inCenter = PointF.length(x, y) <= this.center_radius ? true : false;
-        switch(event.getAction()) {
-            case 0: 
-				this.mTrackingCenter = inCenter;
-					if(!inCenter) {
-						//goto label_26;
-						if(this.mTrackingCenter) {
-							if(this.mHighlightCenter == inCenter) {
-								return true;
-							}
+	
+	@Override
+    public boolean onTouchEvent(MotionEvent event) {
+        int width = getWidth();
+        int height = getHeight();
+        float x = event.getX() - width/2; // - width * 0.20F
+        float y = event.getY() - height/2;
 
-							this.mHighlightCenter = inCenter;
-							this.invalidate();
-							return true;
-						}
+        boolean inCenter = PointF.length(x, y) <= center_radius;
+        //Log.v("color", "x:"+x+" ex:"+event.getX()+" y:"+y+" center_radius:"+center_radius+" len:"+PointF.length(x, y));
+        switch (event.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+                mTrackingCenter = inCenter;
+                if (inCenter) {
+                    mHighlightCenter = true;
+                    invalidate();
+                    break;
+                }
+            case MotionEvent.ACTION_MOVE:
+                if (mTrackingCenter) {
+                    if (mHighlightCenter != inCenter) {
+                        mHighlightCenter = inCenter;
+                        invalidate();
+                    }
+                } else {
+                    float unit;
+                    int newcolor;
+                    //左边色盘
+                    if(event.getX() <= width*0.2F)
+                    {
+                        unit = event.getY() / height;
+                        newcolor = interpColor(new int[] {mColor1, mColor2}, unit, true);
+                        mColor3 = newcolor;
+                    } else if (event.getX() >= width-width*0.2F) { //右边色盘
+                        unit = event.getY() / height;
+                        newcolor = interpColor(new int[] {mColor3, mColor4}, unit, true);
+                    } else {
+                        //控制色盘范围
+                        float angle = (float)java.lang.Math.atan2(y, x);
+                        // need to turn angle [-PI ... PI] into unit [0....1]
+                        unit = angle/(2*(float) Math.PI);
+                        if (unit < 0) {
+                            unit += 1;
+                        }
+                        newcolor = interpColor(mColors, unit, false);
+                        setColor(newcolor);
 
-						if(event.getX() <= (((float)width)) * 0.2f) {
-							newcolor = this.interpColor(new int[]{this.mColor1, this.mColor2}, event.getY() / (((float)height)), true);
-							this.mColor3 = newcolor;
-						}
-						else if(event.getX() >= (((float)width)) - (((float)width)) * 0.2f) {
-							newcolor = this.interpColor(new int[]{this.mColor3, this.mColor4}, event.getY() / (((float)height)), true);
-						}
-						else {
-							float unit = (((float)Math.atan2(((double)y), ((double)x)))) / 6.283185f;
-							if(unit < 0f) {
-								++unit;
-							}
-
-							newcolor = this.interpColor(this.mColors, unit, false);
-							this.setColor(newcolor);
-						}
-
-						if(this.mListener != null) {
-							this.mListener.onColorChanged("", ColorPicker.getColor(newcolor));
-						}
-
-						this.mCenterPaint.setColor(newcolor);
-						this.invalidate();
-						break;
-					
-					}
-
-					this.mHighlightCenter = true;
-					this.invalidate();
-					break;
-				
-            case 1: 
-					if(!this.mTrackingCenter) {
-						return true;
-					}
-
-					this.mTrackingCenter = false;
-					this.invalidate();
-					break;
-				
-            case 2: 
-					//label_26:
-					if(this.mTrackingCenter) {
-						if(this.mHighlightCenter == inCenter) {
-							return true;
-						}
-
-						this.mHighlightCenter = inCenter;
-						this.invalidate();
-						return true;
-					}
-
-				if(event.getX() <= (((float)width)) * 0.2f) {
-					newcolor = this.interpColor(new int[]{this.mColor1, this.mColor2}, event.getY() / (((float)height)), true);
-					this.mColor3 = newcolor;
-					}
-				else if(event.getX() >= (((float)width)) - (((float)width)) * 0.2f) {
-					newcolor = this.interpColor(new int[]{this.mColor3, this.mColor4}, event.getY() / (((float)height)), true);
-					}
-					else {
-						float unit = (((float)Math.atan2(((double)y), ((double)x)))) / 6.283185f;
-						if(unit < 0f) {
-							++unit;
-						}
-
-						newcolor = this.interpColor(this.mColors, unit, false);
-						this.setColor(newcolor);
-					}
-
-					if(this.mListener != null) {
-						this.mListener.onColorChanged("", ColorPicker.getColor(newcolor));
-					}
-
-				this.mCenterPaint.setColor(newcolor);
-					this.invalidate();
-					break;
-				}
-        
-
+                    }
+                    if (mListener != null) {
+                        mListener.onColorChanged("",ColorPicker.getColor(newcolor));
+                    }
+                    mCenterPaint.setColor(newcolor);
+                    invalidate();
+                }
+                break;
+            case MotionEvent.ACTION_UP:
+                if (mTrackingCenter) {
+                    if (inCenter) {
+                        if (mListener != null) {
+                            //mListener.onColorPicked(this, mCenterPaint.getColor());
+                        }
+                    }
+                    mTrackingCenter = false;    // so we draw w/o halo
+                    invalidate();
+                }
+                break;
+        }
         return true;
     }
 	/*public boolean onTouchEvent(MotionEvent paramMotionEvent)
@@ -676,12 +652,13 @@ public class ColorPickerView extends View
 
 	public void setColor(int color) {
         this.mCenterPaint.setColor(color);
-        this.mColor1 = color;
-        this.mColor2 = -16777216;
+        //左边色盘坐当前色到暗色
+		this.mColor1 = color;
+        this.mColor2 = 0xff000000/*-16777216*/;
         this.mColor3 = color;
-        this.mColor4 = -1;
+        this.mColor4 = 0xFFFFFFFF/*-1*/;
     }
-
+	
 	public void setOnColorChangedListener(ColorPicker.OnColorChangedListener paramOnColorChangedListener)
 	{
 		this.mListener = paramOnColorChangedListener;

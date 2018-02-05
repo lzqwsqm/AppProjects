@@ -43,8 +43,8 @@ class FastScroller
         MIN_PAGES = 1;
     }
 	public FastScroller(Context context, EditText listView) {
-        this.mItemCount = -1;
-        this.mHandler = new Handler();
+        //this.mItemCount = -1;
+        //this.mHandler = new Handler();
         this.mList = listView;
         init(context);
     }
@@ -55,11 +55,12 @@ class FastScroller
         this.mPaint = new Paint();
         this.mPaint.setAntiAlias(true);
         this.mPaint.setTextAlign(Align.CENTER);
-        TypedArray ta = context.getTheme().obtainStyledAttributes(new int[]{16842806});
+        TypedArray ta = context.getTheme().obtainStyledAttributes(new int[]{android.R.attr.textColorPrimary/*16842806*/});
         this.mPaint.setColor(ta.getColorStateList(ta.getIndex(STATE_NONE)).getDefaultColor());
         this.mPaint.setStyle(Style.FILL_AND_STROKE);
         this.mState = STATE_NONE;
     }
+	
 	private void useThumbDrawable(Context context, Drawable drawable) {
         this.mThumbDrawable = drawable;
         this.mThumbW = context.getResources().getDimensionPixelSize(R.dimen.fastscroll_thumb_width);
@@ -80,10 +81,10 @@ class FastScroller
             int alpha = -1;
             if (this.mState == STATE_EXIT) {
                 alpha = scrollFade.getAlpha();
-                if (alpha < 104/*R.styleable.Theme_textViewStyle*/) {
-                    this.mThumbDrawable.setAlpha(alpha * STATE_VISIBLE);
+                if (alpha < ScrollFade.ALPHA_MAX / 2/*104/*R.styleable.Theme_textViewStyle*/) {
+                    this.mThumbDrawable.setAlpha(alpha * 2/*STATE_VISIBLE*/);
                 }
-                this.mThumbDrawable.setBounds(viewWidth - ((this.mThumbW * alpha) / 208), STATE_NONE, viewWidth, this.mThumbH);
+                this.mThumbDrawable.setBounds(viewWidth - ((this.mThumbW * alpha) / ScrollFade.ALPHA_MAX /*208*/), STATE_NONE, viewWidth, this.mThumbH);
                 this.mChangedBounds = true;
             }
             canvas.translate((float) x, (float) y);
@@ -134,34 +135,36 @@ class FastScroller
 
 	
 
-	boolean isPointInside(float paramFloat1, float paramFloat2)
+	boolean isPointInside(float x, float y)
 	{
-		boolean i;
+		/*boolean i;
 		if ((paramFloat1 <= this.mList.getWidth() - this.mThumbW) || (paramFloat2 < this.mThumbY) || (paramFloat2 > this.mThumbY + this.mThumbH))
 			i = false;
 		else
 			i = true;
-		return i;
+		return i;*/
+		return x > mList.getWidth() - mThumbW && y >= mThumbY && y <= mThumbY + mThumbH;
 	}
-
+	
 	boolean isVisible()
 	{
-		boolean i;
+		/*boolean i;
 		if (this.mState != 0)
 			i = true;
 		else
 			i = false;
-		return i;
+		return i;*/
+		return !(mState == STATE_NONE);
 	}
 
 	boolean onInterceptTouchEvent(MotionEvent ev) {
-        if (this.mState <= 0 || ev.getAction() != 0 || !isPointInside(ev.getX(), ev.getY())) {
+        if (this.mState <= STATE_NONE/*0*/ || ev.getAction() != MotionEvent.ACTION_DOWN/*0*/ || !isPointInside(ev.getX(), ev.getY())) {
             return false;
         }
         setState(STATE_DRAGGING);
         return true;
     }
-
+	
 	void onScroll(EditText view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
         if (this.mItemCount != totalItemCount && visibleItemCount > 0) {
             this.mItemCount = totalItemCount;
@@ -271,7 +274,7 @@ class FastScroller
             return false;
         }
         int action = me.getAction();
-        if (action == 0) {
+        if (action == MotionEvent.ACTION_DOWN/*0*/) {
             if (!isPointInside(me.getX(), me.getY())) {
                 return false;
             }
@@ -281,7 +284,7 @@ class FastScroller
             }
             cancelFling();
             return true;
-        } else if (action == 1) {
+        } else if (action == MotionEvent.ACTION_UP/*1*/) {
             if (this.mState != STATE_DRAGGING) {
                 return false;
             }
@@ -290,7 +293,7 @@ class FastScroller
             handler.removeCallbacks(this.mScrollFade);
             handler.postDelayed(this.mScrollFade, 1000);
             return true;
-        } else if (action != STATE_VISIBLE || this.mState != STATE_DRAGGING) {
+        } else if (action != MotionEvent.ACTION_MOVE/*STATE_VISIBLE */|| this.mState != STATE_DRAGGING) {
             return false;
         } else {
             int viewHeight = this.mList.getHeight();
