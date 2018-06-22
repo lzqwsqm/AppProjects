@@ -1,4 +1,99 @@
-槽渔滩
+桃源        张村        高庙       瓦屋山
+田永祥50832 张登祥38079 张登祥38005 55963
+雷秀勇55319 张登祥38068      38078
+马国祥55202 王大  50863      23782
+---------- 王小车27378      55968
+柳江        李淑容37622
+56733
+56912
+56963
+38058
+
+
+           洪雅旅客运价表
+|----------------------------------------
+|    | 洪雅         |     | 洪雅17
+|止戈 | 道泉茶厂2    |止戈  | 安子场16
+|（4） | 岩嘴庙3      |（15）| 岩嘴庙15
+|    |             |     | 百花滩
+|    | 止戈         |     | 止戈
+|-2  | 花溪口未过桥4 | -2  | 
+|----|-------------|-----|------------
+|东岳 | 团结小学5    |     | 花溪口未过桥14
+|（7） |             |东岳  | 漫水桥13
+|    | 踏水桥6      |     | 踏水桥
+|    |              |（13）| 新民派出所
+|    | 东岳         |     | 东岳
+|-2  | 石谷包7       |     | 石包谷12
+|    |              |-4   | 张沟路口11     
+|----|--------------|-----|---------
+|    |              |     | 杨岩桥
+|花溪 | 机砖厂8       |花溪 | 机砖厂
+|    |              |     | 白土坪
+|（9） | 花溪         |（10）| 花溪
+|    | 孔坝大桥9     |     | 孔坝大桥
+|    |              | -7  | 大柳坝10
+|----|--------------|-----|---------
+|    |              |     | 老交警队9
+|柳江 | 柳江         |柳江  | 柳江
+|（10）| 李湾口大桥10  |（9） | 李湾口大桥
+|-----|-------------|-----|---------
+|赵河 |             |赵河  | 姜湾坡8
+|     | 洪江桥11    |      | 洪江桥
+|（14）| 三溪水12     |（5）  | 三溪水7
+|     |             |     | 道班房6
+|-7   | 石板沟13     |     | 石板沟
+|     | 赵河         |-12  | 赵河5
+|     | 香花岗14     |     | 香花岗4
+|-----|-------------|------|---------
+|高庙  |             |高庙  | 郭守义3
+|     | 余沟15       |     | 余沟
+|（17） |             |     | 调度山2
+|     |  双河口16    |      |双河口
+|     | 安溪沟       |     | 安溪沟
+|-12  | 高庙17       |     | 高庙
+|-----|-------------|------|--------
+|张杜  | 曾田坝
+|     | 白店子
+|（19） | 漆树湾
+|      | 糟包坪
+|      | 张村
+|-----------------------------------
+
+
+张村 <-> 洪雅（19元70公里0.27/公里17方气50元）
+   1张村   2洪雅   3张村   4洪雅
+1  6：10    9：50  12：40  15：50
+2  6：50   11：50  14：50
+3  7：30   13：00
+4  8：10   14：00
+
+
+洪雅 <-> 张村
+   1洪雅   2张村   3洪雅
+1  8：10   10：50  14：50
+-----------------------------
+止戈4
+东岳7 
+花溪9
+柳江10
+赵河13
+高庙15
+张村19 
+-----------------------------
+洪雅-槽渔滩（8元/25公里0.32/公里5.5方气15元）
+
+止戈花溪口大桥4
+团结园水井5
+塔水桥6
+新明7
+白坳口8
+新明-罗坝5
+渡槽4
+毛沟3
+徐嘴2
+
+
    1     2    3      4     5    6
 1 6：30 8：30 10：20 12：10 2：20 5：20 
 2 7：00 8：55 10：45 12：40 2：45 4：00
@@ -20,27 +115,33 @@
       售票员1700月       1700
 油费   107天x30          3210
 折旧费 330000／8年／12月  3437.5
-维修费 二保500季/3        166.7
-      打黄油20季/3         6.7
-年审   气瓶500个x4/24     83.4
-      车管400年/12       33.4
-      综检400年/12       33.4
-税    保险10000年/12     833.4
-      管理费 800月       800
-gps   1050年/12          87.5
+维修费 二保500季/3         166.7
+      打黄油20季/3          6.7
+年审   气瓶500个x4/24      83.4
+      车管400年/12        33.4
+      综检400年/12        33.4
+税    保险10000年/12      833.4
+      管理费 800月        800
+gps   1050年/12           87.5
  
 合计 14392.3月 479.8天
---------------------------
 
------客车驾驶-----------
+43272.0-43104.9=168
+96/168=0.58元/公里
+33/168=0.2m3/公里
 
+44375.3-44212.7 =162.6 
+ 
+----------------------
+
+------客车驾驶----------
+离合器最佳高度为3个指头
     客车驾驶看路人
     鸣喇靠近多提醒
     节假民俗知客源
     班次时间抢客源
     提前挂档开关门
-    节约时间要安全
-    
+    节约时间要安全    
     开门首先门无人
     监控提醒才开门
     
@@ -49,7 +150,7 @@ gps   1050年/12          87.5
    
 
 
-------------------------    
+--------------------    
    
        行车守则
 
@@ -75,7 +176,7 @@ gps   1050年/12          87.5
     骑挂躲让定轮位
     
     节能操作常滑行
-    经济时速低油门
+    经济时速小油门
     少用低档早挂高
     提前预见车少停
     
@@ -111,7 +212,7 @@ gps   1050年/12          87.5
     定右挂左稳方向
     变灯按喇稳速度
     
-
+       上车
     上车首先四周看
     车货轮胎油水量
     确认安全左手开
@@ -119,13 +220,14 @@ gps   1050年/12          87.5
     左脚收入顺关门
     踩离到底调椅背
     镜内见路见车体
-
+       姿势
     左十右三握方向
+    紧靠背椅远方看
     左脚常放离左下
     右脚放在油门上 
     不许下看盲控制
     离合操作快停慢
-    平稳加油不高转
+    车动丢离油平缓
 
     发动首先踩制动
     踩离拉刹档杆晃
@@ -133,7 +235,7 @@ gps   1050年/12          87.5
     高低转速要正常
        技1
     起步首先挂低档
-    打向鸣喇侧后看
+    打向鸣喇后镜看
     侧后安全手刹松
     加油抬离听声音
     音变车斗稍一停
@@ -149,7 +251,7 @@ gps   1050年/12          87.5
     踩离松油同挂空
     抬离再踩加一档
     加油抬离半联停
-    慢抬加油要平稳
+    加油慢抬要平稳
  
     减档首先听声音
     加油看速估动力
@@ -169,6 +271,7 @@ gps   1050年/12          87.5
     减速打向喇叭按
     靠右慢进定轮位
     以后定前取角度
+    侧身平衡挂侧后
     侧后安全加速度
     慢进快出记心田
     三把方向把路变
@@ -289,156 +392,6 @@ ig79oz09~
 28 099  154  319  337
 
 30 113  176  364  383
-
-=================================
-
-热血江湖手游枪职业输出暴力，是个大家都喜欢的职业。下面为大家带来热血江湖手游邪派鬼枪攻略。
-14
-5 7 11 15
-技能搭配
-
-主动技能：枪刃乱舞，幻魔烈魂，血雨鬼泣，枪跃龙门！气功：怒意之吼，横练太保，以退为进，转守为攻！绝技：醉舞狂歌，这技能打boss和pk谁用谁知道！
-
-宠物
-
-宠物，有条件买龙猫，很不错的宠物，至于咕咕鸡看个人，想要排行就买，平民完全没必要！培养三个，一个龙猫，一个火龙，一个狼！之前听说火龙后期没用，反正我不觉得，最起码挂机用起来很OK！
-
-坐骑：
-
-1.黑马一定要买，有能力老虎也要买，因为坐骑战力都是直接加到人物的，还有关键的洗练属性！
-
-2.至于带什么出战，唯一的区别就是坐骑主动技能，我带的是白马，因为老虎碎片不够升星，不知道老虎技能，以后再考虑！
-
-3.坐骑洗练，我觉得洗练是攻击-暴击-命中-防御-气血-其他！可能我理解有误，但是攻击是必须的，洗练没有技巧，完全看脸！
-
-战力提升：
-
-有能力充到v5 最好，挂机不错，而且能买成长礼包，挺不错的！或者v9因为可以买试炼次数，长期下来经验太多！神豪随意！
-
-前期不要买强化石，除非你特别豪，反正我加起来买了40个中级就收手了！因为魔王也会出，我现在四个8，两个7！勉强不算差吧！前期最主要就是等级，有条件多挂机！
-
-生产等级每天也可以做一下，紫色装备直接卖，不要分解，材料没用，生产等级我主要做初级宠物经验丹，因为要能量少，而且材料也好弄，后期生产等级绝对有用的！
-
-宝石和大部分游戏一样一般都带攻击，气血，防御，不过我自己各自带了个命中，暴击，闪避！可能不对，但是挺好用的！
-
-需要注意的就是宝石一到三级有能力直接买三级宝石，比你升级便宜很多！一级二级直接出售换能量！会省挺多的！
-
-反正我也是这么提升的，没什么别的隐藏东西！暂时就想到这么多！
-
-击杀魔王：
-
-如果有条件一定要参加，一定要参加，一定要参加，重要的事情说三遍！基本上我们装备产出都在这了，而且是不绑定的！
-
-我打了三天，还不是一直打，因为有工作，已经卖了5000多元宝！所以一定要参加！
-
-宠物有龙猫用龙猫，没有就用火龙！给大家科普下，没事尽量自动然后点冷却好的技能，伤害会多不少！
-
-我玩枪主要就是打这个给力，一般排行第一第二！这游戏职业不怎么平衡！枪，剑亲儿子，弓，刀后妈生的！医生是丢掉的孩子……
-
-附上我交易图，免得有人不信……
-
-材料兑换：
-
-前期需要换，买的东西：
-
-1地魔之眼碎片，前期帮贡全部换地魔之眼碎片，击杀魔王也会掉，最快速度把这个神兵弄出来，你会发现很多材料容易不少！我第三天晚上出的，全部宝箱都是我的...
-
-2正邪功勋旗子，选择邪派最大的痛苦就是正魔战场排队一晚上进不去...这时候你必须买旗子、可以换很多好东西，而且这个不是消耗功勋换东西，而是你达到多少功勋，刷新出来的全能换！
-
-3.五绝碑文碎片：提升五绝等级，我主升怪乞，因为他给神兵弓碎片！
-
-竞技场：宠物碎片
-
-帮贡：地魔之眼碎片，气功书！
-
-劫镖帮贡：优先称号！
-
-会武：有老虎坐骑优先老虎坐骑碎片！没有就换自己需要的坐骑碎片！
--------------------------------
-1.气功：打魔王要的带的气功(破甲刺魂丶怒意之 吼丶以退为进丶横练太保)
-
-2.技能：技能的话带(威凌天下丶枪刃狂舞丶疾风天狼破丶嗜血天狼击，嗜血天狼击是血量低于70%伤害最终翻倍，所以打魔王先把血狼降到70%以下)绝技带(醉舞狂歌)打魔王不要先开，第一次火龙刀变身完在用。
-
-3.神兵：神兵的话打魔王的时候先去刷一波小怪把怒气刷满，魔王一出直接开神兵。
-
-神兵第一次变身 先用火龙刀，如果魔王血掉的慢可以开3次神兵，第二次还是变火龙刀打，(这个要按每个区的情况来开，有些区BOSS是变身不了3次，当然装备有怒炎增加怒气的除外)第三次神兵用神枪，神枪的变身很重要，要在魔王还剩2条血的时候才开，不能提前开也不能迟了开，这时候开配合天赋五烈神枪伤害爆炸，也是打伤害主要输出。
-
-还有神兵带的4个技能一定要神满，4个技能点满你会发现你打魔王的输出会提升一大截。(注意：打魔王要把设置里挂机设置自动野外地图神兵变身关掉，不然会自动变身，控制不来时间。VI5以上会自动开的。所以要手动关掉)。
-
-4.宠物：龙猫配合第一次变身火龙刀打，第一波火龙刀快结束的时候进攻号角也可以用了，号角用了立马切换宠物小雪狼打怒气，为第二次神兵变身刷怒气。
-
-怒气刷满了就切回龙猫，因为龙猫打的输出很高。注：(宠物自带的4个技能优先升级龙猫然后是小雪狼，兽灵丹建议 拍卖行宠物里购买，比商城便宜很多)我以前都是商城买的坑了很多元宝。
-
-5.坐骑：坐骑出征(乌骓宝马)优先升到3星带2个孔装备后天骑术(战如熊虎丶铁马金戈(有钱的土豪可以升满5星带人马合一))。
-
-坐骑洗练：枪优先洗出(攻击丶暴击丶其次命中，追加伤害(追加伤害要点开第四个洗练孔才能洗出来))其他属性看个人元宝充足洗，有钱就固定前面说的，元宝不充足洗出橙色或者红色的可以不洗了。
-
-6.强化和升级：升级的话平均升，基本跟等级升，如果升级服不够，优先升(武器 丶戒子丶鞋子)。其他看升级符的富裕来点。
-
-强化优先强化(武器丶护腕丶戒子，)平均升，其他平均跟着升。升级符和强化不要商城买，完全没必要的，每天试练副本(地下宝藏会掉落)足够升级和强化了。(土豪有钱可以去商城买来点强化，毕竟强化到后面加的属性很可观的)
-
-7.内甲： 内甲有玄阴丶烈阳丶太虚。枪选烈阳就行，烈阳加的攻击很猛!内甲升级主要靠试练副本里的(冰原激斗)掉落的材料来升级(土豪可以直接商城买材料升级满级(大概要元宝4W-5W元宝可以一次性升满)
-
-内甲天赋加点个人加法(强攻丶怒炎丶撩切)剩下的因为我也没点到也没试过，所以暂时不知道怎么点，靠大家补脑了!
-
-8.绝技：五绝试练，优先第三个乞丐，出(醉舞狂歌丶和神兵玄武破天弓（注：这把神弓PK打架一流）)
-
-声望优先打每五关的BOS掉落的声望物品比较多，当然关数越高的，掉落越多的。(还有商城土豪可以买每天限购10个的五绝碑文碎片 每个100绑定元宝 一个200点声望)
-
-9.PK：这游戏PK其实也没什么说的，对枪来说，目前基本都是不是你秒我，就是我秒你，没啥技术好言!
-
-PK带的技能和上面说的一样， 气功就带(怒意之吼丶乾坤 挪移丶以退为进丶横练太保)，绝技(带醉舞狂歌注：该技能免疫6秒控制，满级10秒!)因为枪怕控制所以必带。
-
-神兵在没有出玄武破天弓的时候就带彼岸花。PK坐骑建议带老虎，老虎先天技能加命中，后天骑术建议带(马踏环铃、百毒不侵’)老虎没三星有二个孔可以带追风坐骑。
-
-10.势力战：关于势力战很多人都说正派不行，正派总是说输，其实是很多人不会玩，进去都是自己玩自己的。.势力战个人建议帮会或者整个区找战力不是很低的组队进去，只要不是碰到对面变态级土豪大神基本不会输。
-
-首先进去，优先把左右2边小雕像打掉，然后中推中间的大雕像。最后集体推对面水晶。势力战里面是优先推塔的，杀人是其次，推掉一个雕像分数给的很多的比你杀人多，如果你推掉一个水晶，比大神杀30-40个人的分都多，因为里面是按排名给功勋的，也是目前功勋获得的主要来源。(除了势力战获得功勋还有就是商城可以买，土豪专属商城)。
-
-11.试炼副本：试练副本里的试练之地每天必须打，要升级必须打，V9可以购买一次.V13可以购买2次 剩下的试练副本，看个人元宝情况购买。
-
-12.帮派拉镖：每天下午2点到3点和晚上7点30到8点30，拉之前要看下帮会祝福满没满，没满自己有经济可以点下，或者叫帮会土豪点，加成满的经验是多297%!当然小帮会就不多说。
-
-13.帮会自创武功： 个人每次是劲点满(加伤害的)，御点满(点的越高冷却时间越短)自创10级以后会多个追，追点满(中间的控)，剩下的随便点，其实也就剩下一点可以点其他的。至于能不能出优，就看个人人品的，这是看运气出的。
-
-14.限时活动：每天限时活动必须要做的，(正义之心，正邪道场，秘宝矿洞，江湖告急)(不是每天都有的，是分开天数的)
-
-15.还有新区的一个活动，征战天下达成每个目标给的材料很多的，必须做的!
-
-16.新区成长基金，如果想玩下去建议必买
-
-还有新区的，挂机看个人战力挂，最佳是挂比自己高10级的怪经验多，前提你能扛得住!
------------------------------
-枪客，热血江湖手游中的高暴击高伤害输出职业，到后期技能有很多，只能用4个，那么枪客技能选择哪些好？怎么搭配好呢？
-
-￼
-
-1转之前的就用基础的4个职业不用多说；20级1转之后，用两个新技能替换“鹰击长空”和“天神万钧”2个基础技能；
-
-【2转pk】
-
-枪跃龙门+1转的2个技能+2转的伤害技能
-
-【2转pve】
-
-枪刃狂舞+1转的buff技能+2转的2个技能
-
-【3转pk】
-
-1转的Buff技能+2转的伤害技能+3转的2个技能
-
-【3转pve】
-
-枪刃狂舞+1转的Buff技能+2转的Buff技能+2转的Buff技能
-
-因为部分技能名称还未知，所以后续可能再修改，大家主要看好技能的效果选择就行。比如pk就多用伤害+控制技能；pve刷怪打副本用群攻的，加buff的技能。
-
-
-
-
-
-
-
 
 =================================
 
@@ -2971,11 +2924,1003 @@ hardware/libhardware_legacy/vibrator/vibrator.c 
 
 0 0
 
+================================
+登录
+罗升阳 博客专家
+关注
+从CM刷机过程和原理分析Android系统结构
+原创 2014年06月16日 01:01:48 阅读 90653
+       前面101篇文章都是分析Android系统源码，似乎不够接地气。如果能让Android系统源码在真实设备上跑跑看效果，那该多好。这不就是传说中的刷ROM吗？刷ROM这个话题是老罗以前一直避免谈的，因为觉得没有全面了解Android系统前就谈ROM是不完整的。写完了101篇文章后，老罗觉得第102篇文章该谈谈这个话题了，并且选择CM这个有代表性的ROM来谈，目标是加深大家对Android系统的了解。
+
+老罗的新浪微博：http://weibo.com/shengyangluo，欢迎关注！
+
+《Android系统源代码情景分析》一书正在进击的程序员网（http://0xcc0xcd.com）中连载，点击进入！
+
+       说起刷ROM的动机，除了上面说的用来看Android系统源码在真实设备上的运行效果，还有很多值得说的。回想起PC时代，我们对我们自己拥有的设备（电脑），基本上能做的就是在上面重装系统。这个系统是厂商做好给我们的，里面有什么我们就用什么，不能随心所欲地定制。当然，如果你用的是Linux系统，你是可以随心所欲地对它进行定制的。不过可惜的是，我们的女神用的都是Windows系统。你和女神说你想要什么样的Linux系统，我给你定制一个，她会不知道你说的是什么——她需要的是一个不会中毒的又跑得快的Windows系统而已。现如今虽然很多女神用的是仍然是我们不能随心所欲定制的iOS系统，但是在移动设备上，iOS系统毕竟不能做到Windows在PC那样的一家独大——我们还有不少女神是用Android系统的。所以，如果你现在和女神说，我可以帮你刷一个专属的精简Android系统，里面没有一堆你不需要的预装软件，会让你的手机跑得很快，那女神得有多崇拜你啊。
+
+       当然，刷ROM的动机不能只是为了让女神崇拜，作为一个程序猿，我们的首要任务是维护宇宙和平。怎么维护呢？至少程序有BUG不能不改吧。你不改的话，老板是不会放过你的。但是，碰到那些很棘手的BUG，怎么办呢？例如，你是一个Android应用开发者，调用一个API接口的时候，总是抛出一个异常，而这个异常不跟到API内部实现去看看实在是不知道什么原因造成的。这时候，如果你手头上有这个手机的系统源代码，找这个API内部实现的地方，加一两行调试代码，再编译回手机上去跑，是不是就很容易定位问题了呢？
+
+        所以说，会刷ROM，不只是可以获得女神崇拜，还可以维护世界和平，作为一个Android开发者，你还有什么理由不去学习刷ROM呢？既然你决定学习刷ROM了，那你就得先搞清楚两个问题：1. 什么是刷ROM；2. 怎么学习刷ROM。
+
+        在回答第一个问题之前，我们先来看看Android设备从硬件到系统的结构，如图1所示：
+
+
+
+图1 Android系统架构
+
+       最底层的是各种硬件设备，往上一层是Bootloader。Bootloader是什么概念呢？我们都知道，PC主板上有一小段程序叫做BIOS，主板加电时它是第一个跑起来的程序，负责初始化硬件，以及将OS启动起来。在嵌入式世界里（手机也是属于嵌入式设备），也有一小段类似BIOS的程序，不过它不叫BIOS，而是叫Bootloader。使用最广泛的Bootloader是一个叫uboot的程序，它支持非常多的体系结构。经过编译后，uboot会生成一个uboot.bin镜像，将这个镜像烧到设备上的一个特定分区去，就可以作为Bootloader使用了。
+
+        Bootloader支持交互式启动，也就是我们可以让Bootloader初始化完成硬件之后，不是马上去启动OS，而是停留在当前状态，等待用户输入命令告诉它接下来该干什么。这种启动模块就称为Fastboot模式。对于Android设备来说，我们可以通过adb reboot bootloader命令来让它重新启动并且进入到Fastboot模式中去。
+
+        在讨论Fastboot模式之前，我们先了解一下嵌入式设备的ROM结构（NAND flash之类的芯片）。通常，一个能够正常启动的嵌入式设备的ROM包含有以下四个分区：
+
+        1. Bootloader分区，也就是存放uboot.bin的分区
+
+        2. Bootloader用来保存环境变量的分区
+
+        3. Kernel分区，也就是存放OS内核的分区
+
+        4. Rootfs分区，也就是存入系统第一个进程init对应的程序的分区
+
+        当设备处于Fastboot模式时，我们可以通过另外一个工具fastboot来让设备执行指定的命令。对搞机者来说，最常用的命令就是刷入各种镜像文件了，例如，往Kernel分区和Rootfs分区刷入指定的镜像。
+
+        对于Android设备来说，当它处于Fastboot模式时，我们可以将一个包含有Kernel和Rootfs的Recovery.img镜像通过fastboot工具刷入到一个称为设备上一个称为Recovery的分区去。这个过程就是刷Recovery了，它也是属于刷ROM的一种。由于Recovery分区包含有Kernel和Rootfs，因此将Recovery.img刷入到设备后，我们就可以让设备正常地启动起来了。这种启动方式就称为Recovery模式。 对于Android设备来说，我们可以通过adb reboot recovery命令来让它进入到Recovery模式中去。
+
+        当设备处于Recovery模式时，我们可以做些什么呢？答案是取决于刷入的Recovery.img所包含的Rootfs所包含的程序。更确切地说，是取决于Rootfs镜像里面的init程序都做了些什么事情。不过顾名思义，Recovery就是用来恢复系统的意思，也包含有更新系统的意思。这里所说的系统，是用户正常使用的系统，里面包含有Android运行时框架，使得我们可以在上面安装和使用各种APP。
+
+       用户正常使用Android设备时的系统，主要是包含有两个分区：System分区和Boot分区。System分区包含有Android运行时框架、系统APP以及预装的第三方APP等，而Boot分区包含有Kernel和Rootfs。刷入到System分区和Boot分区的两个镜像称为system.img和boot.img，我们通常将它们打包和压缩为一个zip文件，例如update.zip，并且将它上传到Android设备上的sdcard上去。这样当我们进入到Recovery模式时，就可以在Recovery界面上用我们之前上传到sdcard的zip包来更新用户正常使用Android设备时所用的系统了。这个过程就是通常所说的刷ROM了。
+
+       不知道大家看明白了没有？广义上的刷ROM，实际上包含更新Recovery和更新用户正常使用的系统两个意思；而狭义上的刷ROM，只是更新用户正常使用的那个系统。更新Recovery需要进入到Fastboot模式中，而更新用户正常使用的那个系统需要进入到Recovery模式中。Android设备在启动的过程中，在默认情况下，一旦Bootloader启动完成，就会直接启动用户正常使用的那个系统，而不会进入到Recovery模式，或者停留在Bootloader中，也就是停留在Fastboot模式中。只有通过特定的命令，例如adb reboot recovery和adb reboot bootloader，或者特定的按键，例如在设备启动过程中同时按住音量减小键和电源开关键，才能让设备进入到Recovery模式或者Fastboot模式中。
+
+       因此，一个完整的刷ROM过程，包含以下两个步骤：
+
+       1. 让设备进入到Fastboot模式，刷入一个recovery.img镜像
+
+       2. 让设备进入到Recovery模式，刷入一个包含system.img镜像和boot.img镜像的zip包
+
+       不过需要注意的是，system.img镜像和boot.img镜像不一定是只有在Recovery模式才能刷入，在Fastboot模式下也是可以刷入的，就像在Fastboot模式中刷入recovery.img镜像一样，只不过在Recovery模式下刷入它们更友好一些。说到这里，就不得不说另外一个概念，就是所谓的Bootloader锁。在锁定Bootloader的情况下，我们是无法刷入非官方的recovery.img、system.img和boot.img镜像的。这是跟厂商实现的Bootloader相关的，它们可以通过一定的算法（例如签名）来验证要刷入的镜像是否是官方发布的。在这种情况下，必须要对Bootloader进行解锁，我们才可以刷入非官方的镜像。
+
+       好了，以上就回答了什么是刷ROM这个问题，接下来我们要回答的是如常学习刷ROM这个问题。
+
+       前面我们提到了刷ROM的两个步骤，实际上我们还少了一个重要的步骤，那就是先要制作recovery.img、system.img和boot.img。有人可能会说，网上不是很多现成的刷机包吗？直接拿过来用不就是行了吗？但是别忘了前面我们所说的刷ROM动机：随心所欲地定制自己的系统。去拿别人制好的刷机包就失去了随心所欲定制的能力。那就只能自己去编译AOSP源码生成刷机包了。
+
+       然而，从零开始从AOSP源码中编译出能在自己使用的手机上运行的系统，可不是一件容易的事情。不过，好在有很多现成的基于AOSP的第三方开源项目，可以编译出来在目前市场上大部分的手机上运行。其中，最著名的就是CyanogenMod了，简称CM。国内大部分的第三方Android系统，都是基于CM来开发的，包括MIUI和锤子。
+
+       选择CM来讲解刷ROM的过程是本文的主题。不过单就刷ROM这个过程来说，CM官网上已经有很详细的过程，包括从CM源码编译出适用特定机型的刷机包，以及将编译出来的刷机包刷到手机里面去的过程。因此，本文不是单纯地讲解刷ROM过程，而是要结合原理来讲解刷ROM过程的关键步骤，来达到帮助大家更进一步地理解Android的目的。
+
+        要真正做到理解CM ROM的刷机原理，除了要对Android系统本身有一定的认识之外，还熟练掌握Android的源码管理系统和编译系统。因此，在继续阅读下面的内容之前，希望可以先阅读前面Android源代码仓库及其管理工具Repo分析和Android编译系统简要介绍和学习计划这两个系列的文章。接下来我们就开始讲解CM ROM的刷机过程和原理。
+
+        我们首先是要准备好环境以及手机。这是本次操作所用的环境以及手机：
+
+        1. Ubuntu 13.04
+
+        2. CM-10.1
+
+        3. OPPO Find 5
+
+        也就是说，我们将在Ubuntu 13.04上为OPPO Find 5制作CM-10.1的Recovery和ROM。
+
+        不过先别急着制作自己的ROM。为了保证接下来的步骤可以顺利执行，我们首先尝试刷一下CM官方对应版本的Recovery和ROM到我们的OPPO Find 5手机上。如果一切正常，就说明我们使用CM的源码来制作的Recovery和ROM也是可以运行在OPPO Find 5上的。
+
+        适合OPPO Find 5的CM官方Recovery下载地址：http://download2.clockworkmod.com/recoveries/recovery-clockwork-6.0.4.6-find5.img。假设我们下载好之后，保存在本地的路径为$CM/recovery-clockwork-6.0.4.6-find5.img。
+
+        适合OPPO Find 5的CM官方10.1.3版本ROM下载地址：http://download.cyanogenmod.org/get/jenkins/42498/cm-10.1.3-find5.zip。假设我们下载好之后，保存在本地的路径为$CM/cm-10.1.3.find5.zip。
+
+        注意，由于我们计划用CM-10.1源码来制作自己的ROM，所以我们在下载CM官方ROM，也要下载对应10.1版本的。
+
+        在刷Recovery和ROM的过程中，我们需要借助于Android SDK里面的fastboot和adb工具，因此，为了方便执行这些命令，我们先将这些工具的目录加入到PATH环境变量去。假设我们下载的Android SDK保存在目录$ASDK中，那么打开一个终端，执行以下命令即可：
+
+[plain] view plaincopy
+$ export PATH=$ASDK/platform-tools:$PATH  
+        先刷Recovery，步骤如下所示：
+        1. 保持OPPO Find 5在正常开机状态，并且通USB连接到将有Ubuntu 13.04的电脑上。
+
+        2. 还是在刚才打开的终端上，并且进入到保存recovery-clockwork-6.0.4.6-find5.img的目录$CM。
+
+[plain] view plaincopy
+$ cd $CM  
+        3. 执行以下命令让OPPO Find 5重启，并且进入Fastboot模式。
+[plain] view plaincopy
+$ adb reboot bootloader  
+        4. 可以看到OPPO Find 5停留在Fastboot界面上，执行以下命令确保fastboot工具能够连接到OPPO Find 5。
+[plain] view plaincopy
+$ fastboot devices  
+       如果能够连接，那么上述命令将会输出一串标识OPPO Find 5的ID。
+       5. 刷入我们刚才下载的Recovery。
+
+[plain] view plaincopy
+$ fastboot flash recovery recovery-clockwork-6.0.4.6-find5.img  
+       6. 提示刷入成功后，执行以下命令正常重启手机。
+[plain] view plaincopy
+$ fastboot reboot  
+       如果一切正常，手机将进入到原来的系统中。
+       继续在上述打开的终端上，刷CM-10.1.3 ROM，步骤如下所示：
+
+       1. 将下载好的cm-10.1.3.find5.zip上传至OPPO Find 5的sdcard上
+
+[plain] view plaincopy
+$ adb push cm-10.1.3.find5.zip /sdcard/cm-10.1.3.find5.zip  
+       2. 执行以下命令让OPPO Find 5重启，并且进入Recovery模式。
+[plain] view plaincopy
+$ adb reboot recovery  
+       进入到Recovery模式后，我们将看到显示的Recovery版本号为6.0.4.6，这表明我们现在进入的就是刚才我们刷入的Recovery。
+       3. 在刷入新的ROM前，我们先备份一下当前的ROM，以防万一刷机失败，可以进行恢复。在Recovery界面中，通过音量增大/减小键，选中“backup and restore”选项，按下电源键，进入下一个界面，同样是通过音量增大/减小键，选中“backup”，按下电源键，就可以对当前系统进行备份了。
+
+       4. 备份完成之后，我们还要清除手机上的数据，恢复至出厂设置。回到Recovery界面中，通过音量增大/减小键，选中"wipe data/factory reset"，按下电源键，确认后即可进行清除数据，并且恢复至出厂设置。
+
+       5. 清除数据完成之后，再回到Recovery界面上，通过音量增大/减小键，选中“install zip”选项，按下电源键，进入下一个界面，同样是通过音量增大/减小键，选中“choose zip from sdcard”，按下电源键，找到前面我们上传至sdcard的cm-10.1.3.find5.zip，确认之后就可以进行刷机了。
+
+       6. 刷机完成后，再回到Recovery界面上，通过音量增大/减小键，选中“reboot system now”选项，按下电源键，正常启动系统。
+
+       如果一切正常，手机将进入到刚才刷入的CM-10.1.3系统中。
+
+       现在我们就可以确定OPPO Find 5可以正常运行CM-10.1.3的系统了。接下来激动人心的时刻就要开始了，我们将要自己下载和编译CM-10.1源码，并且将编译出来的Recovery和ROM刷入到OPPO Find 5去。同时，在接下来的步骤中，我们会将相关的原理讲清楚，以便我们可以更好地理解Android系统的结构，这也是本文的重点之一。以下假设我们将CM-10.1源码保存在目录$CMSOURCE中，并且已经按照Android官网文档的要求初始化好Android的源码编译环境，即在我们的Ubuntu机器上安装了要求的软件，详情请参考：http://source.android.com/source/initializing.html。
+
+        1. 进入到$CMSOURCE目录中。
+
+[plain] view plaincopy
+$ cd $CMSOURCE  
+        2. 将当前目录初始为CM-10.1分支源码的Git仓库。
+[plain] view plaincopy
+$ repo init -u git://github.com/CyanogenMod/android.git -b cm-10.1  
+        3. 下载CM-10.1分支源码。
+[plain] view plaincopy
+$ repo sync  
+        以上两步都是关于Android源码仓库的知识，可以参考Android源代码仓库及其管理工具Repo分析一文，这里不再详述。
+        4. 进入到$CMSOURCE目录下的vendor/cm子目录中，并且执行里面的get-prebuilts脚本，用来获得一些预编译的APP。
+
+[plain] view plaincopy
+$ ./get-prebuilts  
+        打开$CMSOURCE/vendor/cm/get-prebuilts文件，它的内容如下所示：
+[plain] view plaincopy
+BASEDIR=`dirname $0`  
+  
+mkdir -p $BASEDIR/proprietary  
+  
+# Get Android Terminal Emulator (we use a prebuilt so it can update from the Market)  
+curl -L -o $BASEDIR/proprietary/Term.apk -O -L http://jackpal.github.com/Android-Terminal-Emulator/downloads/Term.apk  
+unzip -o -d $BASEDIR/proprietary $BASEDIR/proprietary/Term.apk lib/*  
+        我们可以发现，实际上这里只是去下载一个叫做Android Terminal Emulator的APP，地址是http://jackpal.github.com/Android-Terminal-Emulator/downloads/Term.apk。这个APP最终会包含在我们自己编译出来的ROM。它用来Android手机上模拟出一个终端来，然后我们就可以像在Linux主机上一样执行一些常用的Linux命令。是不是很酷呢？原来Android手机不单止可以运行我们常见的APP，还可以运运我们常用的Linux命令。关于这个Android Terminal Emulator的安装和介绍，参可以这里：https://github.com/jackpal/Android-Terminal-Emulator。此外，这个Android Terminal Emulator还可以配合另外一个封装了busybox的kbox工具，用来在Android手机上获得更多的Linux常用命令，kbox的安装和介绍，可以参考这里：http://kevinboone.net/kbox2_install.html。
+        5. 回到$CMSOURCE目录中，将build子目录下的envsetup.sh脚本加载到当前终端来。
+
+[plain] view plaincopy
+$ source build/envsetup.sh  
+        参考Android编译系统环境初始化过程分析一文，envsetup.sh脚本加载到当前终端后，我们就可以获得一系列与Android编译系统相关的命令，例如lunch/m/mm/mmm，以及下一步要执行的breakfast命令。
+        6. 为OPPO Find 5下载相关的源码。
+
+[plain] view plaincopy
+$ breakfast find5  
+        在Android编译系统简要介绍和学习计划这个系列的文章中，我们提到，在编译Android的官方源码之前，我们需要执行一个lunch命令来为我们的目标设备初始化编译环境。这个lunch命令是由Android官方源码的envsetup.sh脚本提供的。CM修改envsetup.sh脚本，额外提供了一个breakfast命令，用来从网上寻找指定的设备相关的源码，以便我们可以为该设备编译出能运行的ROM来。
+        打开envsetup.sh文件，查看breakfast的实现：
+
+[plain] view plaincopy
+function breakfast()  
+{  
+    target=$1  
+    CM_DEVICES_ONLY="true"  
+    unset LUNCH_MENU_CHOICES  
+    add_lunch_combo full-eng  
+    for f in `/bin/ls vendor/cm/vendorsetup.sh 2> /dev/null`  
+        do  
+            echo "including $f"  
+            . $f  
+        done  
+    unset f  
+  
+    if [ $# -eq 0 ]; then  
+        # No arguments, so let's have the full menu  
+        lunch  
+    else  
+        echo "z$target" | grep -q "-"  
+        if [ $? -eq 0 ]; then  
+            # A buildtype was specified, assume a full device name  
+            lunch $target  
+        else  
+            # This is probably just the CM model name  
+            lunch cm_$target-userdebug  
+        fi  
+    fi  
+    return $?  
+}  
+        函数breakfast主要是做了以下两件事情。
+
+        第一件事情是检查vendor/cm目录下是否存在一个vendorsetup.sh文件。如果存在的话，就将它加载到当前终端来。注意，这里是通过ls命令来检查文件endor/cm/vendorsetup.sh是否存在的。如果不存在的话，标准输出就为空，而错误信息会重定向至/dev/null。如果存在的话，字符串“endor/cm/vendorsetup.sh”就会输出到标准输出来，也就是变量f的值会等于“endor/cm/vendorsetup.sh”。
+
+        接下来我们就看看文件endor/cm/vendorsetup.sh的内容：
+
+[plain] view plaincopy
+for combo in $(curl -s https://raw.github.com/CyanogenMod/hudson/master/cm-build-targets | sed -e 's/#.*$//' | grep cm-10.1 | awk {'print $1'})  
+do  
+    add_lunch_combo $combo  
+done  
+        它所做的工作就是将https://raw.github.com/CyanogenMod/hudson/master/cm-build-targets的内容下载回来，并且去掉其中的空行，最后将含有"cm-10.1"的行的第1列取出来，并且通过add_lunch_combo命令将其加入到Android编译系统的lunch菜单去。
+        从https://raw.github.com/CyanogenMod/hudson/master/cm-build-targets下载回来的是官方CM所支持的机型列表，格式为cm_<product>-<variant> <version>，以下列出的是部分内容：
+
+[plain] view plaincopy
+# CM build target list  
+# <lunchcombo> <branch> [period: "D"aily, "W"eekly or "M"onthly]  
+# Absence of a period indicates Daily (the default)  
+  
+cm_a700-userdebug cm-11.0  
+cm_acclaim-userdebug cm-11.0  
+cm_amami-userdebug cm-11.0  
+cm_anzu-userdebug jellybean M  
+cm_apexqtmo-userdebug cm-11.0  
+cm_aries-userdebug cm-11.0  
+cm_captivatemtd-userdebug cm-11.0  
+......  
+        由此可见，执行脚本endor/cm/vendorsetup.sh之后，cm-10.1所支持的机型就会增加到lunch菜单中去。
+        回到函数breakfast中，它所做的第二件事情是检查执行函数是否带有参数，即变量target的值是否等于空。如果变量target的值不等于空，并且它的值是<product>-<variant>的形式，那么就直接以它为参数，调用lunch函数。否则的话，就以cm_$target-userdebug为参数，调用lunch函数。
+
+        在这一步中，我们调用breakfast函数时，传进来的参数为find5，不是<product>-<variant>的形式，因此，函数breakfast最后会以cm_find5-userdebug为参数，调用lunch函数。
+
+        函数lunch的实现我们在前面一篇文章Android编译系统环境初始化过程分析已经分析过了，不过当时分析的是AOSP官方版本的实现，CM对其进行了一些修改，增加了一些CM自有的逻辑，下面我们就看看这些修改：
+
+[plain] view plaincopy
+function lunch()  
+{  
+    ......  
+  
+    local product=$(echo -n $selection | sed -e "s/-.*$//")  
+    check_product $product  
+    if [ $? -ne 0 ]  
+    then  
+        # if we can't find a product, try to grab it off the CM github  
+        T=$(gettop)  
+        pushd $T > /dev/null  
+        build/tools/roomservice.py $product  
+        popd > /dev/null  
+        check_product $product  
+    else  
+        build/tools/roomservice.py $product true  
+    fi  
+      
+    ......  
+}  
+       这里的变量selection的值就等于我们传进来的参数"cm_find5-userdebug"，通过sed命令将"cm_find5"提取出来，并且赋值给变量product。接下来调用check_product函数来检查当前的CM源码中是否支持find5这个设备。
+       如果不支持的话，那么它的返回值就不等于0，即#?不等于0，那么接下来就会通过build/tools/roomservice.py到CM源码服务器去检查是否支持find5这个设备。如果CM源码服务器支持find5这个设备的话，那么build/tools/roomservice.py就会将与find5相关的源码下载回来。这时候我们就会发现本地CM源码目录中多了一个device/oppo/find5目录。里面存放的都是编译find5的ROM时所要用的文件。
+
+       另一方面，如果当前的CM源码中已经支持find5这个设备，那么函数lunch也会调用build/tools/roomservice.py去CM源码服务器检查当前CM源码目录中find5设备依赖的其它源码是否有更新，或者是否有新的依赖。如果有的话，就将这些依赖更新下载回来。
+
+       脚本build/tools/roomservice.py的详细内容这里就不分析了，下面主要是解释一下与Android的源码仓库管理工具Repo相关的逻辑。关于Android的源码仓库管理工具Repo的详细分析，可以参考Android源代码仓库及其管理工具Repo分析一文。
+
+       CM源码服务器放在github上，地址为http://github.com/CyanogenMod，上面保存的是CM修改过的AOSP工程、CM支持的设备相关源码工程（下载回来放在device/<manufacturer>/<device>目录中），以及CM支持的设备对应的内核源码工程（下载回来放在kernel/<manufacturer>/<device>目录中）。
+
+       脚本build/tools/roomservice.py会根据传进来的第一个参数，到CM源码服务上检查是否存在相应的工程。在我们这个场景中，传给build/tools/roomservice.py的第一个参数为cm_find5。这时候前面的cm_会被去掉，然后到CM源码服务上检查是否存在一个android_device_<manufacturer>_find5的工程。如果存在的话，那么就会将它下载回来，保存在device/<manufacturer>/find5目录中。这里的<manufacturer>对应的就是oppo了。
+
+       下载回来的设备相关源码实际上是作为是一个Git仓库来管理的，因此，脚本build/tools/roomservice.py还需要将该Git仓库纳入到Repo仓库去管理，以便以后执行repo sync命令时，可以同时对这些设备相关的源码进行更新。
+
+        从Android源代码仓库及其管理工具Repo分析一文可以知道，Repo仓库保存在.repo目录中，而它所管理的Git仓库由.repo/manifest.xml文件描述。文件.repo/manifest.xml实际上只是一个符号链接，它链接至.repo/manifests/default.xml文件。目录.repo/manifests实际上也是一个Git仓库，用来描述当前的CM源码目录都是由哪些工程构成的，并且这些工程是来自于哪些Git远程仓库的。
+
+       如果按照标准的Repo仓库管理方法，从CM源码服务器上下载回来设备相关源码之后，应该往.repo/manifests/default.xml文件增加相应的描述，以后repo工具可以对这些设备相关的源码进行管理。但是，由于Repo仓库是由官方维护的，当我们在本地往.repo/manifests/default.xml增加了新的内容之后，下次执行repo sync命令时，.repo/manifests/default.xml的内容又会被恢复至修改前的样子，因此，修改.repo/manifests/default.xml文件是不适合的。CM采用另外一个办法，那就是在.repo目录下另外创建一个local_manifests目录，在里面可以随意增加任意命名的xml文件，只要这些xml文件的规范与.repo/manifests/default.xml文件的规范一致即可。执行repo sync命令时，它就会同时从.repo/manifests/default.xml和.repo/local_manifests目录下的xml文件中读取当前都有哪些源码工程需要更新。
+
+       实际上，在.repo/local_manifests目录下的xml文件，除了可以描述新增的工程之外，还可以描述要删除的工程。例如，如果我们不想将某一个系统功能或者系统APP编译到我们自己制作的ROM去，那么就可以在.repo/local_manifests目录下增加一个xml文件，里面描述我们需要删除对应的工程。这样，当我们从服务器下载回来相应的工程之后，它们就会在本地中被删除。这样就做到了很好的定制化编译，而且又不会与官方的源码结构产生冲突。关于CM的Local Manifests机制，可以参考官方文档：http://wiki.cyanogenmod.org/w/Doc:_Using_manifests。
+
+       脚本build/tools/roomservice.py将下载回来的设备相关源码纳入到Repo仓库管理的办法就是在.repo/local_manifests目录下创建一个roomservice.xml文件。例如，当我们从CM源码服务器下载回来find5相关的设备源码之后，就可以看到在roomservice.xml文件中看到相应的一行内容：
+
+[html] view plaincopy
+<?xml version="1.0" encoding="UTF-8"?>  
+<manifest>  
+  ......  
+  <project name="CyanogenMod/android_device_oppo_find5" path="device/oppo/find5" remote="github" />  
+  ......  
+</manifest>  
+       这表明本地的device/oppo/find5目录是来自于远程仓库github的，并且相对路径为CyanogenMod/android_device_oppo_find5。
+       好了，现在我们终于将OPPO Find 5相关的设备源码下载回来了，但是在编译之前。需要从OPPO Find 5上提取一些设备相关的私有文件。
+
+       7. 保持OPPO Find 5开机状态，并且通过USB连接到Ubuntu 13.04上，进行到$CMSOURCE/device/oppo/find5目录中,执行以下命令提取设备私有文件。
+
+[plain] view plaincopy
+$ ./extract-files.sh  
+       脚本extract-files.sh的内容如下所示：
+[plain] view plaincopy
+#!/bin/sh  
+  
+VENDOR=oppo  
+DEVICE=find5  
+  
+BASE=../../../vendor/$VENDOR/$DEVICE/proprietary  
+rm -rf $BASE/*  
+  
+for FILE in `cat proprietary-blobs.txt | grep -v ^# | grep -v ^$ | sed -e 's#^/system/##g'`; do  
+    DIR=`dirname $FILE`  
+    if [ ! -d $BASE/$DIR ]; then  
+        mkdir -p $BASE/$DIR  
+    fi  
+    adb pull /system/$FILE $BASE/$FILE  
+done  
+  
+./setup-makefiles.sh  
+       首先是创建一个vendor/oppo/find5/proprietary目录，接着是读取文件proprietary-blobs.txt中的每一行，并且将每一行所描述的文件从设备上的/system目录中获取出来，保存在vendor/oppo/find5/proprietary对应的子目录下面，最后再执行另外一个脚本setup-makefiles.sh。
+
+       文件device/oppo/find5/proprietary-blobs.txt部分的内容如下所示：
+
+[plain] view plaincopy
+/bin/btnvtool  
+/bin/ds_fmc_appd  
+/bin/efsks  
+/bin/hci_qcomm_init  
+/bin/ks  
+/bin/mm-qcamera-daemon  
+/bin/mpdecision  
+/bin/netmgrd  
+/bin/nv_tee  
+/bin/qcks  
+/bin/qmuxd  
+......  
+       这里列出的文件路径都是相对于设备上的/system目录的，并且都是设备特定的、不公开源码的，因此，我们需要从设备上获取出来。
+       再来看脚本setup-makefiles.sh的内容：
+
+[plain] view plaincopy
+#!/bin/sh  
+  
+VENDOR=oppo  
+DEVICE=find5  
+OUTDIR=vendor/$VENDOR/$DEVICE  
+MAKEFILE=../../../$OUTDIR/$DEVICE-vendor-blobs.mk  
+  
+(cat << EOF) > $MAKEFILE  
+# Copyright (C) 2013 The CyanogenMod Project  
+#  
+# Licensed under the Apache License, Version 2.0 (the "License");  
+# you may not use this file except in compliance with the License.  
+# You may obtain a copy of the License at  
+#  
+#      http://www.apache.org/licenses/LICENSE-2.0  
+#  
+# Unless required by applicable law or agreed to in writing, software  
+# distributed under the License is distributed on an "AS IS" BASIS,  
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.  
+# See the License for the specific language governing permissions and  
+# limitations under the License.  
+  
+# This file is generated by device/$VENDOR/$DEVICE/setup-makefiles.sh  
+  
+PRODUCT_COPY_FILES += \\  
+EOF  
+  
+LINEEND=" \\"  
+COUNT=`cat proprietary-blobs.txt | grep -v ^# | grep -v ^$ | wc -l | awk {'print $1'}`  
+for FILE in `cat proprietary-blobs.txt | grep -v ^# | grep -v ^$ | sed -e 's#^/system##g' -e 's#^/##g'`; do  
+    COUNT=`expr $COUNT - 1`  
+    if [ $COUNT = "0" ]; then  
+        LINEEND=""  
+    fi  
+    echo "    $OUTDIR/proprietary/$FILE:system/$FILE$LINEEND" >> $MAKEFILE  
+done  
+  
+(cat << EOF) > ../../../$OUTDIR/$DEVICE-vendor.mk  
+# Copyright (C) 2013 The CyanogenMod Project  
+#  
+# Licensed under the Apache License, Version 2.0 (the "License");  
+# you may not use this file except in compliance with the License.  
+# You may obtain a copy of the License at  
+#  
+#      http://www.apache.org/licenses/LICENSE-2.0  
+#  
+# Unless required by applicable law or agreed to in writing, software  
+# distributed under the License is distributed on an "AS IS" BASIS,  
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.  
+# See the License for the specific language governing permissions and  
+# limitations under the License.  
+  
+# This file is generated by device/$VENDOR/$DEVICE/setup-makefiles.sh  
+  
+# Pick up overlay for features that depend on non-open-source files  
+DEVICE_PACKAGE_OVERLAYS := vendor/$VENDOR/$DEVICE/overlay  
+  
+\$(call inherit-product, vendor/$VENDOR/$DEVICE/$DEVICE-vendor-blobs.mk)  
+EOF  
+  
+(cat << EOF) > ../../../$OUTDIR/BoardConfigVendor.mk  
+# Copyright (C) 2013 The CyanogenMod Project  
+#  
+# Licensed under the Apache License, Version 2.0 (the "License");  
+# you may not use this file except in compliance with the License.  
+# You may obtain a copy of the License at  
+#  
+#      http://www.apache.org/licenses/LICENSE-2.0  
+#  
+# Unless required by applicable law or agreed to in writing, software  
+# distributed under the License is distributed on an "AS IS" BASIS,  
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.  
+# See the License for the specific language governing permissions and  
+# limitations under the License.  
+  
+# This file is generated by device/$VENDOR/$DEVICE/setup-makefiles.sh  
+  
+USE_CAMERA_STUB := false  
+EOF  
+       这个脚本主要就是用来在vendor/oppo/find5目录下生成两个文件：find5-vendor-blobs.mk和BoardConfigVendor.mk文件。这两个文件都是接下来为OPPO Find 5编译ROM时要用到的。
+       生成的find5-vendor-blobs.mk的部分内容如下所示：
+
+[plain] view plaincopy
+PRODUCT_COPY_FILES += \  
+    vendor/oppo/find5/proprietary/bin/btnvtool:system/bin/btnvtool \  
+    vendor/oppo/find5/proprietary/bin/ds_fmc_appd:system/bin/ds_fmc_appd \  
+    vendor/oppo/find5/proprietary/bin/efsks:system/bin/efsks \  
+    vendor/oppo/find5/proprietary/bin/hci_qcomm_init:system/bin/hci_qcomm_init \  
+    vendor/oppo/find5/proprietary/bin/ks:system/bin/ks \  
+......  
+       实际上就是通过PRODUCT_COPY_FILES变量告诉编译系统，要将刚才从设备上获取回来的文件打包到编译出来的ROM的system分区里面去。
+       生成的文件BoardConfigVendor.mk只有1行，如下所示：
+
+[plain] view plaincopy
+USE_CAMERA_STUB := false  
+       在编译摄像头相关的库文件时，就会到这里定义的USE_CAMERA_STUB变量。
+       到目前为止，我们就分别从CM源码服务器和目标设备上获取到了编译OPPO Find 5的ROM所需要的设备相关的文件了，接下来就可以开始编译CM源码了。
+
+       8. 回到$CMSOUCE目录中，为OPPO Find 5编译ROM。
+
+[plain] view plaincopy
+$ brunch find5  
+       命令brunch也是由build/envsetup.sh脚本提供的，它的实现如下所示：
+[plain] view plaincopy
+function brunch()  
+{  
+    breakfast $*  
+    if [ $? -eq 0 ]; then  
+        mka bacon  
+    else  
+        echo "No such item in brunch menu. Try 'breakfast'"  
+        return 1  
+    fi  
+    return $?  
+}  
+       函数brunch做了两件事情：执行breakfast命令和执行mka bacon命令。
+       前面我们不是已经执行过breakfast命令了吗？这里为什么又要再执行一次呢？从前面的分析可以知道，函数breakfast在执行的过程中，会调用函数lunch，而函数lunch又会调用函数check_product来检查目标设备是否存在。因为在前一步中，我们已经将目标设备相关的源码下载回来了，因此这时候目标设备是肯定存在的。当目标设备存在的时候，函数lunch会通过build/tools/roomservice.py脚本检查目标设备相关的源码是否依赖有其它工程，并且这些工程是否已经下载回来了。如果有依赖的工程，并且这些工程还没有下载回来，那么就需要将它们下载回来。
+
+       当目标设备存在的时候，函数lunch执行build/tools/roomservice.py脚本的形式为：
+
+[plain] view plaincopy
+build/tools/roomservice.py $product true  
+       传递给build/tools/roomservice.py第二件参数为true，表示要处理的是目标设备$product依赖的工程。
+       脚本build/tools/roomservice.py是如何知道目标设备有没有依赖的工程的呢？原来，在下载回来的设备源码中，有一个cm.dependencies文件，里面描述了自己所依赖的工程。例如，device/oppo/find5/cm.dependencies的内容如下所示：
+
+[plain] view plaincopy
+[  
+ {  
+   "repository": "android_kernel_oppo_find5",  
+   "target_path": "kernel/oppo/find5",  
+   "branch": "cm-10.1"  
+ }  
+]  
+       上面描述的是OPPO Find 5所使用的内核源码，它来自于CM源码服务器上的android_kernel_oppo_find5仓库的cm-10.1分支，下载回来后保存在kernel/oppo/find5目录中。这意味着我们通过CM源码编译出来的ROM所使用的内核也是由我们自己编译出来的。
+       为了以后执行repo sync命令同步本地源码时，也可以将设备源码依赖的工程也同时同步回来，我们需要将这些依赖工程也纳入到Repo仓库中去，因此，当再次执行过breakfast使命之后。我们就可以在.repo/local_manifests/roomservice.xml文件中发现以下两行内容：
+
+[plain] view plaincopy
+<?xml version="1.0" encoding="UTF-8"?>  
+<manifest>  
+  ......  
+  <project name="CyanogenMod/android_device_oppo_find5" path="device/oppo/find5" remote="github" />  
+  <project name="CyanogenMod/android_kernel_oppo_find5" path="kernel/oppo/find5" remote="github" revision="cm-10.1" />  
+  ......  
+</manifest>  
+      回到函数brunch中，它接下来执行的命令mka也是由build/envsetup.sh脚本提供的，如下所示：
+[plain] view plaincopy
+function mka() {  
+    case `uname -s` in  
+        Darwin)  
+            make -j `sysctl hw.ncpu|cut -d" " -f2` "$@"  
+            ;;  
+        *)  
+            schedtool -B -n 1 -e ionice -n 1 make -j$(cat /proc/cpuinfo | grep "^processor" | wc -l) "$@"  
+            ;;  
+    esac  
+}  
+       它实际上是通过一个叫做schedtool的工具来调用make工具对源码进行编译。我们知道，编码Android源码是一个漫长的过程，而现在的机器都是多核的，为了加快这个编译过程，需要将机器的所有核以都充分利用起来。工具schedtool所做的事情就是充分地利机器的多核特性来执行make命令，使得我们可以尽快结束编译过程。
+       关于Android源码的编译详细过程，可以参考Android编译系统简要介绍和学习计划这个系列的文章，这里只进行简要的说明。
+
+       从Android编译系统简要介绍和学习计划这个系列一文可以知道，Android的编译系统是由很多的mk文件组成的，每一个mk文件都是一个Makefile脚本片段。在编译开始之前，这些mk文件会组合在一起，形成一个很大的Makefile文件，然后再根据这个很大的Makefile文件的指令对源码进行编译。
+
+       由这些mk文件组成的Makefile文件内容可以抽象为四个层次，如图2所示：
+
+
+
+图2 Android编译系统层次
+
+       最下面一层描述的设备CPU的体系架构（Architecture），Android设备支持arm、x86和mips三种CPU体系架构。再往上一层描述的是设备所使用的芯片（Board），例如用的是高通的芯片，还是三星的芯片，等等，与这些芯片相关的源文件存放在hardware目录下。接下来再往上的一层是设备（Device），描述的是具体的硬件设备。最上面的一层是产品（Product），描述的是在硬件设备上运行的软件模块。
+
+       在这一步中，我们通过brunch命令编译CM源码时，指定的唯一参数是find5，那么Android编译系统是如何根据这个参数来找包含上述四个层次的mk文件为OPPO Find 5编译出能正常运行的ROM的呢？
+
+       在我们执行breakfast或者brunch命令的过程中，会调用另外一个函数check_product。根据Android编译系统环境初始化过程分析一文，函数check_product会通过另外一个函数get_build_var加载build/core/config.mk文件。文件build/core/config.mk又会继续加载另外一个文件build/core/envsetup.mk。最后，文件build/core/envsetup.mk又会加载另外一个文件build/core/product_config.mk。
+
+       在build/core/product_config.mk文件的加载过程中，有以下的一段逻辑：
+
+[plain] view plaincopy
+ifneq ($(strip $(TARGET_BUILD_APPS)),)  
+# An unbundled app build needs only the core product makefiles.  
+all_product_configs := $(call get-product-makefiles,\  
+    $(SRC_TARGET_DIR)/product/AndroidProducts.mk)  
+else  
+  ifneq ($(CM_BUILD),)  
+    all_product_configs := $(shell ls device/*/$(CM_BUILD)/cm.mk)  
+  else  
+    # Read in all of the product definitions specified by the AndroidProducts.mk  
+    # files in the tree.  
+    all_product_configs := $(get-all-product-makefiles)  
+  endif # CM_BUILD  
+endif  
+       当我们编译的是整个Android源码时，变量TARGET_BUILD_APPS的值等于空。这时候就会判断是否设置了一个名称为CM_BUILD的环境变量。如果设置了的话，那么接下来就会加载device/*/$(CM_BUILD)目录下的cm.mk文件来获得目标产品配置文件。否则，首先会通过调用另外一个函数get-all-product-makefiles来获得/device/*/*目录下的所有名称为AndroidProducts.mk的文件，接着再在这些AndroidProducts.mk文件中定义的PRODUCT_MAKEFILES变量来获得目标产品配置文件。
+       环境变量CM_BUILD的值是在函数check_product中设置的，并且只有在CM源码中编译时才会设置。在AOSP源码编译时，是不会设置环境变量CM_BUILD的。CM版本的check_product函数实现如下所示：
+
+[plain] view plaincopy
+function check_product()  
+{  
+    T=$(gettop)  
+    if [ ! "$T" ]; then  
+        echo "Couldn't locate the top of the tree.  Try setting TOP." >&2  
+        return  
+    fi  
+  
+    if (echo -n $1 | grep -q -e "^cm_") ; then  
+       CM_BUILD=$(echo -n $1 | sed -e 's/^cm_//g')  
+       if [ `uname` == "Darwin" ]; then  
+           export BUILD_NUMBER=$((date +%s%N ; echo $CM_BUILD; hostname) | openssl sha1 | cut -c1-10)  
+       else  
+           export BUILD_NUMBER=$((date +%s%N ; echo $CM_BUILD; hostname) | sha1sum | cut -c1-10)  
+       fi  
+    else  
+       CM_BUILD=  
+    fi  
+    export CM_BUILD  
+  
+    CALLED_FROM_SETUP=true BUILD_SYSTEM=build/core \  
+        TARGET_PRODUCT=$1 \  
+        TARGET_BUILD_VARIANT= \  
+        TARGET_BUILD_TYPE= \  
+        TARGET_BUILD_APPS= \  
+        get_build_var TARGET_DEVICE > /dev/null  
+    # hide successful answers, but allow the errors to show  
+}  
+        从这里就可以看出，环境变量CM_BUILD的值实际上就是目标设备的名称。例如，前面我们执行breakfast命令时，通过函数lunch调用check_product函数时，传进来的参数为为cm_find5，函数check_product会将find5提取出来，并且赋值给环境变量CM_BUILD。这样在加载build/core/product_config.mk文件时，找到的产品配置文件就为device/*/find5/cm.mk文件。在device目录中，只有oppo子目录包含有find5这个目录，因此最终加载的实际上是device/oppo/find5/cm.mk文件。
+        无论是通过环境变量CM_BUILD来直接获得的目标产品配置文件，还是通过AndroidProducts.mk文件间接获得的目标产品配置文件，获得的目标产品配置文件都会直接或者间接地通过变量PRODUCT_COPY_FILES和PRODUCT_PACKAGES来设备要包含的软件模块。
+
+        以device/oppo/find5/cm.mk为例，它的部分内容如下所示：
+
+[plain] view plaincopy
+......  
+# Inherit device configuration  
+$(call inherit-product, device/oppo/find5/full_find5.mk)  
+  
+## Device identifier. This must come after all inclusions  
+PRODUCT_DEVICE := find5  
+PRODUCT_NAME := cm_find5  
+PRODUCT_BRAND := Oppo  
+PRODUCT_MODEL := Find 5  
+PRODUCT_MANUFACTURER := Oppo  
+......  
+        除定了一些设备相关的变量之外，它还会加载另外一个文件device/oppo/find5/full_find5.mk，后者的部分内容如下所示：
+[plain] view plaincopy
+# Inherit from hardware-specific part of the product configuration  
+$(call inherit-product, device/oppo/find5/device.mk)  
+$(call inherit-product-if-exists, vendor/oppo/find5/find5-vendor.mk)  
+       文件device/oppo/find5/full_find5.mk又会继续加载另外两个文件device/oppo/find5/device.mk和vendor/oppo/find5/find5-vendor.mk。
+       在文件device/oppo/find5/device.mk中，我们就可以看到PRODUCT_COPY_FILES和PRODUCT_PACKAGES的定义：
+
+[plain] view plaincopy
+PRODUCT_PACKAGES := \  
+    lights.msm8960  
+  
+PRODUCT_PACKAGES += \  
+    charger_res_images \  
+    charger  
+  
+# Vold and Storage  
+PRODUCT_COPY_FILES += \  
+        device/oppo/find5/configs/vold.fstab:system/etc/vold.fstab  
+  
+# Live Wallpapers  
+PRODUCT_PACKAGES += \  
+        LiveWallpapers \  
+        LiveWallpapersPicker \  
+        VisualizationWallpapers \  
+        librs_jni  
+......  
+       而文件vendor/oppo/find5/find5-vendor.mk会加载另外一个文件vendor/oppo/find5/find5-vendor-blobs.mk，如下所示：
+[plain] view plaincopy
+......  
+$(call inherit-product, vendor/oppo/find5/find5-vendor-blobs.mk)  
+......  
+        回忆前面的第7步，文件文件vendor/oppo/find5/find5-vendor-blobs.mk是我们执行extract-files.sh脚本的时候生成的，里面通过变量PRODUCT_COPY_FILES告诉编译系统将从设备上获得的私有文件打包到要制作的ROM去。
+        以上就是Product级别的配置信息的获取过程，接下来我们再看Device、Board和Architecture级别的配置信息的获取过程。
+
+        函数check_product会通过另外一个函数get_build_var来加载build/core/config.mk文件的过程中，会在目标产品对应的设备目录中找到一个名称为BoardConfig.mk文件，如下所示：
+
+[plain] view plaincopy
+......  
+board_config_mk := \  
+    $(strip $(wildcard \  
+        $(SRC_TARGET_DIR)/board/$(TARGET_DEVICE)/BoardConfig.mk \  
+        device/*/$(TARGET_DEVICE)/BoardConfig.mk \  
+        vendor/*/$(TARGET_DEVICE)/BoardConfig.mk \  
+    ))  
+......  
+        上述Makefile脚本片段会在build/target/board、device/*、vendor/*目录中寻找一个名称为$(TARGET_DEVICE)的子目录，并且在找到的子目录里面加载一个名称为BoardConfig.mk文件，来获得Device、Board和Architecture级别的配置信息。
+        变量TARGET_DEVICE指向的便是目标设备的名称。在我们这个场景中，它的值就等于find5，因此，最终获得的Device、Board和Architecture级别的配置信息就是来自于device/oppo/find5/BoardConfig.mk文件，它的部分内容如下所示：
+
+[plain] view plaincopy
+TARGET_CPU_ABI := armeabi-v7a  
+TARGET_CPU_ABI2 := armeabi  
+......  
+TARGET_ARCH := arm  
+......  
+  
+# Bluetooth  
+BOARD_HAVE_BLUETOOTH := true  
+BOARD_HAVE_BLUETOOTH_QCOM := true  
+BLUETOOTH_HCI_USE_MCT := true  
+......  
+  
+TARGET_BOARD_PLATFORM := msm8960  
+......  
+  
+# Wifi  
+BOARD_HAS_QCOM_WLAN              := true  
+BOARD_WLAN_DEVICE                := qcwcn  
+......  
+  
+# Display  
+TARGET_QCOM_DISPLAY_VARIANT := caf  
+USE_OPENGL_RENDERER := true  
+......  
+  
+# GPS  
+BOARD_HAVE_NEW_QC_GPS := true  
+......  
+  
+# Camera  
+COMMON_GLOBAL_CFLAGS += -DDISABLE_HW_ID_MATCH_CHECK -DQCOM_BSP_CAMERA_ABI_HACK -DNEW_ION_API  
+......  
+  
+# Audio  
+BOARD_USES_ALSA_AUDIO:= true  
+TARGET_QCOM_AUDIO_VARIANT := caf  
+TARGET_USES_QCOM_MM_AUDIO := true  
+TARGET_USES_QCOM_COMPRESSED_AUDIO := true  
+BOARD_AUDIO_CAF_LEGACY_INPUT_BUFFERSIZE := true  
+......  
+        从这里就可以看到各种Device、Board和Architecture级别的配置信息。例如，CPU体系架构由TARGET_ARCH、TARGET_CPU_ABI和TARGET_CPU_ABI2来描述。芯片类型由TARGET_BOARD_PLATFORM来描述，而设备信息的描述则包括Bluetooth、Wifi、Display、GPS、Camera和Audio等。
+        在BoardConfig.mk文件中配置的编译信息是在什么时候用到的呢？以下我们就以TARGET_BOARD_PLATFORM为例，说明这些配置信息在编译的过程中是如何使用的。在Android源码中，hardware目录包含各种芯片相关的模块源码。在这些模块的编译脚本中，就会根据TARGET_BOARD_PLATFORM的值来为指定的芯片编译出正确的模块来。
+
+        例如，假设我们使用的是高通芯片，在它的Camera HAL2模块源码目录hardware/qcom/camera/QCamera/HAL2/core中定义的Android.mk文件有如下的内容：
+
+[plain] view plaincopy
+......  
+LOCAL_CFLAGS += -DCAMERA_ION_HEAP_ID=ION_CP_MM_HEAP_ID # 8660=SMI, Rest=EBI  
+LOCAL_CFLAGS += -DCAMERA_ZSL_ION_HEAP_ID=ION_CP_MM_HEAP_ID  
+  
+LOCAL_CFLAGS+= -DHW_ENCODE  
+LOCAL_CFLAGS+= -DUSE_NEON_CONVERSION  
+  
+ifeq ($(TARGET_BOARD_PLATFORM),msm8960)  
+        LOCAL_CFLAGS += -DCAMERA_GRALLOC_HEAP_ID=GRALLOC_USAGE_PRIVATE_MM_HEAP  
+        LOCAL_CFLAGS += -DCAMERA_GRALLOC_FALLBACK_HEAP_ID=GRALLOC_USAGE_PRIVATE_IOMMU_HEAP  
+        LOCAL_CFLAGS += -DCAMERA_ION_FALLBACK_HEAP_ID=ION_IOMMU_HEAP_ID  
+        LOCAL_CFLAGS += -DCAMERA_ZSL_ION_FALLBACK_HEAP_ID=ION_IOMMU_HEAP_ID  
+        LOCAL_CFLAGS += -DCAMERA_GRALLOC_CACHING_ID=0  
+else ifeq ($(TARGET_BOARD_PLATFORM),msm8660)  
+        LOCAL_CFLAGS += -DCAMERA_GRALLOC_HEAP_ID=GRALLOC_USAGE_PRIVATE_CAMERA_HEAP  
+        LOCAL_CFLAGS += -DCAMERA_GRALLOC_FALLBACK_HEAP_ID=GRALLOC_USAGE_PRIVATE_CAMERA_HEAP # Don't Care  
+        LOCAL_CFLAGS += -DCAMERA_ION_FALLBACK_HEAP_ID=ION_CAMERA_HEAP_ID # EBI  
+        LOCAL_CFLAGS += -DCAMERA_ZSL_ION_FALLBACK_HEAP_ID=ION_CAMERA_HEAP_ID  
+        LOCAL_CFLAGS += -DCAMERA_GRALLOC_CACHING_ID=0  
+else  
+        LOCAL_CFLAGS += -DCAMERA_GRALLOC_HEAP_ID=GRALLOC_USAGE_PRIVATE_ADSP_HEAP  
+        LOCAL_CFLAGS += -DCAMERA_GRALLOC_FALLBACK_HEAP_ID=GRALLOC_USAGE_PRIVATE_ADSP_HEAP # Don't Care  
+        LOCAL_CFLAGS += -DCAMERA_GRALLOC_CACHING_ID=GRALLOC_USAGE_PRIVATE_UNCACHED #uncached  
+endif  
+......  
+       上述Makefile脚本片段会根据TARGET_BOARD_PLATFORM的值不同而设置不同的LOCAL_CFLAGS值，以便可以为目标设备编译出正确的HAL模块来。
+       这一步执行完成之后，也就是编译完成之后，我们就可以在out/target/product/find5目录中看到两个文件：recovery.img和cm-10.1-xxxxxxxx-UNOFFICIAL-find5.zip。其中，recovery.img是Recovery文件，而cm-10.1-xxxxxxxx-UNOFFICIAL-find5.zip是ROM文件。有了这两个文件之后，我们就可以参照前面的介绍，将它们刷入我们的OPPO Find 5手机上去了。当刷入完成，并且可以正常运行之后，现在我们的手机上面运行的Recovery和ROM都是我们自己亲手打造的了！
+
+       至此，我们就介绍完成CM的刷机过程和原理了，是不是觉得自己亲手去编译一个ROM是一件很容易的事呢？其实不然。我们上面编译的ROM之所以这么轻松，是因为CM已经为我们做了很多的工作，那就是已经在CM源码服务器上准备好了所有设备相关的源码，也就是我们下载回来之后存放在device目录下的源码。如果我们手头上有一部CM官方不支持的手机，那么CM源码服务器上是没有对应的设备源码存在的，这时候我们就需要自己去开发对应的设备源码了。这是一个艰苦的过程，需要不停的调试、调试、再调试，也许要花上几周，甚至一个月来完成这个工作。当然，这个过程也是有一些经验和技巧可以参考的，具体可以参考CM文档：http://wiki.cyanogenmod.org/w/Doc:_porting_intro。这里就不再详述。
+
+       最后，本文之所以选择CM这个第三方ROM和源码来讲解，是因为CM官方提供了很全面的资料供我们去学习如何基于AOSP源码来制作ROM，这样可以使我们少走很多弯路！另外，上面所述的ROM过程都是参考了CM官方文档的。更多的CM刷ROM教程，可以参考：http://wiki.cyanogenmod.org/w/Development。更多信息也可以关注老罗的新浪微博：http://weibo.com/shengyangluo。
+
+ 举报
+罗升阳 博客专家 访问量 1203万+ 原创 188 博主更多文章>
+Android ROM分析(1)：刷机原理及方法
+y97523szb 10799次阅读 2011-05-28 17:26:00
+Android编译系统详解(一)——build/envsetup.sh
+thinkinwm 5182次阅读 2014-05-04 20:26:05
+安卓ROM结构
+sxycgxj 3167次阅读 2013-03-24 09:55:14
+Android ROM包文件系统根结构分析
+haoge921026 1459次阅读 2016-06-14 22:07:54
+关于uboot fastboot 的一些原理分析
+lqxandroid2012 3958次阅读 2013-03-20 09:46:16
+Fastboot使用详解
+ylyuanlu 44971次阅读 2014-03-01 10:36:08
+老罗的ANDROID之旅---硬件抽象层学习笔记
+pkjueying 1903次阅读 2013-10-10 10:17:40
+Android ----制作自己的Vendor
+yimiyangguang1314 18413次阅读 2011-03-22 15:36:00
+降龙十八掌搞定rt3070 USB WIFI模块在android2.3平台上上网［基于x210开发板］
+armeasy 6888次阅读 2011-12-23 10:11:21
+[Android] build 流程
+dearsq 531次阅读 2016-12-16 16:16:00
+更多相关文章
+
+CSDN
+CSDN精彩内容推荐
+查看熊掌号
+
+===============================
+
+热血江湖手游枪职业输出暴力，是个大家都喜欢的职业。下面为大家带来热血江湖手游邪派鬼枪攻略。
+14
+5 7 11 15
+技能搭配
+
+主动技能：枪刃乱舞，幻魔烈魂，血雨鬼泣，枪跃龙门！气功：怒意之吼，横练太保，以退为进，转守为攻！绝技：醉舞狂歌，这技能打boss和pk谁用谁知道！
+
+宠物
+
+宠物，有条件买龙猫，很不错的宠物，至于咕咕鸡看个人，想要排行就买，平民完全没必要！培养三个，一个龙猫，一个火龙，一个狼！之前听说火龙后期没用，反正我不觉得，最起码挂机用起来很OK！
+
+坐骑：
+
+1.黑马一定要买，有能力老虎也要买，因为坐骑战力都是直接加到人物的，还有关键的洗练属性！
+
+2.至于带什么出战，唯一的区别就是坐骑主动技能，我带的是白马，因为老虎碎片不够升星，不知道老虎技能，以后再考虑！
+
+3.坐骑洗练，我觉得洗练是攻击-暴击-命中-防御-气血-其他！可能我理解有误，但是攻击是必须的，洗练没有技巧，完全看脸！
+
+战力提升：
+
+有能力充到v5 最好，挂机不错，而且能买成长礼包，挺不错的！或者v9因为可以买试炼次数，长期下来经验太多！神豪随意！
+
+前期不要买强化石，除非你特别豪，反正我加起来买了40个中级就收手了！因为魔王也会出，我现在四个8，两个7！勉强不算差吧！前期最主要就是等级，有条件多挂机！
+
+生产等级每天也可以做一下，紫色装备直接卖，不要分解，材料没用，生产等级我主要做初级宠物经验丹，因为要能量少，而且材料也好弄，后期生产等级绝对有用的！
+
+宝石和大部分游戏一样一般都带攻击，气血，防御，不过我自己各自带了个命中，暴击，闪避！可能不对，但是挺好用的！
+
+需要注意的就是宝石一到三级有能力直接买三级宝石，比你升级便宜很多！一级二级直接出售换能量！会省挺多的！
+
+反正我也是这么提升的，没什么别的隐藏东西！暂时就想到这么多！
+
+击杀魔王：
+
+如果有条件一定要参加，一定要参加，一定要参加，重要的事情说三遍！基本上我们装备产出都在这了，而且是不绑定的！
+
+我打了三天，还不是一直打，因为有工作，已经卖了5000多元宝！所以一定要参加！
+
+宠物有龙猫用龙猫，没有就用火龙！给大家科普下，没事尽量自动然后点冷却好的技能，伤害会多不少！
+
+我玩枪主要就是打这个给力，一般排行第一第二！这游戏职业不怎么平衡！枪，剑亲儿子，弓，刀后妈生的！医生是丢掉的孩子……
+
+附上我交易图，免得有人不信……
+
+材料兑换：
+
+前期需要换，买的东西：
+
+1地魔之眼碎片，前期帮贡全部换地魔之眼碎片，击杀魔王也会掉，最快速度把这个神兵弄出来，你会发现很多材料容易不少！我第三天晚上出的，全部宝箱都是我的...
+
+2正邪功勋旗子，选择邪派最大的痛苦就是正魔战场排队一晚上进不去...这时候你必须买旗子、可以换很多好东西，而且这个不是消耗功勋换东西，而是你达到多少功勋，刷新出来的全能换！
+
+3.五绝碑文碎片：提升五绝等级，我主升怪乞，因为他给神兵弓碎片！
+
+竞技场：宠物碎片
+
+帮贡：地魔之眼碎片，气功书！
+
+劫镖帮贡：优先称号！
+
+会武：有老虎坐骑优先老虎坐骑碎片！没有就换自己需要的坐骑碎片！
+-------------------------------
+1.气功：打魔王要的带的气功(破甲刺魂丶怒意之 吼丶以退为进丶横练太保)
+
+2.技能：技能的话带(威凌天下丶枪刃狂舞丶疾风天狼破丶嗜血天狼击，嗜血天狼击是血量低于70%伤害最终翻倍，所以打魔王先把血狼降到70%以下)绝技带(醉舞狂歌)打魔王不要先开，第一次火龙刀变身完在用。
+
+3.神兵：神兵的话打魔王的时候先去刷一波小怪把怒气刷满，魔王一出直接开神兵。
+
+神兵第一次变身 先用火龙刀，如果魔王血掉的慢可以开3次神兵，第二次还是变火龙刀打，(这个要按每个区的情况来开，有些区BOSS是变身不了3次，当然装备有怒炎增加怒气的除外)第三次神兵用神枪，神枪的变身很重要，要在魔王还剩2条血的时候才开，不能提前开也不能迟了开，这时候开配合天赋五烈神枪伤害爆炸，也是打伤害主要输出。
+
+还有神兵带的4个技能一定要神满，4个技能点满你会发现你打魔王的输出会提升一大截。(注意：打魔王要把设置里挂机设置自动野外地图神兵变身关掉，不然会自动变身，控制不来时间。VI5以上会自动开的。所以要手动关掉)。
+
+4.宠物：龙猫配合第一次变身火龙刀打，第一波火龙刀快结束的时候进攻号角也可以用了，号角用了立马切换宠物小雪狼打怒气，为第二次神兵变身刷怒气。
+
+怒气刷满了就切回龙猫，因为龙猫打的输出很高。注：(宠物自带的4个技能优先升级龙猫然后是小雪狼，兽灵丹建议 拍卖行宠物里购买，比商城便宜很多)我以前都是商城买的坑了很多元宝。
+
+5.坐骑：坐骑出征(乌骓宝马)优先升到3星带2个孔装备后天骑术(战如熊虎丶铁马金戈(有钱的土豪可以升满5星带人马合一))。
+
+坐骑洗练：枪优先洗出(攻击丶暴击丶其次命中，追加伤害(追加伤害要点开第四个洗练孔才能洗出来))其他属性看个人元宝充足洗，有钱就固定前面说的，元宝不充足洗出橙色或者红色的可以不洗了。
+
+6.强化和升级：升级的话平均升，基本跟等级升，如果升级服不够，优先升(武器 丶戒子丶鞋子)。其他看升级符的富裕来点。
+
+强化优先强化(武器丶护腕丶戒子，)平均升，其他平均跟着升。升级符和强化不要商城买，完全没必要的，每天试练副本(地下宝藏会掉落)足够升级和强化了。(土豪有钱可以去商城买来点强化，毕竟强化到后面加的属性很可观的)
+
+7.内甲： 内甲有玄阴丶烈阳丶太虚。枪选烈阳就行，烈阳加的攻击很猛!内甲升级主要靠试练副本里的(冰原激斗)掉落的材料来升级(土豪可以直接商城买材料升级满级(大概要元宝4W-5W元宝可以一次性升满)
+
+内甲天赋加点个人加法(强攻丶怒炎丶撩切)剩下的因为我也没点到也没试过，所以暂时不知道怎么点，靠大家补脑了!
+
+8.绝技：五绝试练，优先第三个乞丐，出(醉舞狂歌丶和神兵玄武破天弓（注：这把神弓PK打架一流）)
+
+声望优先打每五关的BOS掉落的声望物品比较多，当然关数越高的，掉落越多的。(还有商城土豪可以买每天限购10个的五绝碑文碎片 每个100绑定元宝 一个200点声望)
+
+9.PK：这游戏PK其实也没什么说的，对枪来说，目前基本都是不是你秒我，就是我秒你，没啥技术好言!
+
+PK带的技能和上面说的一样， 气功就带(怒意之吼丶乾坤 挪移丶以退为进丶横练太保)，绝技(带醉舞狂歌注：该技能免疫6秒控制，满级10秒!)因为枪怕控制所以必带。
+
+神兵在没有出玄武破天弓的时候就带彼岸花。PK坐骑建议带老虎，老虎先天技能加命中，后天骑术建议带(马踏环铃、百毒不侵’)老虎没三星有二个孔可以带追风坐骑。
+
+10.势力战：关于势力战很多人都说正派不行，正派总是说输，其实是很多人不会玩，进去都是自己玩自己的。.势力战个人建议帮会或者整个区找战力不是很低的组队进去，只要不是碰到对面变态级土豪大神基本不会输。
+
+首先进去，优先把左右2边小雕像打掉，然后中推中间的大雕像。最后集体推对面水晶。势力战里面是优先推塔的，杀人是其次，推掉一个雕像分数给的很多的比你杀人多，如果你推掉一个水晶，比大神杀30-40个人的分都多，因为里面是按排名给功勋的，也是目前功勋获得的主要来源。(除了势力战获得功勋还有就是商城可以买，土豪专属商城)。
+
+11.试炼副本：试练副本里的试练之地每天必须打，要升级必须打，V9可以购买一次.V13可以购买2次 剩下的试练副本，看个人元宝情况购买。
+
+12.帮派拉镖：每天下午2点到3点和晚上7点30到8点30，拉之前要看下帮会祝福满没满，没满自己有经济可以点下，或者叫帮会土豪点，加成满的经验是多297%!当然小帮会就不多说。
+
+13.帮会自创武功： 个人每次是劲点满(加伤害的)，御点满(点的越高冷却时间越短)自创10级以后会多个追，追点满(中间的控)，剩下的随便点，其实也就剩下一点可以点其他的。至于能不能出优，就看个人人品的，这是看运气出的。
+
+14.限时活动：每天限时活动必须要做的，(正义之心，正邪道场，秘宝矿洞，江湖告急)(不是每天都有的，是分开天数的)
+
+15.还有新区的一个活动，征战天下达成每个目标给的材料很多的，必须做的!
+
+16.新区成长基金，如果想玩下去建议必买
+
+还有新区的，挂机看个人战力挂，最佳是挂比自己高10级的怪经验多，前提你能扛得住!
+-----------------------------
+枪客，热血江湖手游中的高暴击高伤害输出职业，到后期技能有很多，只能用4个，那么枪客技能选择哪些好？怎么搭配好呢？
+
+￼
+
+1转之前的就用基础的4个职业不用多说；20级1转之后，用两个新技能替换“鹰击长空”和“天神万钧”2个基础技能；
+
+【2转pk】
+
+枪跃龙门+1转的2个技能+2转的伤害技能
+
+【2转pve】
+
+枪刃狂舞+1转的buff技能+2转的2个技能
+
+【3转pk】
+
+1转的Buff技能+2转的伤害技能+3转的2个技能
+
+【3转pve】
+
+枪刃狂舞+1转的Buff技能+2转的Buff技能+2转的Buff技能
+
+因为部分技能名称还未知，所以后续可能再修改，大家主要看好技能的效果选择就行。比如pk就多用伤害+控制技能；pve刷怪打副本用群攻的，加buff的技能。
 
 
 
 
-
+========================================
+说法1：
+电喷汽车说明书上说：拖档（带档滑行）电脑（电喷）会自动断油，而空档时发动机为了维持怠速反而要耗油，所以带档滑行要省油些。如果是化油器汽车空档就省油些。
+从供油逻辑上给你说一下空档滑行和带档滑行省油的的原因。
+这先说一下吧，这得从发动机的供油方式说起，现在社会上行驶的汽油发动机的车型主要有两种供油方式，老车化油器供油方式，新车电控燃油喷射方式。化油器供油方式是靠发动机进气时形成的低压将燃油吸入燃烧室进行燃烧的，控制油量的方法是用 量孔，量孔的截面大小决定了吸进去的油量，靠节气门控制空气的
+进气量，空气与汽油混合后进入燃烧室燃烧做功，还有其他一下什么怠速，急加速，全负荷供油等辅助系统就不说了。电控燃油喷射方式，简称电喷，它分为单点，多点，顺序的多种方式，这里就说一下他的工作原理，它和化油器的供油方式完全不一样，它是靠喷油嘴向进气管喷油来供油的，喷油嘴由电脑控制电磁阀的电流来控制喷油嘴开启的时间，也就控制了喷油量，同时根据发动机各个传感器传来的信号修正喷油量，达到精确控制的目的。
+再说一下在带档和空档两种情况下，两种供油方式的处理办法。
+化油器，不管空档，还是带档，只要有气体通过，就会有相应的汽油进入发动机燃烧，带档是发动机被车辆推着走，发动机的转速也不低，所以尽管节气门关闭了，空气进入量被限制了，但是发动机进气时形成了很大的低气压，汽油还是很多被吸入了，这就是很多老车带档一加油就放炮，就是因为很多汽油在发动机里没有燃烧干净，进入到排气管里面燃烧造成的。但是空档就不一样了，空档是怠速，肯定要比这样省油，所以，化油器的汽车空档是省油的，带档一点也不省油。
+电喷的发动机，空档是怠速供油，带档有两种情况出现，一种是车辆在高速行驶时，突然电脑检测到节气门回位到带速位置，它认为进入带档滑行状态，为了燃油经济性，电脑会停止喷油，完全让车反推着发动机运转，电脑检测到车辆行驶速度降到规定值后，电脑控制喷油器继续喷油维持发动机的运转，这期间你加油它也会立即恢复供油的，这个就是带档滑行能省油说法的根据。可是要说明的一点是一般情况下，例如你行驶的速度是60公里你带档滑行，这时这个功能不会启动的，因为速度低时，发动机完全停止喷油会造成坐车的，如果恢复不了供油刹车也受到影响的，所以厂家设定的速度都很高，平时的这种低速行驶根本不省油。所以电喷的发动机高速带档滑行省油的，低速带档滑行没有空档滑行省油。
+所以说化油器的车空档省油，电喷车要好好利用高速它带档滑行省油，低速空档滑行省油的特性才能达到最省油，呵呵！
+说法2：
+给你说简单一点，
+1：空档后并不省油，因为带档滑行节气们就关闭了，节气们关了就说明不烧油了，听着很大的声音，那只是轮子带动变速箱的声音。除非你把钥匙关了摘档滑行，我得一个卖车朋友参加夏利省油比赛，就是这样，半升油跑了20多公里，这个有据可查。
+2：空挡的危害，刹车！！！有人证实过100迈的速度一脚刹死，有档和无档，好像多少米记不清楚了。差20米好像是。
+经常开车脚上应该有感觉啊。
+3：我自己长时间总结的经验，如果你的车用了一段时间后，巧不巧说不定哪天。带速伐脏了，行车滑行的时候突然熄火了， 车熄火了，方向和刹车就没有助理了，如果开着一辆没有方向，没有刹车，是什么样子啊。自己想象后果
+4：补充：损坏变速箱，长时间滑行变速箱就不供油了，变速箱就是干摩。
+请大家一定带档滑行，不要空挡。 我以前也是空挡滑行，改了半年也改过来。
+说法3：
+电喷车空挡滑行省不了多少油！电喷车的基本原理是具有“减速断油”的功能，先看带档的情况：例如你的发动机在4000转/份高速运转，突然松开油门，电脑会自动停止向汽缸供油，缸内也没有燃油燃烧，不过不摘档，车辆带着发动机高速转，等转速降到1300转/分时又自动恢复供油。在从4000-1300转/分的过程中没有燃油消耗，也能滑行很长时间，是省油的，由于不空档，对于行驶来说也是安全的。再看空档的情况：如果你松油门，空档，在4000转时发动机因为没有动力带动将迅速降至1300转，也就是一秒左右的时间。到1300转/份是又自动供油，相当于化油器车的怠速状态，一秒多的时间不供油，你能省多少油呢？虽然你滑行的距离稍远一点，但是发动机基本上是始终供油的，所以不省油，正向楼上所说的那样也不安全。即省不了多少油，又不安全，还不如充分利用它的优势，带档滑行为好。哈哈！
+说法4：
+建议不要空档滑行
+1、空档滑行不是省油的有效方法。
+2、安全问题，现在的家用轿车基本都有液压方向助力，并且采用油压刹车。在这种情况下如果空档滑行，一旦在你不注意的时候由于某处问题导致汽车熄火，汽车的方向助力会把方向锁住，同时刹车很可能实效，非常危险的。
+介绍我开车省油的方法
+1、根据车款适当使用车胎气压，气压不够会很废油。
+2、保持匀速，行车是尽量不要急加速（飙车除外）－_—！。
+3、掌握换挡时机，高转速无疑会增加油耗，但长期低速换挡无疑会增加发动机堆碳，影响混合气体燃烧，也会增加油耗（捷达建议在三千转左右换挡）
+4、定期保养、保持喷油嘴清洁。
+5、避免高速行驶，首先是不安全，其次是你的车经济油耗应该是90Km/h等速。车速高于120Km/h油耗肯定高很多。
+说法5：
+怎么会省油呢？空挡省油是化油器时代的事情了。
+针对化油器的车，在空挡状态时，属于怠速状态。而化油器发动机不存在不喷油时段的情况，所以化油器车最省油的情况在空挡滑行时。
+而电喷车为什么空挡不省油呢?因为在带挡滑行时，车轮由一系列的机械与发动机连接，可以带动发动机运转，在条件合适的情况下，发动机由于有了车轮动力运转，当然就不再需要汽油燃烧运转。这时，行车电脑就控制汽车不再喷油。
+而电喷车空挡滑行时，由于没有了上述条件，发动机是在怠速运转。
+楼主可以想想，到底是带挡滑行完全不燃烧汽油比较省油，还是空挡滑行燃烧汽油省油呢？
+不过这只是理论。在实际中，想要做到真正省油还是需要诀窍的：转速1200以上带挡滑行，当转速低于1200了，大部分发动机都会重新开始喷油，这样油耗就相对空挡就增加了，这时应该选择摘档，让车空挡滑行。当然了，一定要注意安全，特别不要在湿滑的下坡路这样做。
+最后，严重鄙视不会回答问题就拿安全说事的。
+说法6：
+电喷车下坡时挂档省油。电喷车的发动机有三种状态：怠速、加速、减速。怠速和加速状态下发动机是喷油的，而减速状态下，发动机是停止供油的；当你下坡挂上空档后，车载电脑会认为此时发动机是在怠速状态，所以挂空档时发动机仍会供油。
+所以下坡时尤其是大坡长坡时应该挂档下坡，一是坡大速度够，坡长滑行时间长，发动机在长时间里是停止供油的；二是挂档下坡由于发动机制动，所以比较安全，在发生紧急情况时容易减速制动；三是可以保护制动系统，由于挂档时有发动机制动，所以可以减少制动系统的负荷，延长制动系统的寿命。
+但是，发动机停止供油是有条件的，它是在某一转速以上才会停止供油，如果转速低于某档位的标准转速后，发动机又会恢复供油来维持该档位的转速；比如说，一辆车四档的标准转速是2500转，当下坡时开始车速快，发动机转速就高于2500转，这时发动机就停止供油了；但到了坡底了，车速变慢了，转速低过2500转，这时发动机就会恢复供油了。
+所以要不断的累积经验，来判断自己的车子各档位的转速和车速的关系，在合适的速度挂合适的档位。
+说法7：
+高速时挂档滑行省油，而低速时是空挡滑行省油，因为：高速的时候是车带动发动机转，而低速的时候是发动机带动车转。
+电喷发动机，当电喷发动机的ECU监测到一定转速和车速的状态,(每一种车具体参数不同)这时如果还有档位信号，并且监测到油门放开(节气门关闭)就会停止喷油.如果空挡就会认为是怠速状态,还是要喷油的.
+、带档滑行时，当转速低于约1000转－1400时，转用空挡滑行更省，因为这时候关闭的油门会重新打开，不如空挡滑行阻力更少。
+说法8：
+电喷车空挡滑行并不省油，挂高档滑行才省油，因为电喷车当你挂档滑行的时候，电控单元会认为是利用发动机制动，将停止喷油，直到你再次踩油门，或者是发动机转速过低时才会再次喷油，但是当你空挡滑行的时候的时候发动机是怠速运转，电控单元会继续喷油，这样是最费油的
+说法9：
+对一般车来说：3000转以下是空档滑行好，3000转以上时，无所谓，电脑会自动断油的，到3000转时又自动供油，相对来说，空档省油，因为挂挡是发动机有阻力，减少滑行距离，还要加油跑。
+一共三个实验！
+一直对很多人说的电喷带档滑行不喷油非常怀疑，不喷油，难道车不灭么？？？！！！现在终于有人做小白鼠了！
+试验车型：5v捷达、2v捷达、1.6/1.8BORA、2.4/2.5切、2.4佳美
+试验设备：全功能检测仪和喷油嘴检测示波器。
+试验里程：单车100公里，共计600公里
+试验路况：城市、国道混合路况
+试验目的：验证争论很久的带档还是空档省油问题
+试验过程：首先每辆车都加满油，前五十公里为频繁空档驾驶，后五十公里为所有路况带档驾驶。
+经过2天的实验后，得出以下结论。
+1、在空档滑行时，发动机的喷油脉宽为最小怠速喷油脉宽。
+2、带档滑行时，并未出现传说中的断油情况，而且其工作喷油脉宽远大于怠速喷油脉宽。
+3、参加试验的日系车型的怠速瞬时油耗显示为无穷大，其显示结果误导了很多人，因为带档时其显示的油耗小于怠速油耗。
+4、急刹车废油原因有两个，第一损失了动能；第二发动机会加大喷油量，以保证发动机不熄火。
+最终试验结论：空档滑行省油
+空档滑行省油的科学研近来，广播、电视、报纸、网络等各种媒体及一些“专家”，纷纷发表言论，称现在的电喷车空档滑行是不省油的！真是这样吗？通过我的研究试验，结果是：空档滑行真的省油！为什么？有科学根据吗？经过一段时间的研究，找到科学的依据：能量守恒定律！
+我现在的车是帕萨特领驭1.8T手动豪华型，2006.4.1.购买，具有行车电脑，可以实时显示油耗等信息，这为我研究行车省油方法提供了条件。
+由于我的笔记本电脑坏了，近期才修好，所以这个报告现在才完成，不过这也让我反复的验证现在的研究
+结果，确保研究结果的正确性（请大家看完后再拍砖）。
+以前我开的捷达王7年，行驶了26万多公里，我经常空档滑行，以图省油，然而看了有关专家的“理论”，也通过一些土办法验证了：电喷车不摘档滑行时是断油 的（一定速度以上），但有一次，我的车做了三保，修车师傅要求我适当注意磨合，当时我跑长途，采用跑一段、滑行一段的方法，结果算下来，平均油耗：5.8 升/百公里，而我平时跑高速一般在6.3——7.0升/百公里！当时我就觉得空档滑行省油，可惜条件不具备，没办法开展具体的研究。换车时，我特意选择有 行车电脑的车（开始时选定“别克君威”，
+由于没有行车电脑等配置而放弃）。
+研究工作先从道路测试开始，我认为行车电脑中最有用的是：瞬时油耗及平均油耗。
+在同一路段，两次行程的油耗分别记录（近期很忙，经常跑长途，我的领驭两个月跑了9230公里了），以下是记录情况：
+第一组： 全程空调，车载司机一人，上高速前平均油耗清0，长治——太原，限速：每小时110KM、80KM
+、70KM、100KM等：
+1、全程基本不摘空档滑行，采用巡航定速功能，全程213.2KM，平均油耗：7.1升/百公里 用时2小时20分；
+2、全程有机会就空档滑行，213.5KM，平均油耗：6.3升/百公里
+用时2小时22分；
+第二组： 全程空调，车载司机及乘客共两人，上高速前平均油耗清0，太原——原平，限速：每小时90KM、100KM、110KM等
+1、基本不摘空档滑行，采用巡航定速功能，全程93.2KG，平均油耗：7.0升/百公里
+用时57分；
+2、全程有机会就空档滑行，93.3KG，平均油耗：6.4升/百公里
+用时59分；
+从以上数据可以明显看出，空档滑行时，是绝对省油的！特别是去长治，由于坡路较多，节油效果更加明显。原因是下坡路滑行效果更好，（当然，要注意安全，控制好车速，当速度超过限速10——20公里时，挂上5档进行发动机制动，速度低到限速值时再摘空档滑行）。
+另一种测试：
+在平直的高速路上，使车加速到90公里/小时，通过滑行使速度降到40公里/小时（因为挂5档、车速到40公里/小时后，发动机的转速接近1200转，发动机的电脑为了防止熄火，是要开始供油的，这以后的滑行，不能再享受0升/小时的“省油”方式了，所以选这个速度）。
+挂5档滑行，使车速降到40公里/小时，大约能滑行500米左右；
+如果空档滑行，使时速降到40公里/小时，大约可滑行1000米左右。
+空档滑行使行驶距离增加了一倍。挂档滑行时，这500米路程的油你是省下了，可你差下的500米距离不用
+油了吗？
+试验证明了空档滑行省油，有理论依据吗？
+首先，我们来分析省油的原因，我们大家知道，车的行走是靠发动机燃烧燃油旋转产生的动力，换句话说，必须烧油才能使发动机旋转，而发动机旋转的速度是和燃 烧燃油的多少有关系，旋转的速度越快，烧掉的燃油也越多，大家都知道：在停车的时候，你要提高转速，必须踏下油门加油，也就是说转速的提高，需要增加能 耗。我的车载电脑显示：在停车、开空调的情况下，800转/分钟时，油耗 1.2升/小时，如果要使转速保持在2500转/分钟，油耗为 2.8升/小时。
+那么我们的空档滑行与不摘档滑行和发动机转速有关吗？有！
+大家知道，空档滑行时，发动机要维持在约800转的怠速上，要消耗一定的能量；
+而挂档滑行时，在一定的转速以上，发动机是断油的，也就是不耗油，这时，发动机一般要维持在1200转以上（档位、速度不同，发动机的转速不同，但发动机 转速必须大于1200转，否则，发动机电脑是不会断油的），那我为什么说他不省油呢？原因出在发动机的转速上，要维持发动机1200转以上的转速，势必要 比800转的转速消耗更多的能量，也就是：转速越高，消耗的能量越大！那么，这个能量是哪里来的呢？
+它只能是由汽车的动能转换回来的！就是先前加油提速，使车速达到一定值——汽车有了一定的动能，松开油门后，在发动机转速大于1200转以上时，发动机电 脑断油，这时，汽车的一部分动能，就转化为使发动机旋转的能量，根据大家都知道的能量守恒定律，这部分能量的消耗，必然会减少汽车滑行的距离和速度，你要 到达的目的地是一定的，它减少的距离和速度，你需要消耗另外的能量——燃油——来完成，所以挂档滑行的油耗必定比空档滑行要大。
+换一个角度来研究一下，从长治到太原，挂档滑行（140分钟），发动机的转速始终在2500转/分钟以上，2小时20分里，发动机总的转数 为：2500*140=350000转；而采用空档滑行时（142分钟），由于有一段时间是空档，发动机的转速是800转，如果空档滑行的时间按总时间的 1/10计算，则发动机总的转数为：
+2500*128+800*14=320000+11200=331200转，也就是说，在整个行程中，发动机在空档滑行方式下，比挂档滑行方式少旋转了18800转，既然发动机的总转数少了，当然消耗的燃油就少了，那么省油的原因就很清楚了。
+那么为什么外国人要设置挂档滑行时的断油呢？他有什么作用吗？
+这在前面大家可能已经看到了，我在空档滑行速度过快时，立即挂上5档，利用发动机断油的功能，既降低了速度，又不消耗燃油，这比踩刹车来减低车速，要节省燃油。
+另外，在城市里行车时，由于交通情况复杂，经常要加速、减速，合理利用挂档滑行，会起到很好的节油效果。例如，绿灯亮时，前方车辆鱼贯而出，你也不能行驶 的太慢，否则，与前方车辆之间的空当过大，其他车辆会插进来；到下一个路口的信号灯前，你又需要减速，这时尽量利用挂档滑行来减速，必要时，可换入低档， 以增加制动力，减少滑行距离，尽量少用刹车，因为刹车是绝对消耗能量的。
+以上研究的目的，不是鼓励大家一定要用空档滑行，只是要澄清一个大家所认为的“省油”方式的误区。
+考虑问题要全面一些，不要一说电喷发动机，就都说挂档滑行省油，(前些日子看见一篇文章，一个很有经验的老司机说：“在合适的时候空档滑行以节省燃油”， 得到很多人的嗤之以鼻，很是看不惯！)；对于空档滑行的利用，我个人认为，这种方式要因人而异，新手要慎用，驾驶熟练者完全可以充分利用，毕竟利用发动机 做安全制动的作用是有限的，只要你在驾驶过程中，认真观察、谨慎驾驶，及时采用合理的操作，才是最安全的。
+另外，发动机的转速减少，必然减少了发动机的磨损，应该对发动机有好处吧？他还使车辆高速行驶中的发动机有劳有逸，是不是可以减少发动机长期工作在恶劣情况下的损耗呢？
+至于城市里驾车节油，我有几点体会：
+1. 要看的远一些，及早做出判断和处理，例如：在远处看见路口红灯亮起，要根据车速、距离及红、绿灯变化的大概时间，采取空档滑行、或挂合适的档位滑行，使车 辆平稳的到达路口；如果看见绿灯，要及时加速，争取通过，否则，你慢悠悠的过不去，在路口等两三分钟，也是要消耗燃油。
+2. 选择较好的路线，在出行时，就要想好，那条路或路口，当前这个时间是否车多？是否放学时间？是否路过学校？上班时间怎么走？下班时间从哪过？哪条路右转弯 多（我们这里大部分路口红灯可以右转弯）？哪条路左转弯多？什么地方钻小胡同？什么地方走大路等等，然后选一条合适的线路，用最少的时间、尽可能短的距 离，到达目的地。在市内，有速度高的路就不要选速度低的道路。
+3. 在确保安全的情况下，尽可能的使用空档滑行，在需要制动时，尽量使用挂档滑行的方法，必要时，才使用刹车，这样才能最大限度的节省燃油。
+我驾车就是采用这种办法，我得帕萨特领驭1.8T手动豪华型，在开空调的情况下，一般跑长途，油耗控制在6.5升/小时左右，太原市内不超过9升/小时（我在市内开车，其实不很温柔，因为我们这儿的交通，太温柔了是要受欺负！）
+行车利用空档滑行肯定是省油的！当然也不能一直滑行，如果车速已经很慢了，你还滑行，那就不一定省油了。
+本人以前一直开化油器的车，经常是空档滑行，当然比较省油，但在下坡时考虑安全，还是带档滑行的。
+尽管此前多次驾驶过电喷车，从来没有考虑过省油问题。
+最近刚买了一辆经济型SUV，491QME发动机。说明书上标明经济时速是7.8升/百公里（50公里/小时）。根据491QME发动机的“总功率实验曲线”可以看出，它的负载燃油消耗量位于3000转/分钟坐标点处。
+我们都知道，带档滑行距离近，而空档滑行距离远。这只是定性分析。省油的基本概念应该是，行驶相同距离，耗油量越少越省油。为了比较精确的试验论证究竟带 档滑行省油还是空档滑行省油，我们在平坦的路面上试验了一下，试图用试验与定量分析的方法,具体论证这个问题，欢迎各位大侠批评指正。
+一、已知数据：
+车辆加速至50公里/小时（发动机转速为3000转/分钟），空档滑行至5公里/小时，滑行距离为2000多米，滑行时间约3分钟多。
+车辆加速至50公里/小时时，带档滑行至30公里/小时，滑行距离约1000米。根据转速表判断此时发动机会
+自动恢复供油（1200转/分钟），速度由30公里/小时降到5公里/小时。总共滑行时间4分钟多。
+491QME发动机怠速为800转/分钟；
+491QME发动机空载怠速油耗是1.2升/60分钟===20毫升/分钟；
+491QME发动机负载怠速油耗（5档）是12.48升/百公里；
+经济油耗是7.8升/百公里====78毫升/公里；
+二、计算结果：
+1、空档状态时，滑行2000米，空载怠速油耗是60毫升。
+2、带档滑行时，前1000米不耗油，后1000米为负载怠速状态，油耗率（5档）为12.48升/百公里（由491QME发动机“总功率实验曲线”查 出），这样后1000米实际耗油量为124.8毫升。此时油耗高的真正原因是发动机负载怠速或低速油耗高（5档是12.48---15升/百公里），装备 有电脑自动显示瞬时油耗的车辆上可以看出。
+3、行驶相同距离，带档滑行耗油量是空档滑行耗油量的一倍以上。
+三、结论：
+平坦道路时在不影响安全前提下，空档滑行比带档滑行节省一半油以上。
+下坡道路时尽可能低档位带档滑行，以维持发动机高转速断油状态，并保持发动机制动此时比空档滑行更省油
 
 
 

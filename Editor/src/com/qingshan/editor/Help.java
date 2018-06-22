@@ -31,6 +31,16 @@ public class Help
 		
 		}
 	}
+	/*private static void popupWindow(Context mContext, int title, String file) {
+        try {
+            String text = FileUtil.ReadFile(mContext.getAssets().open(file), "utf-8");
+            Builder builder = new Builder(mContext);
+            builder.setIcon(0).setTitle(title).setMessage(text).setPositiveButton(17039370, null);
+            builder.setNegativeButton(R.string.donate, new AnonymousClass1(mContext));
+            builder.show();
+        } catch (Exception e) {
+        }
+    }*/
 
 	public static void showChangesLog(Context mContext) {
         popupWindow(mContext, R.string.changelog, "CHANGES");

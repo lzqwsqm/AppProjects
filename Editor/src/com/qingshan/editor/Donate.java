@@ -16,12 +16,12 @@ public class Donate extends Activity
 		return new Intent("android.intent.action.VIEW", Uri.parse("http://www.jecelyin.com/donate.html"));
 	}
 
-	protected void onCreate(Bundle paramBundle)
-	{
-		super.onCreate(paramBundle);
-		setContentView(2130903043);
-		((WebView)findViewById(2131099926)).loadUrl(this.html_url);
-	}
+	protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.donate);
+        ((WebView) findViewById(R.id.donateWebView)).loadUrl(this.html_url);
+    }
+
 }
 
 /* Location:           C:\Documents and Settings\鏉庡繝鍏╘妗岄潰\鍙嶇紪璇慭ApkDecompiler\Output\com.jecelyin.editor_V12.9.25\classes_dex2jar.jar
