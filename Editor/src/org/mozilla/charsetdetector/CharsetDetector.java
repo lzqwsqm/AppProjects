@@ -32,17 +32,30 @@ import java.net.URL;
  */  
 public class CharsetDetector {  
     
-      
+
+
+	private static native String chardet_get_charset(String str);
+
+    static {
+        System.loadLibrary("CharsetDetector");
+    }
+
+    public static String getEncoding(String file) {
+        return chardet_get_charset(file);
+    }
+
+ //==============================
+ 
     /** 
      * 得到文件的编码 
      * @param filePath 文件路径 
      * @return 文件的编码 
-     */  
+     * 
     public static String getJavaEncode(String filePath){  
         BytesEncodingDetect s = new BytesEncodingDetect();   
         String fileCode = BytesEncodingDetect.javaname[s.detectEncoding(new File(filePath))];  
         return fileCode;  
-    }  
+    }  */
 }  
   
 class BytesEncodingDetect extends Encoding {  

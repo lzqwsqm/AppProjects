@@ -43,10 +43,13 @@ public class Highlight
 	private int mStartOffset = -1;
 	private boolean mStop = true;
 	private static Searcher mSearcher;
+	
+	
+	
      
 	static
 	{
-		//System.loadLibrary("highlight");
+		System.loadLibrary("highlight");
 		mEnabled = true;
 		mLimitFileSize = 0;
 		mSpans = new ArrayList();
@@ -108,14 +111,15 @@ public class Highlight
         if (this.mStop || "".equals(this.mExt)) {
             return false;
         }
-        /*if (this.mStartOffset <= startOffset && this.mEndOffset >= endOffset) {
+        if (this.mStartOffset <= startOffset && this.mEndOffset >= endOffset) {
 		 return false;
-		 }*/
+		 }
 		//由菜单高亮着色控制
         String[] lang = (String[]) langTab.get(this.mExt);
         if (lang == null) {
             return false;
         }
+		//lock it 不然会因为添加了span后导致offset改变，不断地进行高亮
         this.mStop = true;
         this.mStartOffset = startOffset;
         this.mEndOffset = endOffset;
@@ -127,7 +131,7 @@ public class Highlight
             return false;
         }
         int len = ret.length;
-        if (len < GROUP_TAG_ID || ((float) len) % 3.0f != 0.0f) {
+        if (len < 1/*GROUP_TAG_ID*/ || ((float) len) % 3.0f != 0.0f) {
             this.mStop = false;
             return false;
         }
@@ -189,27 +193,124 @@ public class Highlight
         this.mStop = false;
         return false;
     }
+	private native static int[] jni_parse(String text, String syntaxFile);
+	/**
+     * 
+     * @param j 
+     * @param mLayout 
+     * @return 返回[[高亮类型,开始offset, 结束offset],,]
+     */
+    /*public boolean render(Spannable mText, int startOffset, int endOffset)
+    {
+        if(!EditorSettings.ENABLE_HIGHLIGHT || langTab == null)
+            return false;
 
-	//private static native int[] jni_parse(String paramString1, String paramString2);
-	private static  int[] jni_parse(String str, String str2){
-		if(str==null){
-			return null;
-		}
-		//String st ="import";
-		//st.indexOf(str,0);
-		//mSearcher.setText(st);
-		//int[] a1=mSearcher.find(str,0);
-		
-		
-		
-		
-		
-		int[] ai=new int[3];
-		ai[0]=3;
-		ai[1]=0;//a1[0];
-		ai[2]=6;//a1[1];
-		return ai;
-	}
+        if(this.mStop || "".equals(this.mExt))
+            return false;
+
+        if(this.mStartOffset <= startOffset && this.mEndOffset >= endOffset)
+            return false;
+        String[] lang = langTab.get(this.mExt);
+        if(lang == null)
+        {
+            return false;
+        }
+        //lock it 不然会因为添加了span后导致offset改变，不断地进行高亮
+        this.mStop = true;
+        //TimerUtil.start();
+        //Log.d(TAG, startOffset+"="+endOffset);
+
+        this.mStartOffset = startOffset;
+        this.mEndOffset = endOffset;
+        String text = mText.subSequence(0, endOffset).toString();
+        int[] ret = jni_parse(text, JecEditor.TEMP_PATH + File.separator + lang[1]);
+        //TimerUtil.stop("hg parse");
+        if(ret == null)
+        {
+            this.mStop = false;
+            return false;
+        }
+        int len = ret.length;
+        if(len < 1 || len % 3.0F != 0)
+        {
+            this.mStop = false;
+            return false;
+        }
+
+        //TimerUtil.start();
+        //不能清除全陪，因为滚动条需要一个span来按住拖动
+        //mText.clearSpans();
+
+        int color;
+        int start;
+        int end;
+        int index=0;
+        int bufLen = mSpans.size();
+        ForegroundColorSpan fcs;
+        for(ForegroundColorSpan fcs2:mSpans)
+        {
+            mText.removeSpan(fcs2);
+        }
+        for(int i=0; i<len; i++)
+        {
+
+            switch(ret[i])
+            {
+                case GROUP_TAG_ID:
+                    color = color_tag;
+                    break;
+                case GROUP_STRING_ID:
+                    color = color_string;
+                    break;
+                case GROUP_KEYWORD_ID:
+                    color = color_keyword;
+                    break;
+                case GROUP_FUNCTION_ID:
+                    color = color_function;
+                    break;
+                case GROUP_COMMENT_ID:
+                    color = color_comment;
+                    break;
+                case GROUP_ATTR_NAME_ID:
+                    color = color_attr_name;
+                    break;
+                default:
+                    Log.d(TAG, "获取颜色group id失败");
+                    mStop = false;
+                    return false;
+            }
+
+            start = ret[++i];
+            end   = ret[++i];
+
+            if(end < startOffset)
+                continue;
+
+            if(index >= bufLen)
+            {
+                fcs = new ForegroundColorSpan(color);
+                mSpans.add(fcs);
+            } else {
+                fcs = mSpans.get(index);
+                fcs.setColor(color);
+            }
+
+            ++index;
+            try {
+                mText.setSpan(fcs, start, end, SpannableStringBuilder.SPAN_EXCLUSIVE_EXCLUSIVE);
+            } catch(Exception e) {
+
+            }
+
+        }
+        ret = null;
+        //TimerUtil.stop("hg 1");
+        this.mStop = false;
+        return true;
+    }*/
+	
+	
+	
 	
 	
 	//TabHost.setEditTextPref调用
@@ -225,14 +326,18 @@ public class Highlight
 
 	public static boolean loadLang() {
         String langfile = QSEditor.TEMP_PATH + "/lang.conf";
-        if (!new File(langfile).isFile()) {
+        File file = new File(langfile);
+		//if (!new File(langfile).isFile()) 
+			if(!file.isFile()){
             return false;
         }
-        langTab = new HashMap();
-        nameTab = new ArrayList();
+		file = null;
+        langTab = new HashMap<String, String[]>();
+        nameTab = new ArrayList<String[]>();
         try {
             String[] lines = new String(readFile(langfile), "utf-8").split("\n");
-            int length = lines.length;
+            String[] cols;
+			/*int length = lines.length;
             for (int i = 0; i < length; i += GROUP_TAG_ID) {
                 String line = lines[i].trim();
                 if (!line.startsWith("#")) {
@@ -254,15 +359,83 @@ public class Highlight
                         obj2[GROUP_TAG_ID] = synfile;
                         hashMap.put(ext, obj2);
                     }
+                }*/
+			for(String line:lines)
+            {
+                line = line.trim();
+                if(line.startsWith("#"))
+                    continue;
+                cols = line.split(":");
+                String name = cols[0].trim();
+                String synfile = cols[1].trim();
+                String extsString = cols[2].trim();
+                String[] exts = extsString.split("\\s+");
+                nameTab.add(new String[] {name, exts[0]});
+                for(String ext:exts)
+                {
+                    langTab.put(ext, new String[]{name, synfile});
                 }
             }
-            byte[] mByte = null;
-            return true;
+            //byte[] mByte = null;
+            //return true;
         } catch (Exception e) {
             return false;
         }
+		return true;
     }
+	/*public static boolean loadLang()
+    {
+        String langfile = JecEditor.TEMP_PATH + "/lang.conf";
+        File file = new File(langfile);
+        if(!file.isFile())
+        {
+            return false;
+        }
+        file = null;
+        langTab = new HashMap<String, String[]>();
+        nameTab = new ArrayList<String[]>();
 
+        try
+        {
+            String mData = FileUtil.readFileAsString(langfile, "utf-8");
+            String[] lines = mData.split("\n");
+            String[] cols;
+            for(String line:lines)
+            {
+                line = line.trim();
+                if(line.startsWith("#"))
+                    continue;
+                cols = line.split(":");
+                String name = cols[0].trim();
+                String synfile = cols[1].trim();
+                String extsString = cols[2].trim();
+                String[] exts = extsString.split("\\s+");
+                nameTab.add(new String[] {name, exts[0]});
+                for(String ext:exts)
+                {
+                    langTab.put(ext, new String[]{name, synfile});
+                }
+            }
+
+            Collections.sort(nameTab, new Comparator<String[]>() {
+
+					@Override
+					public int compare(String[] object1, String[] object2)
+					{
+						return object1[0].compareToIgnoreCase(object2[2]);
+					}
+				});
+        }catch (Exception e)
+        {
+            return false;
+        }
+
+        return true;
+    }*/
+	//QSEditor.initEnv()
+    //loadLang()
+	//AsyncReadFile.AsyncReadFile()
+	//读取文件
 	public static String readFile(String file, String encoding) {
         try {
             return new String(readFile(file), encoding);
@@ -274,13 +447,17 @@ public class Highlight
             }
         }
     }
-
+    //
 	public static byte[] readFile(String file)
 	{
-		//return read_file(paramString);
-		return readFile(new File(file));
+		return read_file(file);
+		//return readFile(new File(file));
 	}
-	public static byte[] readFile(File filename) {
+	//jin版
+	private static native byte[] read_file(String file);
+	
+	//java版
+	/*public static byte[] readFile(File filename) {
         try {
             
 			return readFile(new FileInputStream(filename));
@@ -300,14 +477,14 @@ public class Highlight
             return null;
         }
 		
-	}
-	//private static native byte[] read_file(String paramString);
-
+	}*/
+	
 	
 
-	
+	//QSEditText.onTextChanged
 	//QSEditText.setCurrentFileExt调用
 	//QSEditText.onTouchEvent调用
+	//QSEditText.class FlingRunnable.run()
 	public void redraw()
 	{
 		this.mStop = false;

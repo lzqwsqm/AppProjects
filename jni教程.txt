@@ -1,0 +1,1079 @@
+史上最适合新手的安卓JNI教程
+
+￼Eternity岚阅读数：7302018-07-18
+
+码字辛苦！转载请注明出处！
+
+0.前言
+
+记得第一次接触安卓JNI的时候，那叫一个苦啊，MK文件？不会写，JNI？不会写，Gradle配置？也不会写。
+
+时间一晃就过去3年了，Android Studio已经由当时的1.3到了现在的3.1，最新版本的Android Studio，再也不用手写MK文件，手写JNI，手写Gradle配置了~
+
+只要你熟练掌握JAVA和C语言基础，十分钟拿下JNI，完全不是问题！
+
+那些上来就叫你写MK文件，叫你编译SO库的。身为一个安卓工程师，这些东西……
+
+￼
+
+1.创建工程
+
+首先要确认一下你的Android Studio版本是3.0以上，如果低于这个版本，那么你仍旧需要手写MK文件，手动编译SO库……
+
+因此赶紧去升级到最新版本的Android Studio吧~
+
+在新版的Android Studio中，只要在创建工程的时候勾选【Include C++ Support】，它就会自动为你创建好JNI的所有开发环境。
+
+￼
+
+创建之后，它会自动下载Android NDK。保持网络通畅，去刷刷段子聊聊天，等待它Build完成就好~
+
+在Build完成之后，它会给你来一段FreeStyle，用JAVA获取来自C++的字符串，并显示在TextView上。
+
+我们来分析一下这个DEMO，以此来了解一下JNI的工作流程。
+
+2.初始化链接库
+
+想要在JAVA上调用SO库，必须先把被编译成SO库的资源Load上来：
+
+// Used to load the 'native-lib' library on application startup.
+
+static {
+
+System.loadLibrary("native-lib");
+
+}
+
+这个链接库的源码在工程的cpp文件夹里：
+
+￼
+
+它通过Android Studio创建的环境，在Build时被编译在这里：
+
+￼
+
+JAVA只能调用被编译成库的C\C++代码。
+
+其中arm64啦，x86什么的是CPU架构，x86就是32位电脑所使用的CPU架构，x86_64即64位的x86架构CPU。
+
+Android Studio默认是会编译全平台的链接库的，如果你不需要兼容某些架构，你可以在app的Gradle脚本中指定需要编译的架构：
+
+android {
+
+...
+
+defaultConfig {
+
+...
+
+ndk {
+
+//设置支持的SO库架构（开发者可以根据需要，选择一个或多个平台的so）
+
+abiFilters "armeabi-v7a", "arm64-v8a"
+
+}
+
+}
+
+}
+
+如此一来，AS在编译的时候，就不会再编译没有被声明的平台了：
+
+￼
+
+ 那么问题来了，如果不Load进来就调用其中的方法，会发生什么呢？
+
+￼
+
+如果不Load进来就调用其中的方法，将会爆出UnsatisfiedLinkError：
+
+￼
+
+￼
+
+所以，在使用SO库的代码前，一定要记得loadLibrary！
+
+3.JAVA调用C语言代码
+
+接下来进入使用JNI的正题，如何使用JAVA调用C语言的代码呢？
+
+首先我们需要在JAVA上声明一个native方法：
+
+￼
+
+不不不不是naive是native，你们这些人啊，too young , too naive！
+
+native方法，就是在JAVA方法的前面加上native，这种方法是专门给JAVA调用C\C++调用的。
+
+public native void helloJNI();
+
+接下来，AS会告诉你，嗨呀，在JNI上找不到这个方法，别慌，快使用万能键ALT+ENTER！
+
+￼
+
+对，AS3.+再也不要什么javah啊，创建头文件这些麻烦事儿了！
+
+直接就特么的给你把JNI代码写好了：
+
+￼
+
+这里的extern "C"的作用是让C++支持调用C语言的方法，如果你不需要，可以去掉；
+
+JNIEXPORT xxx JNICALL代表这是一个JNI方法，其中xxx是返回值类型，如果是空类型，这里就是void；
+
+Java_代表这是一个Java方法；
+
+com_eternity_jnilab_MainActivity_helloJNI这段是你方法所在的包名以及它的方法名，在Java中相当于：com.eternity.jnilab.MainActivity.helloJNI
+
+那么接下来，我们返回一个String回去~
+
+4.JNI数据类型
+
+这里注意一下，JAVA对应的JNI数据类型（记笔记记笔记！）：
+
+￼
+
+等等，String型在哪？
+
+C语言并没有String型，如果需要使用它，需要借助C++的string工具包，把它转换成字符指针(char*)：
+
+...
+
+//导入string工具包
+
+#include <string>
+
+extern "C"
+
+JNIEXPORT jstring JNICALL
+
+Java_com_eternity_jnilab_MainActivity_helloJNI(JNIEnv *env, jobject instance) {
+
+std::string hello = "丢雷楼某";
+
+return env->NewStringUTF(hello.c_str());
+
+//这里的->相当于Java的 .this. 即指针引用
+
+//如果要强行翻译成Java，就是env.this.NewStringUTF(hello.c_str())
+
+}
+
+然后把这个值设置到TextView上：
+
+TextView tv = findViewById(R.id.sample_text);
+
+tv.setText(helloJNI());
+
+运行一下~
+
+￼
+
+￼
+
+我们再来看看其他类型的传递方式，这里以int型作为示例：
+
+JAVA部分：
+
+TextView tv = findViewById(R.id.sample_text);
+
+tv.setText(add(6, 6) + "");
+
+//JAVA原生方法声明
+
+public native int add(int a, int b);
+
+JNI部分：
+
+extern "C"
+
+JNIEXPORT jint JNICALL
+
+Java_com_eternity_jnilab_MainActivity_add(JNIEnv *env, jobject instance, jint a, jint b) {
+
+int result = a + b;
+
+return result;
+
+}
+
+可以看到，表格中的基础数据类型是可以无缝转换的~
+
+更多的类型转换可以参考：https://blog.csdn.net/kgdwbb/article/details/72810251
+
+5.C语言调用JAVA代码
+
+在日常开发中，我们经常会遇到需要把C语言的数据回传给JAVA的情况，这时候怎么办呢？
+
+5.1同步调用
+
+如果是在JAVA调用JNI的同一条线程里调用JAVA代码，非常简单：
+
+JAVA部分：
+
+public void callMeBaby(String msg) {
+
+tv.setText(msg);
+
+}
+
+C++部分：
+
+extern "C"
+
+JNIEXPORT jint JNICALL
+
+Java_com_eternity_jnilab_MainActivity_add(JNIEnv *env, jobject instance, jint a, jint b) {
+
+//获取JAVA类
+
+jclass clazz = env->FindClass("com/eternity/jnilab/MainActivity");
+
+//获取方法ID
+
+jmethodID methodID = env->GetMethodID(clazz, "callMeBaby", "(Ljava/lang/String;)V");
+
+std::string msg = "I Love U";
+
+env->CallVoidMethod(instance, methodID, env->NewStringUTF(msg.c_str()));
+
+}
+
+FindClass的入参是包名+类名的路径；
+
+GetMethodID的入参是JAVA类，方法名，方法签名；
+
+方法签名包含两个部分：
+
+·括号里的内容是回传的数据内容，(Ljava/lang/String;)代表需要回传一个String型数据；
+
+·括号外面的V代表这是一个void方法；
+
+最后通过env->CallVoidMethod/CallStaticVoidMethod等等与Java方法对应的JNI方法调用JAVA。
+
+来看看GetMethodID第三个参数是怎么表示的：
+
+类型签名booleanZbyteBcharCshortSintIlongJfloatFdoubleDvoidVObjectLjava/lang/Object;数组[
+
+ 有点难理解？举个栗子！
+
+￼
+
+JAVA方法：
+
+public int add(boolean excuted, int result) {
+
+return result;
+
+}
+
+ C++获取：
+
+jmethodID methodID = env->GetMethodID(clazz, "add", "(ZI)I");
+
+签名中的ZI代表回传一个boolean类型，一个int类型，括号外的I代表调用后，会返回一个int类型。
+
+JAVA方法：
+
+public boolean getData(byte[] data) {
+
+return true;
+
+}
+
+ C++获取：
+
+jmethodID methodID = env->GetMethodID(clazz, "getData", "([B)Z");
+
+签名中的[B代表回传一个byte[]数组，括号外的Z代表调用后，会返回一个boolean类型。 
+
+之所以boolean类型是Z，是因为B已经被byte给占了呀，不要觉得奇怪！
+
+￼
+
+5.2异步调用 
+
+从上面的代码，可以看到，C调用JAVA方法离不开JNIEnv。
+
+我们先来认识一下JNIEnv：
+
+JNIEnv是JAVA与C沟通的桥梁，他弥补了JAVA与C有差异的部分，可以视作为外交官一样的存在。
+
+JNIEnv一般是是由虚拟机传入，而且是与线程相关的变量，也就说线程A不能使用线程B的 JNIEnv，就好像特朗普的翻译官不会给普京用一个道理，因此，我们需要一个方法来获取当前线程的JNIEnv。
+
+￼
+
+在这之前，我们需要拿到JAVA虚拟机对象，
+
+JAVA虚拟机对象只能从JAVA线程中获取到，因此多数的SO库都会要求在Load之后，调用初始化方法。
+
+现在我们就来写一个初始化的方法：
+
+JAVA部分：
+
+//初始化JNI库
+
+public native void init();
+
+C++部分：
+
+//声明一个静态变量
+
+static JavaVM *JVM;
+
+extern "C"
+
+JNIEXPORT void JNICALL
+
+Java_com_eternity_jnilab_MainActivity_init(JNIEnv *env, jobject instance) {
+
+//获取Java虚拟机，赋值给静态变量
+
+env->GetJavaVM(&JVM);
+
+}
+
+然后通过Java虚拟机获取到当前线程的JNIEnv：
+
+JNIEnv *getCurrentJNIEnv() {
+
+if (JVM != NULL) {
+
+JNIEnv *env_new;
+
+JVM->AttachCurrentThread(&env_new, NULL);
+
+return env_new;
+
+} else {
+
+return NULL;
+
+}
+
+}
+
+在JAVA上创建给C语言用的回调：
+
+TextView tv;
+
+//提供给C语言回调的方法
+
+public void callMeBaby(final String msg){
+
+//在主线程运行
+
+runOnUiThread(new Runnable() {
+
+@Override
+
+public void run() {
+
+tv.setText(msg);
+
+}
+
+});
+
+}
+
+因为回调线程是C语言的线程，他们是没有办法获取JAVA方法的，
+
+因此我们要把JAVA的回调方法保存起来：
+
+static JavaVM *JVM;
+
+static jobject objectMainActivity;
+
+static jmethodID methodCallMeBaby;
+
+//还是上面的初始化方法
+
+extern "C"
+
+JNIEXPORT void JNICALL
+
+Java_com_eternity_jnilab_MainActivity_init(JNIEnv *env, jobject instance) {
+
+//获取Java虚拟机，赋值给静态变量
+
+env->GetJavaVM(&JVM);
+
+//获取Java对象并做static强引用
+
+objectMainActivity = env->NewGlobalRef(instance);
+
+//获取该对象的Java类
+
+jclass clazz = env->GetObjectClass(objectMainActivity);
+
+methodCallMeBaby = env->GetMethodID(clazz, "callMeBaby", "(Ljava/lang/String;)V");
+
+}
+
+注意：无论是jclass还是jobject都必须做强引用保存！否则会爆出JNI DETECTED ERROR IN APPLICATION: use of invalid jobject / jclass .
+
+OK，现在我们在C语言的线程里调用JAVA：
+
+JAVA部分：
+
+@Override
+
+protected void onCreate(Bundle savedInstanceState) {
+
+...
+
+init();
+
+startCThread();
+
+}
+
+C++部分：
+
+void *callingJava(void *arg) {
+
+JNIEnv *jniEnv = getCurrentJNIEnv();
+
+if (jniEnv != NULL) {
+
+std::string msg = "I'm fucking love u!";
+
+jniEnv->CallVoidMethod(objectMainActivity, methodCallMeBaby,
+
+jniEnv->NewStringUTF(msg.c_str()));
+
+}
+
+return NULL;
+
+}
+
+extern "C"
+
+JNIEXPORT void JNICALL
+
+Java_com_eternity_jnilab_MainActivity_startCThread(JNIEnv *env, jobject instance) {
+
+//创建一个C语言的线程,执行上面的callingJava方法
+
+pthread_t pthread;
+
+pthread_create(&pthread, NULL, callingJava, NULL);
+
+}
+
+运行结果：
+
+￼
+
+我擦，这么麻烦的吗，可不可以用同步调用的方法呢？
+
+OK，满足你的好奇心~
+
+现在我们把线程方法里的调用方式改成同步调用的方式：
+
+void *callingJava(void *arg) {
+
+JNIEnv *jniEnv = getCurrentJNIEnv();
+
+if (jniEnv != NULL) {
+
+jclass clazz = jniEnv->FindClass("com/eternity/jnilab/MainActivity");
+
+jmethodID methodID = jniEnv->GetMethodID(clazz, "callMeBaby", "(Ljava/lang/String;)V");
+
+std::string msg = "I'm fucking love u!";
+
+jniEnv->CallVoidMethod(clazz, methodID,
+
+jniEnv->NewStringUTF(msg.c_str()));
+
+}
+
+return NULL;
+
+}
+
+再来执行一遍：
+
+￼
+
+￼
+
+看到了吧，不属于调用线程的JNIEnv，是连JAVA类都找不到的，
+
+现在知道为什么要把JAVA对象和方法都存起来了吧~
+
+6.内存回收
+
+JAVA用习惯了，写C语言代码不回收内存，是我们没错了。
+
+我们来看一段从C语言获取字节流的代码：
+
+int decode(const char *buffer, int size) {
+
+//因为是异步操作，获取当前线程的JNIEnv
+
+JNIEnv *jniEnv = getCurrentJNIEnv();
+
+if (jniEnv != NULL) {
+
+//创建byte[]字节数组
+
+jbyteArray bytes = jniEnv->NewByteArray(size);
+
+//将字符指针*buffer中的数据强转成byte型，填充到数组中
+
+jniEnv->SetByteArrayRegion(bytes, 0, size, reinterpret_cast<const jbyte *>(buffer));
+
+//回传字节流
+
+jniEnv->CallStaticVoidMethod(jniCallClass, onGetDataMethod, bytes, size);
+
+return 0;
+
+} else {
+
+return 1;
+
+}
+
+}
+
+乍看之下没什么问题，然而运行一段时间之后：
+
+￼
+
+￼
+
+经典的内存溢出崩溃，看到没~
+
+在JNI的世界里，大部分数据类型都是需要手动回收的：
+
+6.1哪些需要手动释放？
+
+不要手动释放（基本类型）： jint , jlong , jchar
+
+需要手动释放（引用类型，数组家族）： jstring，jobject ，jobjectArray，jintArray ，jclass ，jmethodID
+
+6.2释放方法
+
+6.2.1 jstring & char *
+
+// 创建 jstring 和 char*
+
+jstring jstr = jniEnv->CallObjectMethod(jniEnv, mPerson, getName);
+
+char* cstr = (char*) jniEnv->GetStringUTFChars(jniEnv,jstr, 0);
+
+// 释放
+
+jniEnv->ReleaseStringUTFChars(jniEnv, jstr, cstr);
+
+jniEnv->DeleteLocalRef(jniEnv, jstr);
+
+6.2.2 jobject，jobjectArray，jclass ，jmethodID等引用类型
+
+jniEnv->DeleteLocalRef(jniEnv, XXX);
+
+6.2.3 jbyteArray
+
+jbyteArray audioArray = jnienv->NewByteArray(frameSize);
+
+jnienv->DeleteLocalRef(audioArray);
+
+6.2.4 GetByteArrayElements
+
+jbyte* array= jniEnv->GetByteArrayElements(env,jarray,&isCopy);
+
+jniEnv->ReleaseByteArrayElements(env,jarray,array,0);
+
+6.2.5 NewGlobalRef
+
+jobject ref= env->NewGlobalRef(customObj);
+
+env->DeleteGlobalRef(customObj);
+
+参考资料：https://blog.csdn.net/c1481118216/article/details/77727573
+
+记笔记记笔记！
+
+7.制作SO/A库
+
+好了，项目搞完，你想把C\C++中的方法保存起来下次使用，或者做成SDK？OJBK！
+
+在本文第二章就讲到了SO文件的编译位置，那么是不是拷出来随便改个名字就行了呢？
+
+告诉你：
+
+￼
+
+￼
+
+很明显，拷出来直接改名字是不行的，和JAVA类一样，SO库也是有态度的，行不更名，坐不改姓！
+
+但是，肯定不能让别人拿到的SO库就叫native-lib吧，这样LOW爆了，
+
+那我们来看看正确的改名方式：
+
+首先我们要找到C\C++文件的“户口簿”，它在Extenal Build Files\CMakeLists.txt这里：
+
+￼
+
+打开它，我们会看到和Gradle脚本格式非常相似的脚本：
+
+add_library( native-lib
+
+SHARED
+
+src/main/cpp/native-lib.cpp )
+
+find_library( log-lib
+
+log )
+
+target_link_libraries( native-lib
+
+${log-lib} )
+
+其中：
+
+add_library的作用是添加需要编译成SO文件的源文件；
+
+find_library的作用是查找SO库
+
+target_link_libraries的作用是连接SO库
+
+他们的语法是：
+
+add_library(生成库的名称
+
+#生成后的库名字前会加上lib
+
+#如：此处配置native-lib
+
+#生成的就是libnative-lib，安卓只能加载名字前面带lib的SO库
+
+库类型
+
+#SHARED共享/STATIC静态
+
+#静态库，名称以.a结尾，运行进程时就会载入，因此运行耗时较长
+
+#共享库，名称以.so结尾，使用时才会挂载
+
+C\CPP文件
+
+#支持多条，换行分割
+
+)
+
+find_library(别名
+
+SO/A库
+
+#这里不要写上库名前的lib和扩展名.so/.a
+
+#但是库名前面必须带lib
+
+#比如liblog.so，这里就写作log
+
+)
+
+target_link_libraries(被连接的库
+
+${别名})
+
+也就是说，只要把add_library后面的名称改掉，就会按照新的名称生成SO库了。
+
+Android Studio默认会在find_library引入log（输出日志的库），这是NDK自带的库，它的位置在你的SDK目录\ndk-bundle\platforms\android-28\arch-arm\usr\lib里，如果不用可以去掉：
+
+￼
+
+8.使用SO/A库
+
+拿到了SO库，我们在新项目里如何使用呢？
+
+非常简单，在项目的src/main目录下创建一个jniLibs目录，然后把生成的库丢进去：
+
+￼
+
+使用和常规方式是一样的，注意调用的JAVA类和方法名要保持和库中一致就行。
+
+static {
+
+System.loadLibrary("sub");
+
+}
+
+//SO库中的方法
+
+public native int sub(int a, int b);
+
+9.调用C\CPP文件
+
+有些场景，我们需要调用已经写好的C\CPP文件，比如博主最近的一个项目，需要使用做视频编码的同事给的C代码。
+
+首先直接把所有的c\cpp\h文件扔进CPP文件夹，不需要拷贝MK文件：
+
+￼
+
+在native-lib中调用其中的方法：
+
+//导入头文件
+
+#include "stream.h"
+
+extern "C"
+
+JNIEXPORT void JNICALL
+
+Java_com_eternity_mediacodeclab_jni_JniCall_streamStartConnect(JNIEnv *env, jclass type,
+
+jstring server_ip_,
+
+jshort server_port,
+
+jshort input_port) {
+
+const char *server_ip = env->GetStringUTFChars(server_ip_, 0);
+
+//这个方法来自stream.c
+
+stream_start_connect(server_ip, server_port, input_port, decode, log);
+
+env->ReleaseStringUTFChars(server_ip_, server_ip);
+
+}
+
+ 在编译的时候，在CMakeLists.txt里把这些文件合并到native-lib：
+
+add_library( native-lib
+
+SHARED
+
+src/main/cpp/native-lib.cpp
+
+#新增的文件
+
+src/main/cpp/stream.c
+
+src/main/cpp/reed_solomon.c)
+
+这样就可以调用C\CPP文件中的方法了~
+
+10.使用log库打印日志
+
+还记不记得AS默认导入的log-lib库呢？
+
+它的作用就是让你在JNI中使用Log.e啦Log.d打印日志的，使用起来非常简单：
+
+首先导入库，定义方法，这里以导入Log.e为例：
+
+#include <android/log.h>
+
+#define LOGE(...) __android_log_print(ANDROID_LOG_ERROR, "CLogTag", __VA_ARGS__)
+
+这里的CLogTag就是Log.e(TAG,MSG)中的TAG哟~
+
+使用方法：
+
+LOGE("C语言并不想理你并向你扔出了一个Log");
+
+怎么样，JNI是不是非常简单呢~
+
+最后，如果觉得有帮助的话，就给博主发个红包吧~
+
+￼
+
+ 
+
+APP打开，阅读更顺畅
+
+4条评论写评论
+
+￼
+
+白日不依山：发现一个bug，不知道楼主调式的时候有没有遇到Native thread exited without calling DetachCurrentThread这个错误。
+解决方法：在掉用完jniEnv->CallVoidMethod(*,*,*)后，加上这一行代码JVM->DetachCurrentThread();(2018-11-21 #2楼)回复
+
+Eternity岚回复白日不依山：我这边在添加JVM->DetachCurrentThread()后，反而爆出了Runtime aborting崩溃，这个方法应该是分情况或是NDK版本使用的。
+我的测试环境是安卓8.0，NDK-r16b，不知道有没有大佬能解释一下2018-11-21
+
+Eternity岚回复白日不依山：没碰到过，可以提供一下出错的安卓系统版本和NDK版本给我吗，确认之后会加到文章中2018-11-21
+
+￼
+
+longjumping：妙啊~(2018-10-19 #1楼)回复
+
+没有更多评论了
+
+Android JNI基础篇（一）
+
+kgdwbb 1.6万次阅读 05-30
+
+Android Studio jni 实现
+
+u013749540 788次阅读 01-19
+
+￼
+
+android之一篇史上最适合最全面的JNI入门教程
+
+zhongwn 226次阅读 02-05
+
+Android studio简单使用JNI实例
+
+wangliu1102 2931次阅读 12-28
+
+Android的JNI【实战教程】1⃣️--java和c／c++的那些事
+
+github_33304260 1370次阅读 03-17
+
+Python这么系统的学习路线规划，你一定不知道的薪资翻倍秘诀
+
+1168次阅读12-08
+
+Android JNI使用总结（二）
+
+wtianok 752次阅读 10-13
+
+Android的JNI【实战教程】5⃣️---Android Studio 2.2 以上 NDK开发
+
+github_33304260 2159次阅读 05-08
+
+IntelliJ IDEA IDEA 2018 激活注册码（可用）
+
+zixiao217 4.2万次阅读 10-05
+
+Android so文件的制作封装与跨平台引用
+
+csdn_mm 587次阅读 12-05
+
+SparseAutoEncoder 稀疏编码详解（Andrew ng课程系列）
+
+wuzuyu365 562次阅读 02-10
+
+GitExtensions工具使用教程
+
+qq_35146862 2795次阅读 02-09
+
+深度学习资源
+
+u013709332 778次阅读 04-21
+
+Java基础视频教程（最适合初学者入门）
+
+CSDNedu 844次阅读 02-08
+
+史上最适合新手的Dagger2教程（四）带参注入
+
+u014653815 192次阅读 07-26
+
+NDK-JNI实战教程（一） 在Android Studio运行第一个NDK程序
+
+yanbober 9.6万次阅读 04-27
+
+Android studio JNI使用方法（例程）
+
+kidults 170次阅读 07-05
+
+Android：JNI 与 NDK的区别（含实例教学）
+
+baidu_38172402 39次阅读 07-19
+
+android studio 提高编译的速度,安装apk过慢问题解决
+
+l_215851356 7233次阅读 12-24
+
+Android JNI编程（七）——使用AndroidStudio编写第一个JNI程序
+
+a_zhon 7635次阅读 11-09
+
+Android中视频文件的下载和播放
+
+qq_28261207 1650次阅读 10-13
+
+【C/C++】从零开始的cmake教程
+
+gg_18826075157 2.7万次阅读 05-27
+
+为什么是python
+
+forestsong78 618次阅读 09-19
+
+Android之从零开始JNI研发
+
+xiaohanluo 5255次阅读 02-15
+
+android JNI开发基本步骤
+
+yinzhiwei2014 6853次阅读 02-23
+
+超级简单的Android Studio jni 实现(无需命令行)
+
+chuhongcai 1.3万次阅读 09-16
+
+史上最全的MonkeyRunner自动化测试从入门到精通（1）
+
+liu_jing_hui 5403次阅读 03-08
+
+作为android初学者对第一个小项目的总结
+
+qq_40949048 197次阅读 07-23
+
+史上最简单的 MyBatis 教程（二）
+
+qq_35246620 1.1万次阅读 02-02
+
+NDK-JNI实战教程（三） 从比Hello World稍复杂点儿的NDK例子说说模板
+
+yanbober 1.5万次阅读 04-27
+
+android studio JNI(NDK)超详细图文步骤，适合新手
+
+wh1076674227 1467次阅读 03-01
+
+Android Studio NDK 入门教程（1）--来自C 语言的String
+
+venusic 9008次阅读 08-08
+
+NDK实战教程（一） 在Android Studio运行第一个NDK程序
+
+jasper_yz 572次阅读 10-13
+
+webstorm 2018 激活破解方法大全
+
+voke_ 696589次阅读 07-31
+
+史上最简单的 SpringCloud 教程 | 终章
+
+forezp 1252555次阅读 04-12
+
+很黄很暴力的十个网站
+
+Kinb_huangwei 79709次阅读 01-09
+
+修改百位上的值（难度系数：半颗星）
+
+yi_ming_he 1217次阅读 05-13
+
+2018最新Web前端经典面试试题及答案
+
+wdlhao 365650次阅读 01-16
+
+最新迅雷“应版权方要求，文件无法下载”的解决办法
+
+xyisv 233297次阅读 03-17
+
+VSCode设置中文语言显示
+
+qq_30068487 65100次阅读 09-10
+
+微服务Springcloud超详细教程+实战（八）
+
+weixin_41838683 19566次阅读 12-12
+
+整理了10个干净、好用的BT、磁力链搜索网站给大家
+
+weixin_42255362 111847次阅读 07-25
+
+Kotlin实战(一)
+
+zping0808 3584次阅读 12-15
+
+程序员的大恩人永远地离开了
+
+csdnnews 1701次阅读 12-20
+
+Postman 使用方法详解
+
+fxbin123 194298次阅读 05-24
+
+微服务Springcloud超详细教程+实战（十）
+
+weixin_41838683 16242次阅读 12-13
+
+初次简单逆向破解安卓APP
+
+u010034154 9953次阅读 10-11
+
+颈椎病怎么能治好，看我用Python对接
+
+john_dung 11602次阅读 12-05
+
+史上最全Java面试题（带全部答案）
+
+linzhiqiang0316 128662次阅读 05-27
+
+FFmpeg详解及常用命令使用
+
+qq_26464039 22014次阅读 11-25
+
+微服务Springcloud超详细教程+实战（九）
+
+weixin_41838683 16062次阅读 12-13
+
+安装和激活Office 2019
+
+u011054333 31516次阅读 10-27
+
+军事理论课答案（西安交大版）
+
+ling_wang 1148348次阅读 12-16
+
+echarts图形自适应div大小
+
+qq_40388552 877次阅读 12-18
+
+Proxyee-down的下载与安装教程
+
+shadandeajian 148056次阅读 05-17
+
+干货！数据可视化解决方案
+
+qq_40388552 1112次阅读 12-05
+
+Visio2016下载激活破解
+
+Sirius_hly 40530次阅读 06-20
+
+webgl第28课-三维空间之加入旋转矩阵的三角形
+
+weixin_39452320 3284次阅读 08-12
+
+webgl第27课-三维空间-不同位置的三角形
+
+weixin_39452320 3154次阅读 08-12
+
+webstorm 2018.11月 License server 最新激活码（持续更新）
+
+hdp134793 72846次阅读 08-09
+
+DirectX修复工具增强版
+
+VBcom 1696299次阅读 02-09
+
+数据插入到有序数组（难度：半颗星）
+
+yi_ming_he 1185次阅读 05-13
+
+智慧树走进故宫章节测试答案智慧树走进故宫刷课插件2018年智慧树走进故宫期末考试答案
+
+qq_22644927 115052次阅读 05-31
+
+vs2017安装和使用教程（详细）
+
+qq_36556893 223422次阅读 03-03
+
+xss绕过，payload全集
+
+spang_33 1065次阅读 07-05
+
+ 点赞 6
+
+ 评论 4
+
+

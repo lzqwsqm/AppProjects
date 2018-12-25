@@ -161,7 +161,7 @@ public class QSEditText extends EditText
 
 	public void onTextChanged(CharSequence s, int start, int before, int count) {
 		if (!QSEditor.isLoading) {
-			// QSEditText.this.mHighlight.redraw();
+			 QSEditText.this.mHighlight.redraw();
 			if (this.lastChange != null) {
 				if (count < UndoParcel.MAX_SIZE) {
 					this.lastChange.newtext = s.subSequence(start, start + count);
@@ -210,7 +210,81 @@ public class QSEditText extends EditText
 	public void afterTextChanged(Editable s) {
 	}
 };
+	/*private TextWatcher mUndoWatcher = new TextWatcher()
+    {
+        TextChange lastChange;
 
+        public void onTextChanged(CharSequence s, int start, int before, int count)
+        {
+            // Log.v(TAG, "isLoading:" + JecEditor.isLoading);
+            if(JecEditor.isLoading)
+                return;
+            mHighlight.redraw();
+            // 撤销，重做
+            if(lastChange != null)
+            {
+                if(count < UndoParcel.MAX_SIZE)
+                {
+                    lastChange.newtext = s.subSequence(start, start + count);
+                    if(start == lastChange.start && (lastChange.oldtext.length() > 0 || lastChange.newtext.length() > 0)
+					   && !TextUtils.equals(lastChange.newtext, lastChange.oldtext))
+                    {
+                        mUndoParcel.push(lastChange);
+                        mRedoParcel.removeAll();
+                    }
+                    updateUndoRedoButtonStatus();
+                }else
+                {
+                    mUndoParcel.removeAll();
+                    mRedoParcel.removeAll();
+                }
+                lastChange = null;
+            }
+            // 记住最后修改位置
+            int bufSize = mLastEditBuffer.size();
+            int lastLoc = 0;
+            if(bufSize != 0)
+            {
+                lastLoc = mLastEditBuffer.get(bufSize - 1);
+            }
+            // 不在附近位置才记住它，不做是否同一行判断，性能问题
+            if(Math.abs(start - lastLoc) > EditorSettings.LAST_EDIT_DISTANCE_LIMIT)
+            {
+                mLastEditBuffer.add(start);
+                mLastEditIndex = mLastEditBuffer.size() - 1;
+                updateUndoRedoButtonStatus();
+            }
+
+        }
+
+        public void beforeTextChanged(CharSequence s, int start, int count, int after)
+        {
+            // Log.v(TAG, "isLoading:" + JecEditor.isLoading);
+            if(JecEditor.isLoading)
+                return;
+            if(mUndoRedo)
+            {
+                mUndoRedo = false;
+            }else
+            {
+                if(count < UndoParcel.MAX_SIZE)
+                {
+                    lastChange = new TextChange();
+                    lastChange.start = start;
+                    lastChange.oldtext = s.subSequence(start, start + count);
+                }else
+                {
+                    mUndoParcel.removeAll();
+                    mRedoParcel.removeAll();
+                    lastChange = null;
+                }
+            }
+        }
+
+        public void afterTextChanged(Editable s)
+        {
+        }
+    };*/
 	
 	private VelocityTracker mVelocityTracker;
 	private Paint mWhiteSpacePaint;
@@ -241,95 +315,8 @@ public class QSEditText extends EditText
 	
 	public QSEditText(Context context, AttributeSet attrs) {
         super(context, attrs);
-        //this.mShowWhiteSpace = false;
-        //this.mShowLineNum = true;
-        //this.mLineBreakPath = new Path();
-       // this.mTabPath = new Path();
-        //Path[] pathArr = new Path[TOUCH_DRAG_START_MODE];
-        //pathArr[0] = this.mTabPath;
-        //pathArr[1] = this.mLineBreakPath;
-        //this.mWhiteSpacePaths = pathArr;
         
-		//this.paddingLeft = 0;
-        //this.lastPaddingLeft = 0;
-        //this.realLineNum = 0;
-        //this.hasNewline = true;
-        //this.mText = null;
-        //this.mUndoParcel = new UndoParcel();
-        //this.mRedoParcel = new UndoParcel();
-        //this.mUndoRedo = false;
-        //this.mAutoIndent = false;
-        //this.mLineStr = new HashMap();
-        //this.mLineNumber = 0;
-        //this.mLineNumberWidth = 0;
-        //this.mLineNumberLength = 0;
-        //this.mLastEditBuffer = new ArrayList();
-        //this.mLastEditIndex = DIR_RIGHT_TO_LEFT;
-        //this.current_encoding = "UTF-8";
-        //this.current_path = "";
-        //this.current_ext = "";
-        //this.current_title = "";
-       // this.current_linebreak = 0;
-        //this.mNoWrapMode = false;
-        //this.mLineNumX = 0;
-        //this.mDateFormat = "0";
-        //this.mTouchMode = TOUCH_DONE_MODE;
-        //this.scale = 0.5f;
-        //this.mOnTextChangedListener = null;
-        /*this.mUndoWatcher = new TextWatcher() {
-           TextChange lastChange;
-
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (!QSEditor.isLoading) {
-                   // QSEditText.this.mHighlight.redraw();
-                    if (this.lastChange != null) {
-                        if (count < UndoParcel.MAX_SIZE) {
-                            this.lastChange.newtext = s.subSequence(start, start + count);
-                            if (start == this.lastChange.start && ((this.lastChange.oldtext.length() > 0 || this.lastChange.newtext.length() > 0) && !QSEditText.this.equalsCharSequence(this.lastChange.newtext, this.lastChange.oldtext))) {
-                                QSEditText.this.mUndoParcel.push(this.lastChange);
-                                QSEditText.this.mRedoParcel.removeAll();
-                            }
-                            QSEditText.this.setUndoRedoButtonStatus();
-                        } else {
-                            QSEditText.this.mUndoParcel.removeAll();
-                            QSEditText.this.mRedoParcel.removeAll();
-                        }
-                        this.lastChange = null;
-                    }
-                    int bufSize = QSEditText.this.mLastEditBuffer.size();
-                    int lastLoc = 0;
-                    if (bufSize != 0) {
-                        lastLoc = ((Integer) QSEditText.this.mLastEditBuffer.get(bufSize + QSEditText.DIR_RIGHT_TO_LEFT)).intValue();
-                    }
-                    if (Math.abs(start - lastLoc) > QSEditText.LAST_EDIT_DISTANCE_LIMIT) {
-                        QSEditText.this.mLastEditBuffer.add(Integer.valueOf(start));
-                        QSEditText.this.mLastEditIndex = QSEditText.this.mLastEditBuffer.size() + QSEditText.DIR_RIGHT_TO_LEFT;
-                        if (QSEditText.this.mOnTextChangedListener != null) {
-                            QSEditText.this.mOnTextChangedListener.onTextChanged(QSEditText.this);
-                        }
-                    }
-                }
-            }
-
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                if (!QSEditor.isLoading) {
-                    if (QSEditText.this.mUndoRedo) {
-                        QSEditText.this.mUndoRedo = false;
-                    } else if (count < UndoParcel.MAX_SIZE) {
-                        this.lastChange = new UndoParcel.TextChange();
-                        this.lastChange.start = start;
-                        this.lastChange.oldtext = s.subSequence(start, start + count);
-                    } else {
-                        QSEditText.this.mUndoParcel.removeAll();
-                        QSEditText.this.mRedoParcel.removeAll();
-                        this.lastChange = null;
-                    }
-                }
-            }
-
-            public void afterTextChanged(Editable s) {
-            }
-        };*/
+        
     }
 	
 	
@@ -889,7 +876,7 @@ public class QSEditText extends EditText
 	//LangList.mClickEvent调用
 	public void setCurrentFileExt(String ext) {
         this.current_ext = ext;
-       // this.mHighlight.redraw();
+      //  this.mHighlight.redraw();
         this.mHighlight.setSyntaxType(this.current_ext);
     }
 	
@@ -1200,7 +1187,10 @@ public class QSEditText extends EditText
     }
 	
 	private boolean canSelectText() {
-        if (!(this.mText instanceof Spannable) || this.mText.length() == 0 || getMovementMethod() == null || !getMovementMethod().canSelectArbitrarily()) {
+        if (!(this.mText instanceof Spannable) 
+			|| this.mText.length() == 0 
+			|| getMovementMethod() == null 
+			|| !getMovementMethod().canSelectArbitrarily()) {
             return false;
         }
         return true;
@@ -1236,7 +1226,9 @@ public class QSEditText extends EditText
 	private boolean canCopy()
 	{
 		Boolean i = false;
-		if ((!(getTransformationMethod() instanceof PasswordTransformationMethod)) && (this.mText.length() > 0) && (getSelectionStart() >= 0))
+		if ((!(getTransformationMethod() instanceof PasswordTransformationMethod)) 
+			&& (this.mText.length() > 0) 
+			&& (getSelectionStart() >= 0))
 			i = true;
 		return i;
 	}
@@ -1252,7 +1244,11 @@ public class QSEditText extends EditText
 	private boolean canPaste()
 	{
 		boolean i;
-		if ((!(this.mText instanceof Editable)) || (getKeyListener() == null) || (getSelectionStart() < 0) || (getSelectionEnd() < 0) || (!((ClipboardManager)getContext().getSystemService("clipboard")).hasText()))
+		if ((!(this.mText instanceof Editable)) 
+			|| (getKeyListener() == null) 
+			|| (getSelectionStart() < 0) 
+			|| (getSelectionEnd() < 0) 
+			|| (!((ClipboardManager)getContext().getSystemService("clipboard")).hasText()))
 			i = false;
 		else
 			i = true;
@@ -1862,7 +1858,7 @@ public class QSEditText extends EditText
                         Touch.scrollTo(this.mWidget, layout, x, y);
                         int delta = this.mLastFlingY - y;
                         if (Math.abs(delta) <= TOUCH_MODE_FLING) {
-                          //  this.mWidget.mHighlight.redraw();
+                           // this.mWidget.mHighlight.redraw();
                         }
                         if (!more || delta == 0) {
                             endFling();

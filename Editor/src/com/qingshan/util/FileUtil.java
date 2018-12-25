@@ -147,28 +147,27 @@ public class FileUtil
         }
         return new StringBuilder(String.valueOf(new DecimalFormat("0.00").format(ret))).append(displaySize).toString();
     }
-	/*public static String Read(File paramFile, String paramString)
-	{
-		try
-		{
-			BufferedReader localBufferedReader = new BufferedReader(new FileReader(paramFile));
-			Object localObject = new char[(int)paramFile.length()];
-			localBufferedReader.read(localObject, 0, (int)paramFile.length());
-			localBufferedReader.close();
-			localObject = new String(localObject);
-			return localObject;
-		}
-		catch (IOException localIOException)
-		{
-		}
-		throw new RuntimeException(paramFile + ": trouble reading", localIOException);
-	}*/
+	
+	public static String Read(String filename, String encoding) {
+        return Read(new File(filename), encoding);
+    }
+	public static String Read(File file, String encoding) {
+        try {
+            BufferedReader in = new BufferedReader(new FileReader(file));
+            char[] allChars = new char[((int) file.length())];
+            in.read(allChars, 0, (int) file.length());
+            in.close();
+            return new String(allChars);
+        } catch (IOException ex) {
+            throw new RuntimeException(file + ": trouble reading", ex);
+        }
+    }
 
-	/*public static String Read(String paramString1, String paramString2)
-	{
-		return Read(new File(paramString1), paramString2);
-	}
-	 */
+
+	public static String ReadFile(String filename) {
+        return ReadFile(filename, "UTF-8");
+    }
+
 	//AsyncReadFile.AsyncReadFile调用
 	public static String ReadFile(String filename, String encoding) {
         return ReadFile(new File(filename), encoding);
@@ -209,10 +208,8 @@ public class FileUtil
 	
 	
 
-	/*public static String ReadFile(String paramString)
-	{
-		return ReadFile(paramString, "UTF-8");
-	}*/
+	
+
 
 	
 

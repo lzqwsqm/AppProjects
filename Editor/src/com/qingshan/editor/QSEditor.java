@@ -62,6 +62,7 @@ import com.qingshan.widget.TabWidget;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
@@ -76,6 +77,7 @@ import java.util.zip.ZipInputStream;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import android.widget.TextView;
+import java.io.*;
 /*
 调试备忘
  QSEditText.setPath
@@ -242,7 +244,11 @@ public class QSEditor extends Activity
         } catch (Exception e) {
         }
 		//优先加载
+		try{
         initEnv();
+		} catch(IOException e){
+			
+		}
         //加入表
 		this.mTabHost = (TabHost) findViewById(R.id.tabs);
         this.mTabHost.initTabHost(this);
@@ -471,19 +477,34 @@ public class QSEditor extends Activity
 	 goto/16 :goto_0
 	 .end method
 	*/
-	private void initEnv() {
+	
+	/**
+     * 初始化一些重要的环境
+     * @throws IOException 
+     */
+	//private void initEnv() 
+	private void initEnv() throws IOException
+	{
         try {
-            if ("mounted".equals(Environment.getExternalStorageState())) {
-                TEMP_PATH = new StringBuilder(String.valueOf(Environment.getExternalStorageDirectory().getAbsolutePath())).append("/.TextEditor").toString();
-            } else {
-                TEMP_PATH = new StringBuilder(String.valueOf(getFilesDir().getAbsolutePath())).append("/.TextEditor").toString();
-            }
+            if (Environment.MEDIA_MOUNTED/*"mounted"*/.equals(Environment.getExternalStorageState())) {
+                //TEMP_PATH = new StringBuilder(String.valueOf(Environment.getExternalStorageDirectory().getAbsolutePath())).append("/.TextEditor").toString();
+				TEMP_PATH = android.os.Environment.getExternalStorageDirectory().getAbsolutePath() + "/.TextEditor";
+			} else {
+                //TEMP_PATH = new StringBuilder(String.valueOf(getFilesDir().getAbsolutePath())).append("/.TextEditor").toString();
+				TEMP_PATH = getFilesDir().getAbsolutePath() + "/.TextEditor";
+			}
             File temp = new File(TEMP_PATH);
-            if (!(temp.isDirectory() || temp.mkdir())) {
+            //if (!(temp.isDirectory() || temp.mkdir())) 
+			if(!temp.isDirectory() && !temp.mkdir())
+			{
                 alert(R.string.can_not_create_temp_path);
             }
-            /*String synfilestr = TEMP_PATH + "/version";
-            if (new File(synfilestr).isFile()) {
+			// 解压语法文件
+            String synfilestr = TEMP_PATH + "/version";
+			File synsignfile = new File(synfilestr);
+            //if (new File(synfilestr).isFile()) 
+			if(!synsignfile.isFile())
+			{
                 if (!SYNTAX_SIGN.equals(Highlight.readFile(synfilestr, "utf-8"))) {
                     if (unpackSyntax()) {
                         FileUtil.writeFile(synfilestr, SYNTAX_SIGN, "utf-8", false);
@@ -495,13 +516,61 @@ public class QSEditor extends Activity
                 FileUtil.writeFile(synfilestr, SYNTAX_SIGN, "utf-8", false);
             } else {
                 alert(R.string.can_not_create_synfile);
-            }*/
+            }
             Highlight.init();
         } catch (Exception e) {
             printException(e);
         }
     }
-	
+	/*private void initEnv() throws IOException
+    {
+        if(Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState()))
+        {
+            TEMP_PATH = android.os.Environment.getExternalStorageDirectory().getAbsolutePath() + "/.920TextEditor";
+        }else
+        {
+            TEMP_PATH = getFilesDir().getAbsolutePath() + "/.920TextEditor";
+        }
+
+        File temp = new File(TEMP_PATH);
+        if(!temp.isDirectory() && !temp.mkdir())
+        {
+            alert(R.string.can_not_create_temp_path);
+            // return;
+        }
+        // 解压语法文件
+        String synfilestr = TEMP_PATH + "/version";
+        File synsignfile = new File(synfilestr);
+        if(!synsignfile.isFile())
+        {
+            if(!unpackSyntax())
+            {
+                alert(R.string.can_not_create_synfile);
+                // return;
+            }else
+            {
+                FileUtil.writeFile(synfilestr, SYNTAX_SIGN);
+            }
+        }else
+        {
+            if(!SYNTAX_SIGN.equals(FileUtil.readFileAsString(synfilestr, "utf-8")))
+            {
+                if(!unpackSyntax())
+                {
+                    alert(R.string.can_not_create_synfile);
+                    // return;
+                }else
+                {
+                    FileUtil.writeFile(synfilestr, SYNTAX_SIGN);
+                }
+            }
+        }
+
+        ColorScheme.init();
+        Highlight.init();
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+    }
+	*/
 	
 	//initEnv()调用
 	public void alert(int msg) {
