@@ -1,0 +1,2 @@
+set solib-search-path ./obj/local/armeabi
+directory /data/data/com.aide.ui/files/ndksupport-1710240001/android-ndk-aide/platforms/android-21/arch-arm/usr/include jni/charset-detector/src/tables jni/charset-detector/include /data/data/com.aide.ui/files/ndksupport-1710240001/android-ndk-aide/sources/cxx-stl/system/include jni/grep/include jni/highlight/src
