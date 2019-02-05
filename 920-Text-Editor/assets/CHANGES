@@ -1,0 +1,25 @@
+Version 12.11.23
+    *) Bug Fix: switch input method causes the text into a line
+
+    *) Change: remove read Email permission, may lead to the e-mail attachments can not be previewed
+
+    *) Feature: Add recursive directory search
+    *) Feature: Add assembler syntax support
+
+Version 12.9.25
+    *) Bug Fix: 920 text editor may pop up when you open the Email
+    *) Bug Fix: ROOT privileges enabled some BUG
+    *) Bug Fix: only open the last a file
+    
+    *) Change: using the system menu is disabled by default, resolves can not copy and paste
+    *) Change: the "spell check" is disabled by default, resolves can not copy and paste
+    *) Change: updated Italian, Spanish, Japanese language
+    
+    *) Feature: "save as" supports file encoding and linebreak char conversion
+    *) Feature: "Open With.." menu to add Python, Perl, Lua, JavaScript, Tcl, the shell file to run in SL4A
+
+Version 12.8.29
+    *) Bug Fix：fixed duplicate blank lines cause the editor to crash
+    *) Bug Fix：fixed may open an empty file cause the editor to crash
+    
+    *) Feature：add Ruby syntax highlighting
