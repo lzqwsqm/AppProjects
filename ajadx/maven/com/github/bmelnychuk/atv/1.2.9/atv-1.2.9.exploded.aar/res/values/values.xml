@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- From: file:/Users/bogdan/Work/Android/AndroidTreeView/library/src/main/res/values/ids.xml -->
+    <eat-comment/>
+    <item name="node_header" type="id"/>
+    <item name="node_items" type="id"/>
+    <item name="tree_items" type="id"/>
+    <!-- From: file:/Users/bogdan/Work/Android/AndroidTreeView/library/src/main/res/values/styles.xml -->
+    <eat-comment/>
+    <style name="TreeNodeStyle">
+        <item name="android:paddingLeft">20dp</item>
+    </style>
+</resources>

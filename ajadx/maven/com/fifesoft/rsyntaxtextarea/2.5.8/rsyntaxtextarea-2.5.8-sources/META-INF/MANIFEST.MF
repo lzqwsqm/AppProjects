@@ -1,0 +1,7 @@
+Manifest-Version: 1.0
+Specification-Title: RSyntaxTextArea
+Specification-Version: 2.5.8
+Implementation-Title: org.fife.ui
+Implementation-Version: 2.5.8
+Require-Capability: osgi.ee;filter:="(&(osgi.ee=JavaSE)(version=1.5))"
+
